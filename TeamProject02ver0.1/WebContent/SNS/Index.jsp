@@ -7,16 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-안녕하세요 여러분 우리의 첫 프로젝트 화면입니다.
-여러분 다시 첫번째 화면입니다.
-<br>
-
-<a href = 'Member/Index.jsp'>회원정보</a>
-<a href = "Movie/Index.jsp">영화</a>
-<a href = "MyPage/Index.jsp">마이페이지</a>
-<a href = "SNS/Index.jsp">SNS</a>
-
-
+여기는 SNS입니다.
 </body>
 </html>
