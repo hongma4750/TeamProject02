@@ -1,24 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-<link rel="stylesheet" type="text/css" href="../css/testmypage.css"/>
+<title>로그인</title>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/testmypage.css">
 
 
 </head>
 <body>
-<%
-String Test_Name = "봄이";
-session.setAttribute("TestLogin", Test_Name);
 
-%>
+
 <header>
-<h5><%=Test_Name %>님 반갑습니다!</h5>
+<h4>로그인</h4></a>
 </header>
 
 <nav>
@@ -36,47 +33,24 @@ session.setAttribute("TestLogin", Test_Name);
 
 <section>
 
-<form action = "" method = "post">
-
+<form action="00login00.jsp" method="post">
 <table>
-<tr>
-  <td>예매번호</td>
-  <td></td> <%--예매번호 46328332--%>
-  <td><input type = "submit" name="R_Cancle" value = "예매취소"/></td>
-</tr>
 
-<tr> <%--영화제목: 15 부산행 (디지털)--%>
-  <td><b></b></td>
+<tr>
+<td>아이디</td>
+<td><input type = "text" name = "id" size="20"/></td>
 </tr>
 
 <tr>
-  <td>관람일</td>
-</tr>
-
-<tr> <%--날짜 2016.07.27(수) 20:10 ~ 22:18 --%>
-  <td></td>
+<td>비밀번호</td>
+<td><input type = "password" name = "pw" size="20"/></td>
 </tr>
 
 <tr>
-  <td>영화관</td>
+<td colspan = "2"><input type = "submit" value= "로그인"/></td>
 </tr>
 
-<tr> <%--신촌 3관 --%>
-  <td></td>
-</tr>
-<hr>
-
-<tr>
-  <td>관람인원</td>
-  <td>좌석정보</td>
-</tr>
-
-<tr>
-  <td></td> <%--성인3 --%>
-  <td></td> <%--K10, K11, K12 --%>
-</tr>
 </table>
-
 </form>
 
 </section>
@@ -84,6 +58,7 @@ session.setAttribute("TestLogin", Test_Name);
 <footer>
 Copyright@우리조
 </footer>
+
 
 </body>
 </html>
