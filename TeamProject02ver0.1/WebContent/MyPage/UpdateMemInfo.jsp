@@ -31,6 +31,31 @@ session.setAttribute("TestLogin", Test_Name);
 
 <section>
 
+<form action="" method= "post">
+<table>
+<tr>
+<td>아이디</td>
+<td><input type = "text" name = "id" size="20"/></td>
+</tr>
+<tr>
+<td>비밀번호</td>
+<td><input type = "password" name = "pw" size="21"/></td>
+</tr>
+<tr>
+<td>이름</td>
+<td><input type = "text" name = "name" size="20"/></td>
+</tr>
+<tr>
+<td>이메일</td>
+<td><input type = "text" name = "email" size="20"/></td>
+</tr>
+<tr>
+
+</tr>
+</table>
+</form>
+
+
 </section>
 
 <footer>

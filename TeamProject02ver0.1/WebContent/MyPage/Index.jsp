@@ -1,3 +1,5 @@
+<%@ page import = "sist.co.Member.Test_MemberDTO" %>
+<%@ page import = "sist.co.Member.Test_MemberDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,6 +17,34 @@
 String Test_Name = "봄이";
 session.setAttribute("TestLogin", Test_Name);
 
+String id = request.getParameter("id");
+String pw = request.getParameter("pw");
+
+Test_MemberDAO dao = Test_MemberDAO.getInstance();
+Test_MemberDTO mem = dao.login(dto)
+
+if(mem !=null && !mem.getId().equals("")){
+	session.setAttribute("login", mem); //login통해 mem정보를 받을수 있다 (session 서버를 통해)
+	session.setMaxInactiveInterval(30*60);
+	%>
+	<script type="text/javascript">
+	alert("안녕하세요 <%=mem.getName()%>님!");
+	location.href="bbslist.jsp";
+	</script>
+	
+	<%
+}else{
+	%>
+	<script type="text/javascript">
+	alert("아이디 패스워드를 다시 확인하세요.");
+	location.href="index.jsp";
+	</script>
+	
+	<%
+	
+}
+	
+%>
 %>
 <header>
 <h5><%=Test_Name %>님 반갑습니다!</h5>
