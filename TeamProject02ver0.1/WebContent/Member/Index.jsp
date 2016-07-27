@@ -5,8 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript" src="../javascript/member.js"></script>
 </head>
 <body>
-여기는 SNS입니다.
-</body>
+멤버
+<input type="button" value="이동" onclick="goPage(1)">
+</head>
 </html>
