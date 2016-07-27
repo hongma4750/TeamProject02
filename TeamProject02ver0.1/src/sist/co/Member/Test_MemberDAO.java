@@ -34,6 +34,7 @@ public class Test_MemberDAO implements Test_iMemberDAO{
 			//db연결
 			conn = DBManager.getConnection();
 			log("1/6 success addMember");
+			
 			pstmt = conn.prepareStatement(sql);
 			log("2/6 success addMember");
 			
