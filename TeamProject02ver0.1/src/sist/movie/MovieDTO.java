@@ -9,19 +9,13 @@ public class MovieDTO {
 	private Date mv_openday;
 	private String mv_genre;
 	private String mv_img;
+	private float mv_like;	// like/총 예매
+	private int mv_on;
 	
 	public MovieDTO() {
 		
 	}
 	
-	public MovieDTO(int mv_seq, String mv_title, Date mv_openday, String mv_genre, String mv_img) {
-		this.mv_seq = mv_seq;
-		this.mv_title = mv_title;
-		this.mv_openday = mv_openday;
-		this.mv_genre = mv_genre;
-		this.mv_img = mv_img;
-	}
-
 	public int getMv_seq() {
 		return mv_seq;
 	}
@@ -60,6 +54,22 @@ public class MovieDTO {
 
 	public void setMv_img(String mv_img) {
 		this.mv_img = mv_img;
+	}
+	
+	public float getMv_like() {
+		return mv_like;
+	}
+
+	public void setMv_like(float mv_like) {
+		this.mv_like = mv_like;
+	}
+
+	public int getMv_on() {
+		return mv_on;
+	}
+
+	public void setMv_on(int mv_on) {
+		this.mv_on = mv_on;
 	}
 
 	public String toString(){
