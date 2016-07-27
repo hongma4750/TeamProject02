@@ -1,5 +1,4 @@
-<%@ page import = "sist.co.Member.Test_MemberDTO" %>
-<%@ page import = "sist.co.Member.Test_MemberDAO" %>
+<%@page import="sist.co.Member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,26 +13,23 @@
 <body>
 
 <%
-String Test_Name = "봄이";
+MemberDTO memberdto = new MemberDTO();
+memberdto.setM_id("BomBom");
+memberdto.setM_pw("1234");
+memberdto.setM_name("Bom");
+memberdto.setM_email("ddd");
 
-session.setAttribute("TestLogin", Test_Name);
-
-String id = request.getParameter("id");
-String pw = request.getParameter("pw");
-
-Test_MemberDAO dao = Test_MemberDAO.getInstance();
-//Test_MemberDTO mem = dao.login(dto);
+session.setAttribute("login",memberdto);
 
 %>
 <header>
-<h5><%=Test_Name %>님 반갑습니다!</h5>
+<h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
 </header>
 
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
 
-  &nbsp;&nbsp;<a href = "MemInfo.jsp">회원정보</a><br>
-  &nbsp;&nbsp;<a href = "UpdateMemInfo.jsp">회원정보수정</a><br>
+  &nbsp;&nbsp;<a href = "UpdateLogin.jsp">회원정보</a><br>
   
 
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
