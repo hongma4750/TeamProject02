@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 public class DBManager {
 
@@ -17,8 +17,11 @@ public class DBManager {
 		String db_pw="hr";
 		
 		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("연결성공");
 			conn = DriverManager.getConnection(url,db_id,db_pw);
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			System.out.println("DBManager 연결부분");
 			e.printStackTrace();
 		}
 		return conn;
