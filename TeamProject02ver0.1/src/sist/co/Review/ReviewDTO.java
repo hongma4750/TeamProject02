@@ -14,6 +14,7 @@ public class ReviewDTO {
 	
 	public ReviewDTO(){
 		
+		
 	}
 
 	public int getR_seq() {
