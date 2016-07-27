@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-여기는 SNS입니다.
+
+<table>
+
+
+</table>
+
 </body>
-</html> 
+</html>
