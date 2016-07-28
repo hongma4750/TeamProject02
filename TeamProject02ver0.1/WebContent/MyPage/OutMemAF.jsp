@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@page import="test.Member.testMemberDAO"%>
+<%@page import="sist.co.Member.MemberDTO"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -20,8 +22,13 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
- 
+
+testMemberDAO dao = new testMemberDAO();
+boolean isS = dao.outMember(memberdto);
+
 %>
+
+
 <header>
 <h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
 </header>
@@ -40,11 +47,10 @@ session.setAttribute("login",memberdto);
 
 <section>
 
-
 <%
 //member DB에 해당 사용자 delete 작업한 후 
 //성공시 사이트 메인페이지로 
-if(true){	
+if(isS){	
 	%>
 	<script type="text/javascript">
 	alert("탈퇴되었습니다.");
@@ -63,6 +69,8 @@ if(true){
 	
 }
 %>
+
+
 </section>
 
 <footer>
