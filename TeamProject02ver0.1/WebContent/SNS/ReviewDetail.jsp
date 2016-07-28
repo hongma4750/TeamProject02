@@ -51,24 +51,34 @@ ReviewDTO redto = redao.getReviewDTO(r_seq);
 		</tr>
 		
 	</table>
-	<input type="button" value="돌아가기" onclick="javascript:location.href='ReviewList.jsp'">
+	<input type="button" value="돌아가기" onclick="location.href='index01.jsp?mode=SNS/ReviewList'">
 </div>
 <hr>
 
 <script>
 	var like = <%=redto.getR_like()%>;
+	var doLike = 0;
 	
-    $('#addlike').click(function(){
-        $.ajax({
-            url:'addLike.jsp?r_seq=<%=redto.getR_seq()%>' ,
-            success:function(data){
-            },complete : function(data) {
-            	like +=1;
-            	$('#like').val(like);
-          }
-            
-        });
-    });
+	
+	    $('#addlike').click(function(){
+	    	if(doLike==0){
+	    	$.ajax({
+	            url:'SNS/addLike.jsp?r_seq=<%=redto.getR_seq()%>' ,
+	            success:function(data){
+	            },complete : function(data) {
+	            	like +=1;
+	            	doLike +=1;
+	            	$('#like').val(like);
+	          }
+	            
+	        });
+	    	
+	    	}else{
+	    		alert("그만눌러이씨");
+	    	}
+	    	
+	    });
+	
 </script>
 </body>
 </html>

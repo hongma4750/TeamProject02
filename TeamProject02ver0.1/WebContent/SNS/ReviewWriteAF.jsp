@@ -33,14 +33,14 @@ session.setAttribute("result", result);
 <c:if test="${result==1 }">
 	<script type="text/javascript">
 		alert("리뷰등록 완료");
-		location.href="ReviewList.jsp";
+		location.href="../index01.jsp?mode=SNS/ReviewList";
 	</script>
 </c:if>
 
 <c:if test="${result != 1 }">
 	<script type="text/javascript">
 		alert("리뷰등록 실패");
-		location.href="ReviewList.jsp";
+		location.href="../index01.jsp?mode=SNS/ReviewList";
 	</script>
 </c:if>
 

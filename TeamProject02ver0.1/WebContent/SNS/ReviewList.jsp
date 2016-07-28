@@ -4,15 +4,20 @@
      <%@ page import="sist.co.Review.ReviewDAO" %>
      <%@ page import="sist.co.Review.ReviewDTO" %>
      <%@ page import="java.util.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>리뷰 리스트</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/main.css" rel="stylesheet">
+
 </head>
 <body>
+
+
 
 <%
 MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
@@ -21,7 +26,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 <hr>
 
 <div id="middle_wrap">
-<table class="content_table">
+<table class="table table-bordered">
 	<col width="50"/><col width="70"/><col width="200"/><col width="100"/>
 	<col width="50"/><col width="50"/>
 	<tr>
@@ -41,7 +46,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 				<td><%=redto.getR_seq() %></td>
 				<td><%=redto.getM_id() %></td>
 				<td>
-					<a href="ReviewDetail.jsp?r_seq=<%=redto.getR_seq() %>">
+					<a href="index01.jsp?mode=SNS/ReviewDetail&r_seq=<%=redto.getR_seq() %>">
 						<%=redto.getR_title() %>
 					</a>
 				</td>
@@ -56,8 +61,9 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	
 </table>
 
-<input type="button" value="글쓰기" onclick="javascript:location.href='ReviewWrite.jsp'">
+<input type="button" value="글쓰기" onclick="location.href='index01.jsp?mode=SNS/ReviewWrite'">
 </div>
+
 
 
 <hr>
