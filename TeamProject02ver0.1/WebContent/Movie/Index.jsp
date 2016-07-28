@@ -36,14 +36,15 @@ request.setAttribute("jsonresult", jsonresult);
 </head>
 <body>
 
-<%
-MemberDTO mem = new MemberDTO("asdf", "asdf", "asdf", "asdf@asdf");
-
+<%	// main에서 빼도됌. nav 영역에서 session을 set해줌
+MemberDTO mem = new MemberDTO("qwer", "qwer", "qwer", "asdf@asdf");
 session.setAttribute("login", mem);
 %>
 
+<%-- nav 에 전체 예매 tab 존재. 따라서, 각 영화의 예매버튼이 존재 --%>
 <%-- (수정할거1)예매할 때, 로그인했는지 안했는지 판단해야함. 따라서, session 변수저장되어있는지로 확인하기 --%>
-<form action="reserve.jsp" method="post">
+<form action="Reserve.jsp">
+	<input type="hidden" name="seq" value="<%=1 %>">
 	<input type="submit" value="예매" style="width: 100px">	
 </form>
 
@@ -56,7 +57,7 @@ session.setAttribute("login", mem);
 <table width="80%">
 	<tr>
 		<%--for문 --%>
-		<td><a href="moviedetail.jsp?seq=<%=1 %>"><img src="../img/arrow.png"></a></td>
+		<td><a href="Moviedetail.jsp?seq=<%=1 %>"><img src="../img/arrow.png"></a></td>
 		<td></td>
 		<td></td>
 		<td></td>

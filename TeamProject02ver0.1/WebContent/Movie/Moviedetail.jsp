@@ -1,6 +1,10 @@
+<%@page import="sist.co.Review.ReviewDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="sist.co.Review.ReviewDAO"%>
 <%@page import="sist.movie.MovieDTO"%>
 <%@page import="sist.movie.MovieDAO"%>
 <%@page import="sist.co.Member.MemberDTO"%>
+<%@page import="sist.movie.ReservationDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +37,6 @@ public String dot3(String msg){	// 리뷰가 15자 이상이면
 }
 %>
 <%
-/* MemberDTO mem = (MemberDTO)session.getAttribute("login"); */
 Object ologin = session.getAttribute("login");
 MemberDTO mem = null;
 if(ologin==null){
@@ -75,8 +78,23 @@ MovieDTO mdto = dao.getmoviedetail(1);
 		<td><%=mdto.getMv_like() %></td>
 	</tr>
 	<tr>		<%--좋아요 , 싫어요: count 표시하기--%>
-		<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/like.jpg">좋아요</a></td>
-		<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/hate.jpg">싫어요</a></td>
+		<%
+		if(mem!=null){	// 로그인한상태
+			ReservationDAO rdao = ReservationDAO.getInstance();
+			int confirmpoll = rdao.judgepoll(seq, mem.getM_id());	// ture : 투표했음
+			if(confirmpoll == 1){		// 투표 여부 판단 : 좋아요 로 투표했음 %>
+				<td colspan="2"><img src="../img/like.jpg">좋아요</td>
+		<%	}else if(confirmpoll == 2){ // 투표 여부 판단 : 싫요 로 투표했음 %>
+				<td colspan="2"><img src="../img/like.jpg">싫어요</td>
+		<%	}else{						// confirmpoll==0 : 해당영화 예매 했지만, 투표안함	%>
+				<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/like.jpg">좋아요</a></td>
+				<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/hate.jpg">싫어요</a></td>
+		<%	}
+		}else{			// 로그인 안한 상태%>		
+			<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/like.jpg">좋아요</a></td>
+			<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/hate.jpg">싫어요</a></td>
+		<%
+		} %>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="submit" value="예매하기"><input type="hidden" value="<%=mdto.getMv_seq()%>"></td>
@@ -90,50 +108,24 @@ MovieDTO mdto = dao.getmoviedetail(1);
 	<tr>
 		<th colspan="3" class="leftfix">리뷰</th>
 	</tr>
+	<% 
+		ReviewDAO rdao = ReviewDAO.getInstance();
+		List<ReviewDTO> rlist = rdao.seereview(seq);
+		for(int i = 0; i < rlist.size(); i++){	%>
+			<tr>
+				<td><%=rlist.get(i).getM_id() %></td>
+				<td colspan="2"><b><%=rlist.get(i).getR_title() %><b></td>
+			</tr>	
+			<tr>
+				<td colspan="3"><%=dot3(rlist.get(i).getR_content()) %></td>
+			</tr>
+		<%	if(i > 0) break;
+		} %>	
 	<tr>
-		<td colspan="3">리뷰1</td>
-	</tr>
-	<tr>
-		<td colspan="3">리뷰2</td>
-	</tr>
-	<tr>
-		<td colspan="3"><a href="reviewdetail.jsp">리뷰더보기</a></td>
+		<td colspan="3"><a href="Reviewmore?seq=<%=seq %>.jsp">리뷰더보기</a></td>
 	</tr>
 </table>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>

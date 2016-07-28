@@ -39,30 +39,27 @@ int addlike = Integer.parseInt(poll);
 if(mem!=null){
 	confirmreserve = rdao.judgereserve(seq, mem.getM_id()); // true : 예매했음
 	if(confirmreserve){		// 해당 예매 내역 존재
-		confirmpoll = rdao.judgepoll(seq, mem.getM_id());	// ture : 투표했음
-		if(!confirmpoll){	// 투표 여부 판단
-			if(addlike==1){	// 좋아요
-				isS = dao.addlike(seq, addlike);
-			}else{			// 싫어요
-				isS = dao.addlike(seq, addlike);
-			}
-			
-			if(isS){ 
-				//투표했으니 reservation 의 R_POLL을 1혹은 2로 바꿔줘야함
-				// 따라서, 좋아요, 싫어요를 구분해야함. 단순히 투표에 성공했다고 쓰면 x
-			%>
-				<script type="text/javascript">
-					alert("투표에 성공했습니다");
-					location.href="<%=url%>";
-				</script>
-			<%	
-			}else{ %>
-				<script type="text/javascript">
-					alert("투표에 실패했습니다");
-					location.href="<%=url%>";
-				</script>
-			<%
-			} 
+		if(addlike==1){	// 좋아요
+			isS = dao.addlike(seq, addlike, mem.getM_id());
+		}else{			// 싫어요
+			isS = dao.addlike(seq, addlike, mem.getM_id());
+		}
+		
+		if(isS){ 
+			//투표했으니 reservation 의 R_POLL을 1혹은 2로 바꿔줘야함
+			// 따라서, 좋아요, 싫어요를 구분해야함. 단순히 투표에 성공했다고 쓰면 x
+		%>
+			<script type="text/javascript">
+				alert("투표에 성공했습니다");
+				location.href="<%=url%>";
+			</script>
+		<%	
+		}else{ %>
+			<script type="text/javascript">
+				alert("투표에 실패했습니다");
+				location.href="<%=url%>";
+			</script>
+		<%	 
 		}
 	}else{ %>
 		<script type="text/javascript">

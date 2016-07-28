@@ -74,7 +74,7 @@ public class ReservationDAO implements IReservation{
 	}
 
 	@Override
-	public boolean judgepoll(int seq, String id) {
+	public int judgepoll(int seq, String id) {
 	
 		String sql = " SELECT R_POLL FROM RESERVATION WHERE MV_SEQ=? AND M_ID=? ";
 		
@@ -107,7 +107,7 @@ public class ReservationDAO implements IReservation{
 			log("6/6 Success judgereserve");
 		}
 				
-		return r_poll!=0?true:false;	// 0: 투표 X, 1: 좋아요, 2: 싫어요 => true : 투표했음
+		return r_poll;	// 0: 투표 X, 1: 좋아요, 2: 싫어요 => true : 투표했음
 
 	}
 	
