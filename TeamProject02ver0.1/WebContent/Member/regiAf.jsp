@@ -6,9 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>RegiAf/title>
+<title>RegiAf</title>
 </head>
 <body>
+regiAf
 <%
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
@@ -38,7 +39,5 @@ else{
 		location("Regi.jsp");
 	</script>
 <%}%>
-
-
 </body>
 </html>
