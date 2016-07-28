@@ -15,9 +15,7 @@
 <table style = "border: 1px solid black">
 <tr>
 	<td>ID</td>
-	<td>
-		<input type="text" name="id" size="20"/>
-	</td>
+	<td><input type="text" name="id" size="20"/></td>
 	<td><input type="button" value="중복확인" size="100" onclick="idDupchk()"></td>
 </tr>
 <tr>
@@ -44,6 +42,6 @@
 </form>
 </div>
 <input type="button" value ="가입완료" onclick = "goPage(2)">
-<input type="button" value="메인으로" onclick="goPage(2)">
+<input type="button" value="메인으로" onclick="goPage(3)">
 </body>
 </html>

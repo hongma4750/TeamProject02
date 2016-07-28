@@ -10,7 +10,7 @@ function goPage(a){
 		alert("로그인");
 		location.href="login.jsp";
 	}else if(a==3){
-		location.href="bbs/bbslist.jsp";
+		location.href="index.jsp";
 	}else if(a==4){
 		location.href="Calendar/Calendar.jsp";
 	}else if(a==5){
@@ -38,13 +38,12 @@ function idDupchk(){
 	return false;
 }
 
-
 function emailDupchk(){
 	alert("emailDupchk");
 	if(document.joinmem.email.value.length<4){
 		alert("ID를 최소 4자리 이상 입력하세요");
 		document.joinmem.id.focus();
 		return false;
-		location.href = "idDupChk.jsp?id=document.joinmem.id";
+		location.href = "emailDupChk.jsp";
 	}
 }
