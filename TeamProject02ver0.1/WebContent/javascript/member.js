@@ -32,7 +32,8 @@ function idDupchk(){
 		document.joinmem.id.focus();
 	}
 	else{
-		location.href="idDupChk.jsp";
+		alert("ID 중복검사를 합니다");
+		location.href="idDupChk.jsp";		//id 중복검사
 	}
 	return false;
 }

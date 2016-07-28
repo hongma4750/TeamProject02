@@ -3291,7 +3291,7 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 
 .btn {
 	display: inline-block;
-	padding: 6px 12px;
+	padding: auto;
 	margin-bottom: 0;
 	font-size: 14px;
 	font-weight: 400;
@@ -3520,7 +3520,9 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 .btn-danger {
 	color: #fff;
 	background-color: #d9534f;
-	border-color: #d43f3a
+	border-color: #d43f3a;
+	width:120px;
+	height:70px;
 }
 
 .btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus,

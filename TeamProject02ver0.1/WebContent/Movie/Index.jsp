@@ -10,7 +10,8 @@
 <body>
 
 <%
-MemberDTO mem = new MemberDTO("asdf", "asdf", "kay", "11@11");
+MemberDTO mem = new MemberDTO();
+ 
 
 session.setAttribute("login", mem);
 %>

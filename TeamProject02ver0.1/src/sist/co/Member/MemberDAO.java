@@ -81,7 +81,7 @@ public class MemberDAO implements iMember {
 			log("4/6 Success IdDuple");
 			
 			while(rs.next()){
-				name = rs.getString(1);
+				name = rs.getString("m_name");
 			}
 			System.out.println(name);
 			log("5/6 Success IdDuple");
