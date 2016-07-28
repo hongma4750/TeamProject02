@@ -174,15 +174,42 @@ alter table REVIEW
 add constraint fk_review_id foreign key(m_id)
 references member(m_id)
 
+drop sequence review_seq;
 create sequence review_seq
 start with 1 increment by 1;
 
-drop sequence review_seq;
+
 
 insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요1','안녕하세요1');
 insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요2','안녕하세요2');
 insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요3','안녕하세요3');
 
+
+-- [9] r_comment : (SNS - 댓글)
+
+DROP TABLE r_comment
+CASCADE CONSTRAINT;
+
+SELECT * FROM r_comment
+
+CREATE TABLE r_comment(
+	com_seq number(5) primary key,
+	r_seq number(5) not null,
+	m_id varchar2(50) not null,
+	com_content varchar2(500) not null,
+	com_writedate date default sysdate
+)
+
+alter table r_comment
+add constraint fk_comment_r_seq foreign key(r_seq)
+references review(r_seq)
+
+drop sequence comment_seq;
+create sequence comment_seq
+start with 1 increment by 1;
+
+insert into r_comment values (comment_seq.nextval,1,'hong','ㅋㅋㅋㅋ아닌듯',sysdate);
+insert into r_comment values (comment_seq.nextval,1,'ma','간지나요',sysdate);
 
 
 

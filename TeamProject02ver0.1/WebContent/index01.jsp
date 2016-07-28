@@ -55,7 +55,7 @@
 	
 	
 		<c:if test="${param.mode != null }">
-			<jsp:include page="${param.mode }.jsp" flush="false"/>	
+			<jsp:include page="${param.mode}.jsp" flush="false"/>	
 		</c:if>
 		
 	</div>
