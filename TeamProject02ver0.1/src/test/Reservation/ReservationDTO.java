@@ -1,4 +1,4 @@
-package sist.co.Reservation;
+package test.Reservation;
 
 import java.sql.Date;
 
@@ -11,7 +11,6 @@ public class ReservationDTO {
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
-	private Date r_date;
 	
 	public ReservationDTO() {
 	}
@@ -72,19 +71,10 @@ public class ReservationDTO {
 		this.r_elder = r_elder;
 	}
 
-	public Date getR_date() {
-		return r_date;
-	}
-
-	public void setR_date(Date r_date) {
-		this.r_date = r_date;
-	}
-
 	@Override
 	public String toString() {
 		return "ReservationDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", th_seq=" + th_seq + ", r_totalprice="
-				+ r_totalprice + ", r_adult=" + r_adult + ", r_student=" + r_student + ", r_elder=" + r_elder
-				+ ", r_date=" + r_date + "]";
+				+ r_totalprice + ", r_adult=" + r_adult + ", r_student=" + r_student + ", r_elder=" + r_elder +"]";
 	}
 
 
