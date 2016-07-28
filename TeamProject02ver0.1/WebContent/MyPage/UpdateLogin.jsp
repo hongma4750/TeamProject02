@@ -6,8 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" type="text/css" href="../css/testmypage.css">
+<link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 
 </head>
 <body>
@@ -21,32 +23,51 @@ memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
 
+
 %>
 <header>
-<h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
+<h5><%=memberdto.getM_name() %>님 반갑습니다!</h5>
 </header>
 
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
-
+  <h4>내 정보관리</h4></a>
   &nbsp;&nbsp;<a href = "UpdateLogin.jsp">회원정보</a><br>
   
-
+  <h4>예매내역</h4></a>
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
   
- 
+  <h4>무비 히스토리</h4></a>
   &nbsp;&nbsp;<a href = "MovieHistory.jsp">나의 관람 영화</a><br>
 </nav>
 
 <section>
-<a href = "Ticket.jsp"><h3>내 티켓 바로가기</h3></a><br><br>
+
+<form action="UpdateMemInfo.jsp" method="post">
+<table>
+
+<tr>
+<td>아이디</td>
+<td><input type = "text" name = "id" size="20" value = "<%=memberdto.getM_id()%>"/></td>
+</tr>
+
+<tr>
+<td>비밀번호</td>
+<td><input type = "password" name = "pw" size="20"/></td>
+</tr>
+
+<tr>
+<td colspan = "2"><input type = "submit" value= "확인"/></td>
+</tr>
+
+</table>
+</form>
+
 </section>
 
 <footer>
 Copyright@우리조
 </footer>
-
-  
 
 </body>
 </html>

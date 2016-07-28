@@ -39,14 +39,23 @@ session.setAttribute("login",memberdto);
 </nav>
 
 <section>
-<a href = "Ticket.jsp"><h3>내 티켓 바로가기</h3></a><br><br>
+
+<form action = "OutMemAF.jsp" method = "post">
+●사용하고 계신 아이디(<%=memberdto.getM_id()%>)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.<br>
+●탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.<br>
+●탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.<br><br>
+<b>탈퇴 후에는 아이디 <%=memberdto.getM_id() %> 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다. 
+게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</b><br><br>
+
+<input type = "submit" value = "확인"/>
+</form>
+ 
 </section>
 
 <footer>
 Copyright@우리조
 </footer>
 
-  
 
 </body>
 </html>

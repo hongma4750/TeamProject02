@@ -39,14 +39,36 @@ session.setAttribute("login",memberdto);
 </nav>
 
 <section>
-<a href = "Ticket.jsp"><h3>내 티켓 바로가기</h3></a><br><br>
+
+
+<%
+//member DB에 해당 사용자 delete 작업한 후 
+//성공시 사이트 메인페이지로 
+if(true){	
+	%>
+	<script type="text/javascript">
+	alert("탈퇴되었습니다.");
+	location.href="../Index.jsp";
+	</script>
+	
+	<%
+}else{
+	%>
+	<script type="text/javascript">
+	alert("취소되었습니다.");
+	location.href="OutMem.jsp";
+	</script>
+	
+	<%
+	
+}
+%>
 </section>
 
 <footer>
 Copyright@우리조
 </footer>
 
-  
 
 </body>
 </html>
