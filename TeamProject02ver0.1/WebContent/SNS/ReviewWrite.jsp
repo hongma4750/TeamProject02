@@ -6,6 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -20,7 +22,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 <hr>
 
 <div id="middle_wrap">
-	<form action="ReviewWriteAF.jsp" method="post">
+	<form action="SNS/ReviewWriteAF.jsp" method="post">
 	<table class="content_table" border="1">
 		<tr>
 			<td>작성자</td>
@@ -42,7 +44,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	</table>
 	
 	<input type="submit" value="저장">
-	<input type="button" value="취소" onclick="javascript:location.href='ReviewList.jsp'">
+	<input type="button" value="취소" onclick="location.href='index01.jsp?mode=SNS/ReviewList'">
 	
 	</form>
 	
