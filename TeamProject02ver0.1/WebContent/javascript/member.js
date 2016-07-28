@@ -1,15 +1,7 @@
-/**
- * 
- */
-
-
-
-
-
 function goPage(a){
 	
 	if(a==1){
-		location.href="member/regi.jsp";
+		location.href="regi.jsp";
 	}else if(a==2){
 		alert("실행?")
 		location.href="../index.jsp";
@@ -28,5 +20,14 @@ function goPage(a){
 		location.href="poll/pollmake.jsp";
 	}else if(a==9){
 		location.href="poll/polllist.jsp";
+	}
+}
+
+function idDupchk(){
+	if(document.joinmem.id.value.length=0){
+		alert("ID를 입력하세요");
+		document.joinmem.id.focus();
+		return;
+		location.href = "IdCupChk.jsp?id=document.joinmem.id";
 	}
 }

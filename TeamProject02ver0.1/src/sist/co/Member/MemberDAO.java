@@ -55,7 +55,7 @@ public class MemberDAO implements iMember {
 			psmt.setString(4, dto.getM_email());
 			log("3/5 Success addMember");
 			
-			count= psmt.executeUpdate();
+			count = psmt.executeUpdate();
 			log("4/5 Success addMember");
 		}
 		catch(SQLException e){
