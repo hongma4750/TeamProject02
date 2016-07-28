@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="sist.co.Member.MemberDTO" %>
+         <%@ page import="sist.co.Review.ReviewDAO" %>
+     <%@ page import="sist.co.Review.ReviewDTO" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,21 +10,15 @@
 
 </head>
 <body>
-여기는 SNS입니다.
 
 <%
-MemberDTO memberdto = new MemberDTO();
-memberdto.setM_id("hong");
-memberdto.setM_pw("1234");
-memberdto.setM_name("hong");
-memberdto.setM_email("ddd");
+String r_seqs = request.getParameter("r_seq");
+int r_seq = Integer.parseInt(r_seqs);
 
-session.setAttribute("login",memberdto);
+ReviewDAO.getInstance().addLike(r_seq);
+
 %>
-
-<a href="ReviewList.jsp">게시판 이동</a>
-
 
 
 </body>
-</html> 
+</html>

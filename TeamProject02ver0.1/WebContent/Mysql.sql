@@ -179,7 +179,29 @@ CASCADE CONSTRAINT;
 
 SELECT * FROM REVIEW
 
-CREATE TABLE REVIEW()
+CREATE TABLE REVIEW(
+	r_seq number(5) primary key,
+	m_id varchar2(50) not null,
+	r_title varchar2(500) not null,
+	r_content varchar2(3000) not null,
+	r_writedate date default sysdate,
+	r_like number default 0,
+	r_readcount number default 0
+)
+
+alter table REVIEW
+add constraint fk_review_id foreign key(m_id)
+references member(m_id)
+
+create sequence review_seq
+start with 1 increment by 1;
+
+drop sequence review_seq;
+
+insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요1','안녕하세요1');
+insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요2','안녕하세요2');
+insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요3','안녕하세요3');
+
 
 
 --
