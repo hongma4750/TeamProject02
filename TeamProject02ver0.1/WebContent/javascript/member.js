@@ -1,19 +1,13 @@
-/**
- * 
- */
-
-
-
-
 
 function goPage(a){
 	
 	if(a==1){
-		location.href="member/regi.jsp";
+		alert("회원가입");
+		location.href="regi.jsp";
+
 	}else if(a==2){
-		alert("실행?")
-		location.href="../index.jsp";
-		
+		alert("로그인");
+		location.href="login.jsp";
 	}else if(a==3){
 		location.href="bbs/bbslist.jsp";
 	}else if(a==4){
@@ -28,5 +22,14 @@ function goPage(a){
 		location.href="poll/pollmake.jsp";
 	}else if(a==9){
 		location.href="poll/polllist.jsp";
+	}
+}
+
+function idDupchk(){
+	if(document.joinmem.id.value.length<4){
+		alert("ID를 최소 4자리 이상 입력하세요");
+		document.joinmem.id.focus();
+		return false;
+		location.href = "IdCupChk.jsp";
 	}
 }
