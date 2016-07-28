@@ -13,7 +13,7 @@
 
 </head>
 <body>
-
+ 
 <%
 MemberDTO memberdto = new MemberDTO();
 memberdto.setM_id("BomBom");

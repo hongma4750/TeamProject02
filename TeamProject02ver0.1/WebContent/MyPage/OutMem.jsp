@@ -20,7 +20,7 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
-
+ 
 %>
 <header>
 <h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>

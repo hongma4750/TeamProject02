@@ -17,7 +17,7 @@
 
 Object objlogin = session.getAttribute("login");//로그인으로 mem 정보 가져옴
 
-
+ 
 if(objlogin==null){
 	%>
 	<script type="text/javascript">

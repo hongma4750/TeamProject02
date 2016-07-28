@@ -22,7 +22,7 @@ String pw = request.getParameter("pw");
 /* 
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
-
+ 
 Test_MemberDAO dao = Test_MemberDAO.getInstance();
 Test_MemberDTO mem = new Test_MemberDTO();
 mem.setM_Id(id);

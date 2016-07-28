@@ -57,7 +57,7 @@ session.setAttribute("login",memberdto);
   
   <tr><td colspan = "3"><h4><b>15 부산행 (디지털)</b></h4><hr></td></tr>  <%--영화제목: 15 부산행 (디지털)--%>
  
-  <tr>
+  <tr> 
     <td>관람일</td>
     <td colspan="2">2016.07.27(수) 20:10 ~ 22:18</td>
   </tr>
