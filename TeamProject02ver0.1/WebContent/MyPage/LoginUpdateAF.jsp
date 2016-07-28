@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>나의 관람영화</title>
-
-<link rel="stylesheet" type="text/css" href="../css/testmypage.css"/>
-<link rel="stylesheet" type="text/css" href="../css/style.css"/>
-<link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
-
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/testmypage.css">
 
 </head>
 <body>
+
+
 <%
 MemberDTO memberdto = new MemberDTO();
 memberdto.setM_id("BomBom");
@@ -22,14 +21,35 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
- 
+String pw = request.getParameter("pw"); 
+
+if(pw.equals(memberdto.getM_pw())){	
+	%>
+	<script type="text/javascript">
+	alert("확인 완료되었습니다.");
+	location.href="UpdateMemInfo.jsp";
+	</script>
+	
+	<%
+}else{
+	%>
+	<script type="text/javascript">
+	alert("패스워드를 다시 확인하세요.");
+	location.href="LoginUpdate.jsp";
+	</script>
+	
+	<%
+	
+}
+	
 %>
 <header>
-<h5><%=memberdto.getM_name() %>님 반갑습니다!</h5>
+<h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
 </header>
 
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
+
    &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
   
 
@@ -40,32 +60,7 @@ session.setAttribute("login",memberdto);
 </nav>
 
 <section>
-
-
-<table align = "center">
-<col width="150"/><col width="200"/><col width="150"/>
-<tr align = "center">  
-  <td>관람일</td>
-  <td>영화</td>
-  <td>상영관</td>
-</tr>
-
-<%
-//과거에 관람 영화가 있으면 <tr>생성해서 리스트 구성
-
-%>
-
-<tr align = "center">
-   <td>2016.05.21</td>
-   <td><a href = "../ReserDetail.jsp?seq">싱 스트리트</a></td>
-   <td>홍대입구</td>
-</tr>
-
-
-
-
-</table>
-
+<a href = "Ticket.jsp"><h3>내 티켓 바로가기</h3></a><br><br>
 </section>
 
 <footer>

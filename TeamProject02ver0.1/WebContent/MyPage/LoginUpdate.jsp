@@ -43,7 +43,7 @@ session.setAttribute("login",memberdto);
 
 <section>
 
-<form action="UpdateMemInfo.jsp" method="post">
+<form action="LoginUpdateAF.jsp" method="post">
 <table>
 
 <tr>
