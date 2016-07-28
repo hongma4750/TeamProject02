@@ -17,13 +17,13 @@
 		%>
 		<script type="text/javascript">
 			alert("가입 가능한 아이디 입니다");
-			location("Regi.jsp");
+			location("regi.jsp");
 		</script>
 	<%}
 	else{%>
 		<script type="text/javascript">
 			alert("이미 존재하는 아이디 입니다");
-			location("Regi.jsp");
+			location("regi.jsp");
 		</script>
 	<%} %>
 </body>
