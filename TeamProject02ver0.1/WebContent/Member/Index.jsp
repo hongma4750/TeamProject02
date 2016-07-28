@@ -23,9 +23,11 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="button" name="join" value = "회원가입" onclick="goPage(1)"/>
-		<input type="button" name="login" value = "로그인" onclick="goPage(3)"/></td>
+		<td>
+			<input type="button" name="join" value = "회원가입" onclick="goPage(1)"/>
+			<input type="button" name="login" value="로그인" onclick="goPage(3)"/>
+		</td>
 	</tr>
 </table>
-</head>
+</body>
 </html>

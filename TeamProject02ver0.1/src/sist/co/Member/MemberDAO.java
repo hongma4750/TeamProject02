@@ -15,17 +15,6 @@ public class MemberDAO implements iMember {
 	private boolean isS = true;
 	private static MemberDAO memberDAO;
 	
-	public MemberDAO() {
-		try{
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			log("1/6 Success");
-		}
-		catch(ClassNotFoundException e){
-			log("1/6 Fail" ,e);
-			System.out.println(e.getMessage());
-		}
-	}
-	
 	public static MemberDAO getInstance(){
 		if(memberDAO==null){
 			memberDAO = new MemberDAO();

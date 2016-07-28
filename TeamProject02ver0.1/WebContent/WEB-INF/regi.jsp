@@ -11,12 +11,12 @@
 <h1>회원 등록</h1>
 
 <div>
-<form name="joinmem" action="regiAf.jsp" method="post">
+<form name="joinmem" action="RegiAf.jsp" method="post">
 <table style = "border: 1px solid black">
 <tr>
 	<td>ID</td>
 	<td><input type="text" name="id" size="20"/></td>
-	<td><input type="submit" value="중복확인" size="100" onclick="idDupchk()"></td>
+	<td><input type="submit" value="중복확인" size="100" onclick="iddupchk()"></td>
 </tr>
 <tr>
 	<td>PW</td>
