@@ -1,4 +1,6 @@
 <%@page import="sist.co.Member.MemberDTO"%>
+<%@page import="sist.co.Reservation.*"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,7 +43,10 @@ session.setAttribute("login",memberdto);
 
 <section>
 
-
+<%
+ReservationDAO dao = ReservationDAO.getInstance();
+List<ReservationDTO> rLists = dao.getReservList();
+%>
 <table align = "center">
 <col width="150"/><col width="200"/><col width="150"/>
 <tr align = "center">  
@@ -51,18 +56,21 @@ session.setAttribute("login",memberdto);
 </tr>
 
 <%
-//과거에 관람 영화가 있으면 <tr>생성해서 리스트 구성
+for(int i=0; i<rLists.size();i++){
+	ReservationDTO rdto = rLists.get(i);
 
 %>
 
 <tr align = "center">
-   <td>2016.05.21</td>
+   <td></td>
    <td><a href = "../ReserDetail.jsp?seq">싱 스트리트</a></td>
    <td>홍대입구</td>
 </tr>
 
 
-
+<%
+}
+%>
 
 </table>
 
