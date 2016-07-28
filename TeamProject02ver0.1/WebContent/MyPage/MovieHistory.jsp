@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>나의 관람영화</title>
 
 <link rel="stylesheet" type="text/css" href="../css/testmypage.css"/>
 <link rel="stylesheet" type="text/css" href="../css/style.css"/>
