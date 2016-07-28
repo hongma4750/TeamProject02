@@ -1,6 +1,4 @@
-<%@page import="sist.co.Member.Test_MemberDAO"%>
-<%@page import="sist.co.Member.Test_MemberDTO"%>
-
+<%@page import="sist.co.Member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <%
+
+MemberDTO memberdto = new MemberDTO();
+memberdto.setM_id("BomBom");
+memberdto.setM_pw("1234");
+memberdto.setM_name("Bom");
+memberdto.setM_email("ddd");
+
+session.setAttribute("login",memberdto);
+String pw = request.getParameter("pw");
+/* 
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 
@@ -19,22 +28,20 @@ Test_MemberDTO mem = new Test_MemberDTO();
 mem.setM_Id(id);
 mem.setM_Pw(pw);
 mem = dao.login(new Test_MemberDTO());
-
-if(mem !=null && !mem.getM_Id().equals("")){
-	session.setAttribute("login", mem); //login통해 mem정보를 받을수 있다 (session 서버를 통해)
-	
+ */
+/* if(memberdto !=null && !memberdto.getM_id().equals("")){ */
+if(pw.equals(memberdto.getM_pw())){	
 	%>
 	<script type="text/javascript">
-	alert("안녕하세요 <%=mem.getM_Name()%>님!");
-	location.href="Index.jsp";
+	location.href="UpdateMemberInfo.jsp";
 	</script>
 	
 	<%
 }else{
 	%>
 	<script type="text/javascript">
-	alert("아이디 패스워드를 다시 확인하세요.");
-	location.href="00index00.jsp";
+	alert("패스워드를 다시 확인하세요.");
+	location.href="UpdateLogin.jsp";
 	</script>
 	
 	<%
