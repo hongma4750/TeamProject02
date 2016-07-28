@@ -7,17 +7,8 @@ public class MemberDTO {
 	private String m_name;
 	private String m_email;
 	
-	public MemberDTO() {
+	public MemberDTO() {}
 	
-	}
-	
-	public MemberDTO(String m_id, String m_pw, String m_name, String m_email) {
-		this.m_id = m_id;
-		this.m_pw = m_pw;
-		this.m_name = m_name;
-		this.m_email = m_email;
-	}
-		
 	public String getM_id() {
 		return m_id;
 	}
