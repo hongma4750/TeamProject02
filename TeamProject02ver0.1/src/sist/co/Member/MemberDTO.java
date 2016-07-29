@@ -6,6 +6,7 @@ public class MemberDTO {
 	private String m_pw;
 	private String m_name;
 	private String m_email;
+	private int m_auth;
 	
 	public MemberDTO() {}
 	
@@ -41,9 +42,17 @@ public class MemberDTO {
 		this.m_email = m_email;
 	}
 
+	public int getM_auth() {
+		return m_auth;
+	}
+
+	public void setM_auth(int m_auth) {
+		this.m_auth = m_auth;
+	}
+	
 	public String toString(){
 		return "MEMBER[m_id:" + m_id + ",m_pw:" + m_pw + ",m_name:"
-				+ m_name + ",m_email:" + m_email + "]"; 
+				+ m_name + ",m_email:" + m_email + ",m_auth:" + m_auth + "]"; 
 	}
 	
 }
