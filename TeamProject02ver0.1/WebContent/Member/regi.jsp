@@ -34,16 +34,18 @@
 </tr>
 <tr>
 	<td>E-mail</td>
-	<td><input type="text" name="email" size="20"/></td>
-	<td><input type="button" value="중복확인" size="100"></td>
+	<td><input type="email" name="email" size="20"/></td>
+	<td><input type="button" value="중복확인" size="100" onclick="emailDupchk()"></td>
 </tr>
-<tr>
-	
+<tr><td></td>
+	<td><input type="submit" value ="가입완료" >&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="메인으로" onclick="goPage(3)"></td>
 </tr>
 </table>
+
 </form>
 </div>
-<input type="button" value ="가입완료" onclick = "goPage(2)">
-<input type="button" value="메인으로" onclick="goPage(2)">
+
+
 </body>
 </html>

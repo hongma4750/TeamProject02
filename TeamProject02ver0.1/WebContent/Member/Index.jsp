@@ -5,13 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../css/style.css" type ="text/css">
-<title>Insert title here</title>
-
+<title>Member Login</title>
 <script type="text/javascript" src="../javascript/member.js"></script>
 </head>
 <body>
 <h1>Junghyun Login</h1>
-
+<form action="login.jsp" method="post">
 <table>
 	<tr>
 		<td>아이디</td>
@@ -25,9 +24,10 @@
 		<td></td>
 		<td>
 			<input type="button" name="join" value = "회원가입" onclick="goPage(1)"/>
-			<input type="button" name="login" value="로그인" onclick="goPage(3)"/>
+			<input type="submit" name="login" value="로그인" onclick="goPage(3)"/>
 		</td>
 	</tr>
 </table>
+</form>
 </body>
 </html>

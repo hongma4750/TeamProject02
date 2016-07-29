@@ -14,11 +14,11 @@
 	MemberDAO dao = MemberDAO.getInstance();
 	boolean iddupchk = dao.IdDuple(id);
 	
-	if(!iddupchk){
+	if(iddupchk){
 		%>
 		<script type="text/javascript">
 			alert("가입 가능한 아이디 입니다");
-			location("regi.jsp");
+			history.go(-1);
 		</script>
 	<%}
 	else{%>
