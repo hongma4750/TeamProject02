@@ -183,8 +183,42 @@ public class ReviewDAO {
 		}
 	}
 	
-	
-	
+	// moviedetail에서 해당 영화의 리뷰 불러오기 by ay
+	public List<ReviewDTO> seereview(int mv_seq){
+		
+		String sql = " SELECT M_ID, R_TITLE, R_CONTENT FROM REVIEW WHERE MV_SEQ=? ";
+		
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<ReviewDTO> rlist = new ArrayList<ReviewDTO>();
+
+		try {
+			conn = DBManager.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,mv_seq);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ReviewDTO rdto = new ReviewDTO();
+				rdto.setM_id(rs.getString(1));
+				rdto.setR_title(rs.getString(2));
+				rdto.setR_content(rs.getString(3));
+				System.out.println("rdto:" + rdto.getM_id());
+				rlist.add(rdto);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt);
+		}
+		
+		return rlist;
+	}
 	
 	
 	
