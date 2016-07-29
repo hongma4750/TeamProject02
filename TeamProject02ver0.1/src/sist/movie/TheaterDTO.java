@@ -1,5 +1,6 @@
 package sist.movie;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class TheaterDTO {
@@ -11,21 +12,10 @@ public class TheaterDTO {
 	private int th_num;
 	private int th_totalseat;
 	private int th_leftseat;
-	private Date th_time;
+	private Timestamp th_time;
 	
 	public TheaterDTO() {
 		
-	}
-
-	public TheaterDTO(int th_seq, String th_name, int mv_seq, String th_cinema, int th_num, int th_totalseat, int th_leftseat, Date th_time) {
-		this.th_seq = th_seq;
-		this.th_name = th_name;
-		this.mv_seq = mv_seq;
-		this.th_cinema = th_cinema;
-		this.th_num = th_num;
-		this.th_totalseat = th_totalseat;
-		this.th_leftseat = th_leftseat;
-		this.th_time = th_time;
 	}
 
 	public int getTh_seq() {
@@ -84,19 +74,22 @@ public class TheaterDTO {
 		this.th_leftseat = th_leftseat;
 	}
 
-	public Date getTh_time() {
+	public Timestamp getTh_time() {
 		return th_time;
 	}
 
-	public void setTh_time(Date th_time) {
+	public void setTh_time(Timestamp th_time) {
 		this.th_time = th_time;
 	}
-	
-	public String toString(){
-		return "THEATER[th_seq:" + th_seq + ",th_name:" + th_name + ",mv_seq:"
-				+ mv_seq + ",th_cinema:" + th_cinema + ",th_num:" + th_num + ",th_totalseat:" 
-				+ th_totalseat + ",th_leftseat:" + th_leftseat + ",th_time:" + th_time + "]"; 
+
+	@Override
+	public String toString() {
+		return "TheaterDTO [th_seq=" + th_seq + ", th_name=" + th_name + ", mv_seq=" + mv_seq + ", th_cinema="
+				+ th_cinema + ", th_num=" + th_num + ", th_totalseat=" + th_totalseat + ", th_leftseat=" + th_leftseat
+				+ ", th_time=" + th_time + "]";
 	}
+
+	
 
 	
 }

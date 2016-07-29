@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-MovieManager mm = new MovieManager();
+/* MovieManager mm = new MovieManager();
 List<MovieDTO> list = mm.getCGVData();
 
 //json 생성
@@ -20,7 +20,7 @@ jsonresult = jsonresult.substring(0, jsonresult.lastIndexOf(","));	// 맨 끝의
 jsonresult += "]";
 
 System.out.println(jsonresult);
-request.setAttribute("jsonresult", jsonresult);
+request.setAttribute("jsonresult", jsonresult); */
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -57,7 +57,7 @@ request.setAttribute("jsonresult", jsonresult);
 <table width="80%">
 	<tr>
 		<%--for문 --%>
-		<td><a href="Moviedetail.jsp?seq=<%=1 %>"><img src="../img/arrow.png"></a></td>
+		<td><a href="Moviedetail.jsp?seq=<%=2 %>"><img src="../img/arrow.png"></a></td>
 		<td></td>
 		<td></td>
 		<td></td>

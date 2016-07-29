@@ -57,6 +57,7 @@ public class TheaterDAO implements ITheater{
 			psmt=conn.prepareStatement(sql);
 			psmt.setInt(1, mv_seq);
 			
+			
 			rs = psmt.executeQuery();
 			while(rs.next()){
 				TheaterDTO thdto = new TheaterDTO();
@@ -68,8 +69,8 @@ public class TheaterDAO implements ITheater{
 				thdto.setTh_num(rs.getInt(i++));
 				thdto.setTh_totalseat(rs.getInt(i++));
 				thdto.setTh_leftseat(rs.getInt(i++));
-				thdto.setTh_time(rs.getDate(i++));
-
+				thdto.setTh_time(rs.getTimestamp(i++));
+				
 				thlist.add(thdto);
 			}
 			
@@ -79,6 +80,45 @@ public class TheaterDAO implements ITheater{
 		}finally{
 			DBManager.close(conn, psmt);
 		}
+		return thlist;
+	}
+
+	@Override
+	public List<TheaterDTO> getTh_num(int mv_seq, String th_name, String th_cinema) {
+		
+		String sql = " SELECT TH_NUM, TO_CHAR(TH_TIME, 'YY-MM-DD HH24:MI:SS') FROM THEATER WHERE MV_SEQ=? AND TH_NAME=? AND TH_CINEMA=? ";
+		
+		Connection conn=null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<TheaterDTO> thlist = new ArrayList<TheaterDTO>();
+
+		try {
+			conn = DBManager.getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, mv_seq);
+			psmt.setString(2, th_name);
+			psmt.setString(3, th_cinema);
+			
+			rs = psmt.executeQuery();
+			while(rs.next()){
+				TheaterDTO thdto = new TheaterDTO();
+				thdto.setTh_num(rs.getInt(1));
+				System.out.println("into:"+thdto.getTh_num());
+				thdto.setTh_time(rs.getTimestamp(2));
+				System.out.println("into:"+thdto.getTh_time());
+				
+				thlist.add(thdto);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, psmt);
+		}
+		
 		return thlist;
 	}
 	
