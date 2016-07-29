@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript">
-<!-- var USERID_CHECK_FLAG = false; //사용자아이디 중복체크했는지 여부
+var USERID_CHECK_FLAG = false; //사용자아이디 중복체크했는지 여부
 var USERID_CHECK_SUCCESS_FLAG = false; //사용자아이디 중복체크 한 후 결과값
 
 $(document).ready(function() {
@@ -91,7 +91,7 @@ function trim(str) {
 
 </script>
 <form name="memberJoinForm" id="memberJoinForm" method="post" action="memberJoinProc.jsp">
- --><!-- <table>
+<!-- <table>
 <tbody>
 <tr>
  <td>

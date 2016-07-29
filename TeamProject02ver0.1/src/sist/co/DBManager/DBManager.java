@@ -16,6 +16,8 @@ public class DBManager {
 		String db_id="hr";
 		String db_pw="hr";
 		
+		
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("연결성공");
