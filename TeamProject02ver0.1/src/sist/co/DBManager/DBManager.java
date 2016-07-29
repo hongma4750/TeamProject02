@@ -13,8 +13,10 @@ public class DBManager {
 		Connection conn=null;
 		
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String db_id="hr";
-		String db_pw="hr";
+		String db_id="HR";
+		String db_pw="HR";
+		
+		
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
