@@ -1,4 +1,13 @@
 <%@page import="sist.co.Member.MemberDTO"%>
+<%@page import="test.Movie.MovieDTO"%>
+<%@page import="sist.co.Member.MemberDTO"%>
+<%@page import="test.Reservation.ReservationDTO"%>
+<%@page import="test.Reservation.ReservationDAO"%>
+<%@page import="test.Theater.TheaterDTO"%>
+<%@page import="test.Theater.TheaterDAO"%>
+<%@page import="test.Movie.MovieDAO"%>
+<%@page import="test.Movie.MovieDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,7 +39,7 @@ session.setAttribute("login",memberdto);
 
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
-   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
+  &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
   
 
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
@@ -41,21 +50,44 @@ session.setAttribute("login",memberdto);
 
 <section>
 
-<form action = "" method = "post">
+<%
+ReservationDAO  rdao = ReservationDAO.getInstance();
+TheaterDAO tdao = TheaterDAO.getInstance();
+MovieDAO mdao = MovieDAO.getInstance();
 
+//MovieDTO mdto = mdao.getMovie(2);//영화 하나 가져옴
+List<ReservationDTO> rlist = rdao.getTicketList();
+
+MovieDTO mdto = mdao.getMovie(1);
+%>
+
+
+
+<%-- <%
+for(int i=0; i<rlist.size();i++){
+	ReservationDTO rdto = rlist.get(i);
+	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
+	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
+    
+	if(rlist.size()<0){ //내역이 없을때
+		%>
+		예매내역이 없습니다.
+		
+		<%
+	}else{ //내역이 있을 때
+		%> --%>
+<form action = "CancleReserv.jsp" method = "post">
 <table>
-
-<tr >
-  <col width="80"/><col width="80"/><col width="150"/><col width="20"/>
-  
-  <td rowspan="7" valign="top" style="margin: 60px;"><img src = "../img/p_tobusanline.jpg" name = "MvPoster"/></td>  
+  <tr>
+    <col width="80"/><col width="80"/><col width="150"/><col width="20"/>
+    <td rowspan="7" valign="top" style="margin: 60px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster"/></td>  
   
     <td>예매번호</td>
     <td>46328332</td> <%--예매번호 46328332--%>
     <td><input type = "submit" name="R_Cancle" value = "예매취소"/></td>
   </tr>
   
-  <tr><td colspan = "3"><h4><b>15 부산행 (디지털)</b></h4><hr></td></tr>  <%--영화제목: 15 부산행 (디지털)--%>
+  <tr><td colspan = "3"><h4><b><%=mdto.getMv_title() %></b></h4><hr></td></tr>  <%--영화제목: 15 부산행 (디지털)--%>
  
   <tr> 
     <td>관람일</td>
@@ -67,8 +99,7 @@ session.setAttribute("login",memberdto);
     <td  colspan="2">신촌 3관</td>
   </tr>
   
-   <tr>
-  
+  <tr>
     <td> <hr>관람인원</td>
     <td  colspan="2" align = "center"><b>좌석정보</b></td>
   </tr>
@@ -85,14 +116,17 @@ session.setAttribute("login",memberdto);
   </td>
 </tr> 
 </table>
-
 </form>
-
+<%-- <%
+	}
+}
+%> --%>
 </section>
 
 <footer>
 Copyright@우리조
 </footer>
+
 
 </body>
 </html>

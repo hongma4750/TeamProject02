@@ -66,35 +66,55 @@ public class testMemberDAO implements testiMemberDAO {
 
 	@Override 
 	public boolean outMember(MemberDTO dto) {
-		String sql = " DELETE FROM MEMBER WHERE M_ID=? ";
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int count = 0;
-		log("1/6 Success outMember");
-		try{
-			conn = DBManager.getConnection();
-			log("2/6 Success outMember");
+		String sql1 = " DELETE FROM RESERVATION WHERE M_ID=? ";
+			String sql2 = " DELETE FROM MEMBER WHERE M_ID=? ";
 			
-			pstmt = conn.prepareStatement(sql);
-			log("3/6 Success outMember");
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int count = 0;
+			log("1/6 Success outMember");
 			
-			System.out.println(dto.getM_id());
-			pstmt.setString(1, dto.getM_id());
-			log("4/6 Success outMember");
-			
+			try{
+				conn = DBManager.getConnection();
+				conn.setAutoCommit(false);//자동 커밋 안됨
+				log("2/6 Success outMember");
+				
+				pstmt = conn.prepareStatement(sql1);
+				log("3/6 Success outMember");
+				
+				pstmt.setString(1, dto.getM_id());
+				log("4/6 Success outMember");
+				
+				count = pstmt.executeUpdate();
+				log("5/6 Success outMember");
+				
+				pstmt.clearParameters();
+				
+				pstmt = conn.prepareStatement(sql2);
+				
+				pstmt.setString(1, dto.getM_id());
+				
+				pstmt.executeBatch();
+				
+				conn.commit(); //수동커밋
+				
+				}catch(SQLException e){
+					log("Fail outMember");
+					try {
+						conn.rollback();
+					} catch (SQLException e1) {
+					}
+				}finally {
+					try {
+						conn.setAutoCommit(true);
+					} catch (SQLException e) {
+					}
+					DBManager.close(conn, pstmt);
+					log("6/6 Success outMember");
+				}
 			System.out.println(count);
-			count = pstmt.executeUpdate();
-			log("5/6 Success outMember");
-			
-			}catch(SQLException e){
-				log("Fail outMember");
-			}finally {
-				DBManager.close(conn, pstmt);
-				log("6/6 Success outMember");
-			}
-		System.out.println(count);
-			return count>0?true:false;
+				return count>0?true:false;
 	}
 
 	public void log(String msg){

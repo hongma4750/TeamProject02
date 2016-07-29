@@ -51,8 +51,11 @@ public class MovieDAO implements iMovieDAO {
 				mdto.setMv_title(rs.getString(i++));
 				mdto.setMv_openday(rs.getDate(i++));
 				mdto.setMv_genre(rs.getString(i++));
+				mdto.setMv_story(rs.getString(i++));
 				mdto.setMv_img(rs.getString(i++));
+				mdto.setMv_count(rs.getInt(i++));
 				mdto.setMv_like(rs.getInt(i++));
+				mdto.setMv_hate(rs.getInt(i++));
 				mdto.setMv_on(rs.getInt(i++));
 				
 			}
@@ -69,6 +72,8 @@ public class MovieDAO implements iMovieDAO {
 		
 		return mdto;
 	}
+	
+	
 	
 	public void log(String msg){
 		if(isS){ //isS가 true일때

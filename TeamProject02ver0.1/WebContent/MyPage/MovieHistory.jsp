@@ -52,7 +52,7 @@ session.setAttribute("login",memberdto);
 
 <%
 ReservationDAO dao = ReservationDAO.getInstance();
-List<ReservationDTO> rLists = dao.getReservList();
+List<ReservationDTO> rLists = dao.getHistoryList(memberdto.getM_id());
 
 TheaterDAO tdao = TheaterDAO.getInstance();
 MovieDAO mdao = MovieDAO.getInstance();
@@ -72,19 +72,29 @@ for(int i=0; i<rLists.size();i++){
 	ReservationDTO rdto = rLists.get(i);
 	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
 	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
+	
+	if(rLists.size() == 0){ //내역이 없을때
+		%>
+		
+		<tr>
+		  <td colspan="5">지난 예매내역이 없습니다.</td>
+		</tr>
+		
+		<%
+	}else{ //내역이 있을 때
+		%>
 
-%>
-
-<tr align = "center">
-   <td><%=tdto.getTh_time() %></td>
-   <td><%=rdto.getR_seq() %></td>
-   <td><a href = "../ReservationDetail.jsp?seq"><%=mdto.getMv_title() %></a></td>
-   <td><%=tdto.getTh_name() %></td>
-   <td><%=tdto.getTh_cinema() %></td>
-</tr>
+		<tr align = "center">
+		   <td><%=tdto.getTh_time() %></td>
+		   <td><a href = "#"><%=rdto.getR_seq() %></a></td> <%--예매detail로 이동 --%>
+		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
+		   <td><%=tdto.getTh_name() %></td>
+		   <td><%=tdto.getTh_cinema() %></td>
+		</tr>
 
 
-<%
+		<%
+	}
 }
 %>
 

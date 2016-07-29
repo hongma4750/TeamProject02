@@ -7,10 +7,15 @@ public class ReservationDTO {
 	private int r_seq;
 	private String m_id;
 	private int th_seq;
+	private int mv_seq;
+	private int r_poll;
 	private int r_totalprice;
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
+	private Date r_time;
+	private String r_thname;
+	private String r_cinema;
 	
 	public ReservationDTO() {
 	}
@@ -37,6 +42,22 @@ public class ReservationDTO {
 
 	public void setTh_seq(int th_seq) {
 		this.th_seq = th_seq;
+	}
+
+	public int getMv_seq() {
+		return mv_seq;
+	}
+
+	public void setMv_seq(int mv_seq) {
+		this.mv_seq = mv_seq;
+	}
+
+	public int getR_poll() {
+		return r_poll;
+	}
+
+	public void setR_poll(int r_poll) {
+		this.r_poll = r_poll;
 	}
 
 	public int getR_totalprice() {
@@ -71,11 +92,36 @@ public class ReservationDTO {
 		this.r_elder = r_elder;
 	}
 
-	@Override
-	public String toString() {
-		return "ReservationDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", th_seq=" + th_seq + ", r_totalprice="
-				+ r_totalprice + ", r_adult=" + r_adult + ", r_student=" + r_student + ", r_elder=" + r_elder +"]";
+	public Date getR_time() {
+		return r_time;
 	}
 
+	public void setR_time(Date r_time) {
+		this.r_time = r_time;
+	}
+
+	public String getR_thname() {
+		return r_thname;
+	}
+
+	public void setR_thname(String r_thname) {
+		this.r_thname = r_thname;
+	}
+
+	public String getR_cinema() {
+		return r_cinema;
+	}
+
+	public void setR_cinema(String r_cinema) {
+		this.r_cinema = r_cinema;
+	}
+
+	@Override
+	public String toString() {
+		return "ReservationDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", th_seq=" + th_seq + ", mv_seq=" + mv_seq
+				+ ", r_poll=" + r_poll + ", r_totalprice=" + r_totalprice + ", r_adult=" + r_adult + ", r_student="
+				+ r_student + ", r_elder=" + r_elder + ", r_time=" + r_time + ", r_thname=" + r_thname + ", r_cinema="
+				+ r_cinema + "]";
+	}
 
 }

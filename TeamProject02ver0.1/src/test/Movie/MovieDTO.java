@@ -8,8 +8,11 @@ public class MovieDTO {
 	private String mv_title;
 	private Date mv_openday;
 	private String mv_genre;
+	private String mv_story;
 	private String mv_img;
+	private int mv_count;
 	private int mv_like;
+	private int mv_hate;
 	private int mv_on;
 	
 	public MovieDTO() {
@@ -48,6 +51,14 @@ public class MovieDTO {
 		this.mv_genre = mv_genre;
 	}
 
+	public String getMv_story() {
+		return mv_story;
+	}
+
+	public void setMv_story(String mv_story) {
+		this.mv_story = mv_story;
+	}
+
 	public String getMv_img() {
 		return mv_img;
 	}
@@ -56,12 +67,28 @@ public class MovieDTO {
 		this.mv_img = mv_img;
 	}
 
+	public int getMv_count() {
+		return mv_count;
+	}
+
+	public void setMv_count(int mv_count) {
+		this.mv_count = mv_count;
+	}
+
 	public int getMv_like() {
 		return mv_like;
 	}
 
 	public void setMv_like(int mv_like) {
 		this.mv_like = mv_like;
+	}
+
+	public int getMv_hate() {
+		return mv_hate;
+	}
+
+	public void setMv_hate(int mv_hate) {
+		this.mv_hate = mv_hate;
 	}
 
 	public int getMv_on() {
@@ -75,9 +102,7 @@ public class MovieDTO {
 	@Override
 	public String toString() {
 		return "MovieDTO [mv_seq=" + mv_seq + ", mv_title=" + mv_title + ", mv_openday=" + mv_openday + ", mv_genre="
-				+ mv_genre + ", mv_img=" + mv_img + ", mv_like=" + mv_like + ", mv_on=" + mv_on + "]";
+				+ mv_genre + ", mv_story=" + mv_story + ", mv_img=" + mv_img + ", mv_count=" + mv_count + ", mv_like="
+				+ mv_like + ", mv_hate=" + mv_hate + ", mv_on=" + mv_on + "]";
 	}
-
-	
-	
 }

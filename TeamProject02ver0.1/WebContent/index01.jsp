@@ -21,7 +21,7 @@
 
 	<div id="action">
 		<c:if test="${ login!=null}">
-			<a href="#">마이페이지</a>&nbsp;&nbsp;
+			<a href="MyPage/Index.jsp">마이페이지</a>&nbsp;&nbsp;
 			<a href="#">로그아웃</a>&nbsp;&nbsp;
 		</c:if>
 		
