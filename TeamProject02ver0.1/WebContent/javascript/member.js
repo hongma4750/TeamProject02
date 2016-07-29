@@ -9,14 +9,12 @@ function goPage(a){
 		alert("가입완료클릭");
 		location.href="regiAf.jsp";
 	}else if(a==3){
-
 		alert("로그인클릭");
 		location.href="login.jsp";
-
-		location.href="index.jsp";
-
 	}else if(a==4){
-		location.href="Calendar/Calendar.jsp";
+		
+		alert("메인으로 가기 클릭");
+		location.href="Index.jsp";
 	}else if(a==5){
 		location.href="Calendar.jsp";
 	}else if(a==6){
@@ -72,3 +70,20 @@ function emailDupchk(){
 		location.href = "emailDupChk.jsp";
 	}
 }
+
+/*function regifinish(){
+	if
+}*/
+
+
+function idCheck(){
+		
+	   if(document.joinmem.id.value==""){
+	      alert("아이디를 입력해 주세요");
+	      joinmem.id.focus();
+	      return;
+	   }
+	   
+	   var url="idCheck.jsp?id="+document.joinmem.id.value;
+	   window.open(url,"_black_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+	}

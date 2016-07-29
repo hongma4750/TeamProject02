@@ -13,6 +13,7 @@
 <form action="login.jsp" method="post">
 <table>
 	<tr>
+	
 		<td>아이디</td>
 		<td><input type="text" name="id" size="20"/></td>
 	</tr>
@@ -23,7 +24,7 @@
 	<tr>
 		<td></td>
 		<td>
-			<input type="button" name="join" value = "회원가입" onclick="goPage(1)"/>
+			<input type="button" name="join" value="회원가입" onclick="goPage(1)"/>
 			<input type="submit" name="login" value="로그인" onclick="goPage(3)"/>
 		</td>
 	</tr>

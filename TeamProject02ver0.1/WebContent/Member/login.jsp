@@ -35,7 +35,7 @@ if(mem!= null && !mem.getM_id().equals("")){
 %>
 	<script	type="text/javascript">
 		alert("안녕하세요<%=mem.getM_id()%>님!");
-		location.href="../Mypage/Index.jsp";
+		location.href="../MyPage/Index.jsp";
 	</script>
 <%}
 else{%>

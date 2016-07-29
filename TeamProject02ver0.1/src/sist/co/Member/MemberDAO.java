@@ -87,13 +87,13 @@ public class MemberDAO implements iMember {
 			while(rs.next()){
 				name = rs.getString("m_name");
 			}
-			System.out.println(name);
+			System.out.println("id 있음? ="+name);
 			log("5/6 Success IdDuple");
 			if(name==null){
-				ck = false;
+				ck = true;
 			}
 			else{
-				ck = true;
+				ck = false;
 			}
 		}
 		catch(SQLException e){

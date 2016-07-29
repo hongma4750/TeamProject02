@@ -29,14 +29,14 @@ if(isS){
 %>
 	<script type="text/javascript">
 		alert("성공적으로 가입했습니다");
-		location("Index.jsp");
+		location
 	</script>
 <%}
 else{
 %>
 	<script type="text/javascript">
 		alert("다시 기입하십시오");
-		location("regi.jsp");
+		history.go(-1);
 	</script>
 <%}%>
 </body>
