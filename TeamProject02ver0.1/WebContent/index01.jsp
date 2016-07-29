@@ -13,6 +13,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -26,7 +27,7 @@
 		</c:if>
 		
 		<c:if test="${ login==null}">
-			<a href="#">로그인</a>&nbsp;&nbsp;
+			<a href="index01.jsp?mode=Member/hong_Login">로그인</a>&nbsp;&nbsp;
 			<a href="#">회원가입</a>&nbsp;&nbsp;
 			<a href="#">ID찾기</a>&nbsp;&nbsp;
 			<a href="#">PW찾기</a>
