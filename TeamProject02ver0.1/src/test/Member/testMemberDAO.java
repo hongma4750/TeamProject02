@@ -79,7 +79,7 @@ public class testMemberDAO implements testiMemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			log("3/6 Success outMember");
 			
-			pstmt.setString(1, dto.getM_id().toUpperCase());
+			pstmt.setString(1, dto.getM_id());
 			log("4/6 Success outMember");
 			
 			count = pstmt.executeUpdate();
