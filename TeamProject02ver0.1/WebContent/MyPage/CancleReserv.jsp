@@ -30,7 +30,7 @@ session.setAttribute("login",memberdto);
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
 
-   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br> 
+   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>  
  
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
   
