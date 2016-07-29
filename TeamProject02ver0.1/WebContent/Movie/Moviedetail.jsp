@@ -97,7 +97,7 @@ MovieDTO mdto = dao.getmoviedetail(1);
 		} %>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="submit" value="예매하기"><input type="hidden" value="<%=mdto.getMv_seq()%>"></td>
+		<td colspan="2"><input type="submit" value="예매하기"><input type="hidden" name="seq" value="<%=mdto.getMv_seq()%>"></td>
 	</tr>
 	<tr>
 		<th colspan="3" class="leftfix">줄거리</th>

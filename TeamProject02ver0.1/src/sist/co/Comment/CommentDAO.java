@@ -60,7 +60,7 @@ public class CommentDAO {
 		}
 		return list;
 	}
-	
+	// 댓글입력
 	public void insertComment(CommentDTO comdto){
 		String sql ="insert into r_comment values (comment_seq.nextval,?,?,?,sysdate)";
 		
@@ -83,4 +83,53 @@ public class CommentDAO {
 			DBManager.close(conn, pstmt);
 		}
 	}
+	
+	//댓글 삭제
+	public void deleteComment(int com_seq){
+		String sql = "delete from r_comment where com_seq = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, com_seq);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt);
+		}
+	}
+	
+	
+	//댓글 수정
+	public void updateComment(CommentDTO comdto){
+		String sql = "update r_comment set com_content = ? where com_seq = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, comdto.getCom_content());
+			pstmt.setInt(2, comdto.getCom_seq());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt);
+		}
+	}
+	
 }

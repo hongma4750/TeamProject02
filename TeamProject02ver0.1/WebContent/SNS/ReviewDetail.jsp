@@ -18,8 +18,80 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>리뷰 디테일</title>
 
+<script src="javascript/review.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	 
+	$('.comment-toggle').click(function(e) {
+		
+	        var $form = $(e.target).parent().parent().find('.modify-comment');
+	        
+	        var $p = $(e.target).parent().parent().find('.comment-toggle');
+	        var $o = $(e.target).parent().parent().find('.comment-delete');
+	        var $c = $(e.target).parent().parent().parent().find('.comment-content');
+	        
+	        if ($form.is(':hidden') == true) {
+	            $form.show();
+	            $p.hide();
+	        	$o.hide();
+	        	$c.hide();
+	        } else {
+	            $form.hide();
+	            $p.show();
+	            $o.show();
+	            $c.show();
+	        }
+	        return false;
+	});
+	
+	$('.comment-delete').click(function(e) {
+		var chk = confirm("정말로 삭제하시겠습니까?");
+        if (chk == true) {
+            return true;
+        }
+        return false;
+});
+	
+	/* SNS/CommentUpdate.jsp?com_seq=${comment.com_seq }$r_seq=${comment.r_seq }&com_content= */
+	//form 안의 수정하기 링크
+	$('.modifying').click(function(e) {
+		
+	   var url="SNS/CommentUpdate.jsp?com_seq="+$('.com_seq_re').val()+"&r_seq="+$('.r_seq_re').val()+"&com_content="+$('.modify-comment-ta').val();
+	    $(location).attr('href',url);
+	     
+	    //alert(url);
+	    //location.href="index01.jsp?mode=SNS/ReviewDetail"
+
+	});
+	
+	//form 안의 취소 링크
+	$('.cancel').click(function(e) {
+	    var $form = $(e.target).parents().find('.modify-comment');
+	    
+	    var $p = $(e.target).parents().find('.comment-toggle');
+        var $o = $(e.target).parents().find('.comment-delete');
+        var $c = $(e.target).parents().find('.comment-content');
+        
+	    if ($form.is(':hidden') == true) {
+	        $form.show();
+	        $p.hide();
+        	$o.hide();
+        	$c.hide();
+	    } else {
+	        $form.hide();
+	        $p.show();
+            $o.show();
+            $c.show();
+	    }
+	    return false;
+	});
+
+});
+</script>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
@@ -79,18 +151,40 @@ request.setAttribute("comList", comList);
 			<c:forEach var="comment" items="${comList }">
 				<tr style="background-color:#C9AA56">
 					<td colspan="2">
+					
+						<div class="comments">
 						
-						<h4> 
+						<h4 class="view-commnet"> 
 							[${comment.m_id}] 
 							<small>${comment.com_writedate }</small>
 							<c:if test="${login.m_id == comment.m_id }">		
-									<a href="#"><small>수정</small></a>
-									<a href="#"><small>삭제</small></a>
+									<a href="#" ><small class="comment-toggle">수정</small></a>
+									<a href="SNS/CommentDelete.jsp?com_seq=${comment.com_seq }&r_seq=${comment.r_seq}"><small class="comment-delete">삭제</small></a>
+									
+									
+								<!--  댓글 수정!!!!!!!!!!!!!!!!!!!!!!!!!!!!jquery -->	
+											
+								<div class="modify-comment" style="display: none">
+							    	
+							    <div style="text-align: right;">
+							      <a href="#"><small class="modifying">수정</small></a> |
+							      <a href="#"><small class="cancel">취소</small></a>
+							    </div>
+							    
+							    <div>
+							    	<input type="hidden" value="${comment.com_seq }" class="com_seq_re">
+							    	<input type="hidden" value="${comment.r_seq }" class="r_seq_re">
+							      <textarea class="modify-comment-ta" name="com_content_re" rows="4" cols="50">${comment.com_content }</textarea>
+							    </div>
+							    
+							  </div>
+									
 							</c:if>
 						</h4>
-						
+						<h3 class="comment-content">
 						${comment.com_content } 
-						
+						</h3>
+						</div>
 					</td>
 				</tr>
 			</c:forEach>
