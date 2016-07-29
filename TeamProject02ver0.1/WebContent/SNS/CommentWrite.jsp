@@ -32,9 +32,9 @@
 	comdao.insertComment(comdto);
 	
 %>
-<%-- <script type="text/javascript">
+<script type="text/javascript">
 	location.href="../index01.jsp?mode=SNS/ReviewDetail&r_seq=<%=r_seq%>";
-</script> --%>
+</script>
 
 </body>
 </html>
