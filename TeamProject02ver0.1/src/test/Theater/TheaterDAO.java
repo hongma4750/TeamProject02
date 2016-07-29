@@ -13,7 +13,7 @@ public class TheaterDAO implements iTheaterDAO {
 	
 	private boolean isS = true;
 	private static TheaterDAO theaterDAO;
-	
+	 
 	public static TheaterDAO getInstance(){
 		if (theaterDAO == null) {
 			theaterDAO = new TheaterDAO();

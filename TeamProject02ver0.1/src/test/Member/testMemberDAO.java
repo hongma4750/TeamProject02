@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import sist.co.DBManager.DBManager;
 import sist.co.Member.MemberDTO;
-
+ 
 public class testMemberDAO implements testiMemberDAO {
 	
 	private boolean isS = true;

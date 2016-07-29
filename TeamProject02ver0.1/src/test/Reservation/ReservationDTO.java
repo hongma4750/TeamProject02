@@ -3,7 +3,7 @@ package test.Reservation;
 import java.sql.Date;
 
 public class ReservationDTO {
-	
+	 
 	private int r_seq;
 	private String m_id;
 	private int th_seq;
