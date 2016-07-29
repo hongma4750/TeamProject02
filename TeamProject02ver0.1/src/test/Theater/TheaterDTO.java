@@ -14,7 +14,7 @@ public class TheaterDTO {
 	private int th_leftseat;
 	private Date th_time;
 	
-	public TheaterDTO() {
+	public TheaterDTO() { 
 	}
 
 	public int getTh_seq() {

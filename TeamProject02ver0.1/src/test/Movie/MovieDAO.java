@@ -10,7 +10,7 @@ import test.Theater.TheaterDAO;
 import test.Theater.TheaterDTO;
 
 public class MovieDAO implements iMovieDAO {
-	 
+	  
 	private boolean isS = true;
 	private static MovieDAO movieDAO;
 	

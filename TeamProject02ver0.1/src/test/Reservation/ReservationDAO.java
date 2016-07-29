@@ -10,7 +10,7 @@ import java.util.List;
 import sist.co.DBManager.DBManager;
 
 public class ReservationDAO implements iReservateionDAO {
- 
+  
 	private boolean isS = true;
 	private static ReservationDAO reservDAO;
 	

@@ -64,7 +64,7 @@ public class testMemberDAO implements testiMemberDAO {
 	}
 
 
-	@Override
+	@Override 
 	public boolean outMember(MemberDTO dto) {
 		String sql = " DELETE FROM MEMBER WHERE M_ID=? ";
 		
@@ -79,9 +79,11 @@ public class testMemberDAO implements testiMemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			log("3/6 Success outMember");
 			
+			System.out.println(dto.getM_id());
 			pstmt.setString(1, dto.getM_id());
 			log("4/6 Success outMember");
 			
+			System.out.println(count);
 			count = pstmt.executeUpdate();
 			log("5/6 Success outMember");
 			
@@ -91,7 +93,7 @@ public class testMemberDAO implements testiMemberDAO {
 				DBManager.close(conn, pstmt);
 				log("6/6 Success outMember");
 			}
-			
+		System.out.println(count);
 			return count>0?true:false;
 	}
 
