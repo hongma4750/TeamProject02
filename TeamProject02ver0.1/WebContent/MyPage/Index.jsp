@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../css/testmypage.css">
 
 </head>
-<body>
+<body> 
 
 <%
 MemberDTO memberdto = new MemberDTO();

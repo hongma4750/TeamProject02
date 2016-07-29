@@ -51,7 +51,7 @@ boolean isS = dao.outMember(memberdto);
 //member DB에 해당 사용자 delete 작업한 후 
 //성공시 사이트 메인페이지로 
 if(isS){	
-	%>
+	%> 
 	<script type="text/javascript">
 	alert("탈퇴되었습니다.");
 	location.href="../index01.jsp";

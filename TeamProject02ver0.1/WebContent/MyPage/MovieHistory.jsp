@@ -68,7 +68,7 @@ MovieDAO mdao = MovieDAO.getInstance();
 </tr>
 
 <%
-for(int i=0; i<rLists.size();i++){
+for(int i=0; i<rLists.size();i++){ 
 	ReservationDTO rdto = rLists.get(i);
 	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
 	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
