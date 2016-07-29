@@ -4,8 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@page import="test.Member.testMemberDAO"%>
-<%@page import="sist.co.Member.MemberDTO"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -13,6 +11,7 @@
 
 </head>
 <body>
+
 
 <%
 MemberDTO memberdto = new MemberDTO();
@@ -22,13 +21,28 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
+String pw = request.getParameter("pw"); 
 
-testMemberDAO dao = new testMemberDAO();
-boolean isS = dao.outMember(memberdto);
-
+if(pw.equals(memberdto.getM_pw())){	
+	%>
+	<script type="text/javascript">
+	alert("확인 완료되었습니다.");
+	location.href="UpdateMemInfo.jsp";
+	</script>
+	
+	<%
+}else{
+	%>
+	<script type="text/javascript">
+	alert("패스워드를 다시 확인하세요.");
+	location.href="LoginUpdate.jsp";
+	</script>
+	
+	<%
+	
+}
+	
 %>
-
-
 <header>
 <h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
 </header>
@@ -36,7 +50,7 @@ boolean isS = dao.outMember(memberdto);
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
 
-  &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
+   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
   
 
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
@@ -46,31 +60,7 @@ boolean isS = dao.outMember(memberdto);
 </nav>
 
 <section>
-
-<%
-//member DB에 해당 사용자 delete 작업한 후 
-//성공시 사이트 메인페이지로 
-if(isS){	
-	%>
-	<script type="text/javascript">
-	alert("탈퇴되었습니다.");
-	location.href="../Index.jsp";
-	</script>
-	
-	<%
-}else{
-	%>
-	<script type="text/javascript">
-	alert("취소되었습니다.");
-	location.href="OutMem.jsp";
-	</script>
-	
-	<%
-	
-}
-%>
-
-
+<a href = "Ticket.jsp"><h3>내 티켓 바로가기</h3></a><br><br>
 </section>
 
 <footer>

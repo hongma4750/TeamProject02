@@ -23,7 +23,7 @@ memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
 
-
+ 
 %>
 <header>
 <h5><%=memberdto.getM_name() %>님 반갑습니다!</h5>
@@ -31,19 +31,19 @@ session.setAttribute("login",memberdto);
 
 <nav>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
-  <h4>내 정보관리</h4></a>
+
   &nbsp;&nbsp;<a href = "UpdateLogin.jsp">회원정보</a><br>
   
-  <h4>예매내역</h4></a>
+
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
   
-  <h4>무비 히스토리</h4></a>
+
   &nbsp;&nbsp;<a href = "MovieHistory.jsp">나의 관람 영화</a><br>
 </nav>
 
 <section>
 
-<form action="UpdateMemInfo.jsp" method="post">
+<form action="LoginUpdateAF.jsp" method="post">
 <table>
 
 <tr>

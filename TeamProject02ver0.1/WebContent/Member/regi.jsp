@@ -4,7 +4,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="../css/style.css" type ="text/css">
-<script type="text/javascript" src="../javascript/memeber.js"></script>
+<script type="text/javascript" src="../javascript/member.js"></script>
 </head>
 <body>
 
@@ -15,8 +15,10 @@
 <table style = "border: 1px solid black">
 <tr>
 	<td>ID</td>
-	<td><input type="text" name="id" size="20"/></td>
-	<td><input type="submit" value="중복확인" size="100" onclick="idDupchk()"></td>
+	<td>
+		<input type="text" name="id" size="20"/>
+	</td>
+	<td><input type="button" value="중복확인" size="100" onclick="idDupchk()"></td>
 </tr>
 <tr>
 	<td>PW</td>
@@ -33,7 +35,7 @@
 <tr>
 	<td>E-mail</td>
 	<td><input type="text" name="email" size="20"/></td>
-	<td><input type="submit" value="중복확인" size="100"></td>
+	<td><input type="button" value="중복확인" size="100"></td>
 </tr>
 <tr>
 	

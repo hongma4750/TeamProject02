@@ -1,4 +1,5 @@
 
+
 function goPage(a){
 	
 	if(a==1){
@@ -29,7 +30,21 @@ function idDupchk(){
 	if(document.joinmem.id.value.length<4){
 		alert("ID를 최소 4자리 이상 입력하세요");
 		document.joinmem.id.focus();
+	}
+	else{
+		alert("ID 중복검사를 합니다");
+		location.href="idDupChk.jsp";		//id 중복검사
+	}
+	return false;
+}
+
+
+function emailDupchk(){
+	alert("emailDupchk");
+	if(document.joinmem.email.value.length<4){
+		alert("ID를 최소 4자리 이상 입력하세요");
+		document.joinmem.id.focus();
 		return false;
-		location.href = "IdCupChk.jsp";
+		location.href = "idDupChk.jsp?id=document.joinmem.id";
 	}
 }

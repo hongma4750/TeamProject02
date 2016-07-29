@@ -1,19 +1,19 @@
-package sist.movie;
+package sist.co.Reservation;
+
+import java.sql.Date;
 
 public class ReservationDTO {
-
+	
 	private int r_seq;
 	private String m_id;
 	private int th_seq;
-	private int mv_seq;
-	private int r_poll;		// 0 : 투표 x, 1: 투표(좋아요), 2: 투표(싫어요)
 	private int r_totalprice;
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
+	private Date r_date;
 	
 	public ReservationDTO() {
-	
 	}
 
 	public int getR_seq() {
@@ -72,29 +72,20 @@ public class ReservationDTO {
 		this.r_elder = r_elder;
 	}
 
-	public int getR_poll() {
-		return r_poll;
+	public Date getR_date() {
+		return r_date;
 	}
 
-	public void setR_poll(int r_poll) {
-		this.r_poll = r_poll;
+	public void setR_date(Date r_date) {
+		this.r_date = r_date;
 	}
 
-	public int getMv_seq() {
-		return mv_seq;
+	@Override
+	public String toString() {
+		return "ReservationDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", th_seq=" + th_seq + ", r_totalprice="
+				+ r_totalprice + ", r_adult=" + r_adult + ", r_student=" + r_student + ", r_elder=" + r_elder
+				+ ", r_date=" + r_date + "]";
 	}
 
-	public void setMv_seq(int mv_seq) {
-		this.mv_seq = mv_seq;
-	}
 
-	public String toString(){
-		return "THEATER[r_seq:" + r_seq + ",m_id:" + m_id + ",th_seq:" + th_seq 
-				+ ",mv_seq:" + mv_seq + ",r_poll:" + r_poll
-				+ ",r_totalprice:" + r_totalprice + ",r_adult:" + r_adult + ",r_student:" 
-				+ r_student + ",r_elder:" + r_elder + "]"; 
-	}
-	
-	
-	
 }

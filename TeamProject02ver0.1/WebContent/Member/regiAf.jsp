@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "sist.co.Member.MemberDTO, sist.co.Member.MemberDAO"%>    
+<%@ page import = "sist.co.Member.MemberDTO"%>    
+<%@ page import = "sist.co.Member.MemberDAO"%>
 <%request.setCharacterEncoding("utf-8");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +13,7 @@
 regiAf
 <%
 String id = request.getParameter("id");
-String pw = request.getParameter("pw");
+String pw = request.getParameter("pwd");
 String name = request.getParameter("name");
 String email = request.getParameter("email");
 

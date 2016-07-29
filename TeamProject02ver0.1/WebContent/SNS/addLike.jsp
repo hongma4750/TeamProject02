@@ -12,6 +12,7 @@
 </head>
 <body>
 
+
 <%
 String r_seqs = request.getParameter("r_seq");
 int r_seq = Integer.parseInt(r_seqs);

@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
+
+
 <title>Insert title here</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +56,7 @@
 	
 	
 		<c:if test="${param.mode != null }">
-			<jsp:include page="${param.mode }.jsp" flush="false"/>	
+			<jsp:include page="${param.mode}.jsp" flush="false"/>	
 		</c:if>
 		
 	</div>
