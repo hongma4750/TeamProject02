@@ -1,23 +1,50 @@
+
 <%@page import="sist.co.Member.MemberDTO"%>
+
+<%@page import="sist.movie.MovieDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="sist.movie.MovieManager"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+MovieManager mm = new MovieManager();
+List<MovieDTO> list = mm.getCGVData();
+
+//json 생성
+String jsonresult = "[";
+for(MovieDTO m: list){
+	jsonresult += "{name:'" + m.getMv_title() + "',y:" + m.getMv_img() + "}, ";
+}
+jsonresult = jsonresult.substring(0, jsonresult.lastIndexOf(","));	// 맨 끝의 ',' 삭제
+jsonresult += "]";
+
+System.out.println(jsonresult);
+request.setAttribute("jsonresult", jsonresult);
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>movie_index</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<title>movie_main</title>
+
 </head>
 <body>
 
-<%
-MemberDTO mem = new MemberDTO();
- 
-
-session.setAttribute("login", mem);
+<%	// main에서 빼도됌. nav 영역에서 session을 set해줌
+/* MemberDTO mem = new MemberDTO("qwer", "qwer", "qwer", "asdf@asdf"); */
+/* session.setAttribute("login", mem); */
 %>
 
+<%-- nav 에 전체 예매 tab 존재. 따라서, 각 영화의 예매버튼이 존재 --%>
 <%-- (수정할거1)예매할 때, 로그인했는지 안했는지 판단해야함. 따라서, session 변수저장되어있는지로 확인하기 --%>
-<form action="reserve.jsp" method="post">
+<form action="Reserve.jsp">
+	<input type="hidden" name="seq" value="<%=1 %>">
 	<input type="submit" value="예매" style="width: 100px">	
 </form>
 
@@ -29,7 +56,8 @@ session.setAttribute("login", mem);
 <form action="moviedetail.jsp">
 <table width="80%">
 	<tr>
-		<td>123123dsdfsdfsfd</td>
+		<%--for문 --%>
+		<td><a href="Moviedetail.jsp?seq=<%=1 %>"><img src="../img/arrow.png"></a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -38,9 +66,6 @@ session.setAttribute("login", mem);
 	
 </table>
 </form>
-
-
-
 
 
 </body>

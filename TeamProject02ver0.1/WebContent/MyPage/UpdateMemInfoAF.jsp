@@ -21,7 +21,7 @@
 testMemberDAO dao = new testMemberDAO();
 
 MemberDTO memberdto = new MemberDTO();
-memberdto.setM_id("BomBom");
+memberdto.setM_id("bombom");
 memberdto.setM_pw("1234");
 memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
@@ -41,7 +41,7 @@ String u_email = request.getParameter("email");
 System.out.println("u_email: " +u_email);
 System.out.println("mid: " +mid);
 
-boolean isS = dao.updateMember(u_pw, u_email, mid.toUpperCase());
+boolean isS = dao.updateMember(u_pw, u_email, mid);
 //boolean isS = dao.updateMember("2222", "2222", "BOMBOM");
 System.out.println("isS: " + isS);
 %>

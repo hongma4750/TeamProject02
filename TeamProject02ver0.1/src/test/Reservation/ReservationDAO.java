@@ -1,4 +1,4 @@
-package sist.co.Reservation;
+package test.Reservation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.List;
 import sist.co.DBManager.DBManager;
 
 public class ReservationDAO implements iReservateionDAO {
-
+  
 	private boolean isS = true;
 	private static ReservationDAO reservDAO;
 	
@@ -24,8 +24,8 @@ public class ReservationDAO implements iReservateionDAO {
 	@Override
 	public List<ReservationDTO> getReservList() {
 		
-		String sql = " SELECT * FROM RESERVATION "
-				+ " WHERE  ";
+		String sql = " SELECT * FROM RESERVATION ";
+				//+ " WHERE  ";//상영시간이 지난 내역
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;

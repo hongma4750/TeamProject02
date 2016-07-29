@@ -1,24 +1,21 @@
-package sist.movie;
+package test.Movie;
 
 import java.util.Date;
 
 public class MovieDTO {
-
+  
 	private int mv_seq;
 	private String mv_title;
 	private Date mv_openday;
 	private String mv_genre;
-	private String mv_story;
 	private String mv_img;
-	private int mv_count;	// 해당 영화의 총 예매
-	private float mv_like;	// like/총 예매
-	private float mv_hate;	// hate/총 예매
-	private int mv_on;		// 상영여부(1:상영, 0:X)
+	private int mv_like;
+	private int mv_on;
 	
 	public MovieDTO() {
 		
 	}
-	
+
 	public int getMv_seq() {
 		return mv_seq;
 	}
@@ -58,12 +55,12 @@ public class MovieDTO {
 	public void setMv_img(String mv_img) {
 		this.mv_img = mv_img;
 	}
-	
-	public float getMv_like() {
+
+	public int getMv_like() {
 		return mv_like;
 	}
 
-	public void setMv_like(float mv_like) {
+	public void setMv_like(int mv_like) {
 		this.mv_like = mv_like;
 	}
 
@@ -74,37 +71,13 @@ public class MovieDTO {
 	public void setMv_on(int mv_on) {
 		this.mv_on = mv_on;
 	}
-	
-	public int getMv_count() {
-		return mv_count;
+
+	@Override
+	public String toString() {
+		return "MovieDTO [mv_seq=" + mv_seq + ", mv_title=" + mv_title + ", mv_openday=" + mv_openday + ", mv_genre="
+				+ mv_genre + ", mv_img=" + mv_img + ", mv_like=" + mv_like + ", mv_on=" + mv_on + "]";
 	}
 
-	public void setMv_count(int mv_count) {
-		this.mv_count = mv_count;
-	}
-
-	public float getMv_hate() {
-		return mv_hate;
-	}
-
-	public void setMv_hate(float mv_hate) {
-		this.mv_hate = mv_hate;
-	}
-
-	public String getMv_story() {
-		return mv_story;
-	}
-
-	public void setMv_story(String mv_story) {
-		this.mv_story = mv_story;
-	}
-
-	public String toString(){
-		return "MOVIE[mv_seq:" + mv_seq + ",mv_title:" + mv_title + ",mv_openday:" + mv_openday
-				+ ",mv_genre:" + mv_genre + ",mv_story:" + mv_story	+ ",mv_img:" + mv_img 
-				+ "mv_count:" + mv_count + ",mv_like:" + mv_like + ",mv_hate:" + mv_hate  
-				+ ",mv_on:" + mv_on + "]"; 
-	}
 	
 	
 }
