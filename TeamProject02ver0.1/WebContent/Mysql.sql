@@ -269,7 +269,11 @@ insert into r_comment values (comment_seq.nextval,1,'hong','ㅋㅋㅋㅋ아닌�
 insert into r_comment values (comment_seq.nextval,1,'ma','간지나요',sysdate);
 
 
---
+--by ay
 SELECT R_POLL FROM RESERVATION WHERE M_ID='qwer' AND MV_SEQ=1
 insert into review (r_seq,m_id,mv_seq,r_title,r_content) values (review_seq.nextval,'qwer', 1,'안녕하세요1','안녕하세요1');
 insert into review (r_seq,m_id,mv_seq,r_title,r_content) values (review_seq.nextval,'hong', 1,'실사 블록버스터에 새긴 연상호적인 순간들','지금껏 연상호 감독이 스크린 밖 현실을 벨 듯이 휘둘러온 날카로운 칼날을 기대한 관객이라면 그것이 다소 무뎌진 것에 아쉬움을 느낄 수 있다. 하지만 [부산행]이 여름 시장을 겨냥한 재난 블록버스터, 게다가 실사라는 점을 고려한다면 이 정도의 타협은 납득할 만하다. (한때 인간이었던) 좀비를 때려잡는 자극적인 화면이 아닌, 인물들의 감정으로 기승전결의 곡선을 그리며 달려가는 [부산행]은 인간에 대한 관심과 예의를 담은 연상호적인 순간들을 탄생시켰다. 더 좋은 어른, 더 좋은 사회의 일원이 되고 싶다는 감독의 고민이 명징하게 담긴 블록버스터는 드물다.');
+--시간만 불러오기
+SELECT TO_CHAR(TH_TIME, 'HH24:MI') 
+FROM THEATER
+WHERE TH_NAME='명동'
