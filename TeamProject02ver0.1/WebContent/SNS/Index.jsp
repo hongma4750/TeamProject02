@@ -13,6 +13,7 @@
 
 여기는 SNS입니다.
 
+
 <%
 MemberDTO memberdto = new MemberDTO();
 memberdto.setM_id("hong");

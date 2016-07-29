@@ -13,6 +13,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
+
 <body>
 
 <%
@@ -23,7 +24,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 
 <div id="middle_wrap">
 	<form action="SNS/ReviewWriteAF.jsp" method="post">
-	<table class="content_table" border="1">
+	<table class="table table-bordered" border="1">
 		<tr>
 			<td>작성자</td>
 			<td><input type="text" name="m_id" readonly value="<%=memberdto.getM_id() %>"></td>
