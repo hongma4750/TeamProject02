@@ -24,8 +24,9 @@ dto.setM_pw(pw);
 dto.setM_name(name);
 dto.setM_email(email);
 System.out.println("확인: : " + dto.getM_id()+","+ dto.getM_pw()+","+ dto.getM_name()+","+dto.getM_email());
-boolean isS = dao.AddMember(dto);
-if(isS){
+%>
+
+<%-- if(isS){
 %>
 	<script type="text/javascript">
 		alert("성공적으로 가입했습니다");
@@ -38,6 +39,6 @@ else{
 		alert("다시 기입하십시오");
 		history.go(-1);
 	</script>
-<%}%>
+<%}%> --%>
 </body>
 </html>
