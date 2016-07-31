@@ -1,6 +1,7 @@
 package test.Reservation;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ReservationDTO {
 	  
@@ -8,12 +9,12 @@ public class ReservationDTO {
 	private String m_id;
 	private int th_seq;
 	private int mv_seq;
-	private int r_poll;
+	private int r_poll;  // 0 : 투표 x, 1: 투표(좋아요), 2: 투표(싫어요)
 	private int r_totalprice;
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
-	private Date r_time;
+	private Date r_time;///////////////////timestamp
 	private String r_thname;
 	private String r_cinema;
 	

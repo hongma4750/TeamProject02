@@ -10,7 +10,9 @@
 <title>Insert title here</title>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/testmypage.css">
-
+<%-- --%>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -27,13 +29,45 @@ testMemberDAO dao = new testMemberDAO();
 boolean isS = dao.outMember(memberdto);
 
 %>
+<div id="container">
 
+	<div id="action">
+		<c:if test="${ login!=null}">
+			<a href="MyPage/Index.jsp">마이페이지</a>&nbsp;&nbsp;
+			<a href="#">로그아웃</a>&nbsp;&nbsp;
+		</c:if>
+		
+		<c:if test="${ login==null}">
+			<a href="index01.jsp?mode=Member/hong_Login">로그인</a>&nbsp;&nbsp;
+			<a href="#">회원가입</a>&nbsp;&nbsp;
+			<a href="#">ID찾기</a>&nbsp;&nbsp;
+			<a href="#">PW찾기</a>
+		</c:if>
+	</div>
+	
+	<div id="nav">
+		<nav class="navbar navbar-inverse">
+  
+  
+    	<ul class="nav nav-tabs">
+	  		<li role="presentation" class="active"><a href="index01.jsp?mode=body">Home</a></li>
+	  		<li role="presentation"><a href="#">영화</a></li>
+	  		<li role="presentation"><a href="#">예매</a></li>
+	  		<li role="presentation"><a href="index01.jsp?mode=SNS/ReviewList">리뷰</a></li>
+	  		<li role="presentation"><a href="SNS/Index.jsp">공지사항</a></li>
+		</ul>
+</nav>
+	</div>
+	
+	<div id="contents">
+	
+	<%-- --%>
 
-<header>
+<header1>
 <h5><%=memberdto.getM_name()%>님 반갑습니다!</h5>
-</header>
+</header1>
 
-<nav>
+<nav1>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
 
   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
@@ -43,9 +77,9 @@ boolean isS = dao.outMember(memberdto);
   
  
   &nbsp;&nbsp;<a href = "MovieHistory.jsp">나의 관람 영화</a><br>
-</nav>
+</nav1>
 
-<section>
+<section1>
 
 <%
 //member DB에 해당 사용자 delete 작업한 후 
@@ -71,11 +105,16 @@ if(isS){
 %>
 
 
-</section>
+</section1>
 
-<footer>
+<footer1>
 Copyright@우리조
-</footer>
+</footer1>
+
+<%-- --%>
+  	</div>
+	
+</div>
 
 
 </body>

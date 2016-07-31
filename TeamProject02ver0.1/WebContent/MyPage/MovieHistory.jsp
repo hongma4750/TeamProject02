@@ -19,7 +19,9 @@
 <link rel="stylesheet" type="text/css" href="../css/testmypage.css"/>
 <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
-
+<%-- --%>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/main.css" rel="stylesheet">
 
 </head>
 <body>
@@ -35,20 +37,55 @@ session.setAttribute("login",memberdto);
 
 
 %>
-<header>
-<h5><%=memberdto.getM_name() %>님 반갑습니다!</h5>
-</header>
 
-<nav>
+<div id="container">
+
+	<div id="action">
+		<c:if test="${ login!=null}">
+			<a href="MyPage/Index.jsp">마이페이지</a>&nbsp;&nbsp;
+			<a href="#">로그아웃</a>&nbsp;&nbsp;
+		</c:if>
+		
+		<c:if test="${ login==null}">
+			<a href="index01.jsp?mode=Member/hong_Login">로그인</a>&nbsp;&nbsp;
+			<a href="#">회원가입</a>&nbsp;&nbsp;
+			<a href="#">ID찾기</a>&nbsp;&nbsp;
+			<a href="#">PW찾기</a>
+		</c:if>
+	</div>
+	
+	<div id="nav">
+		<nav class="navbar navbar-inverse">
+  
+  
+    	<ul class="nav nav-tabs">
+	  		<li role="presentation" class="active"><a href="index01.jsp?mode=body">Home</a></li>
+	  		<li role="presentation"><a href="#">영화</a></li>
+	  		<li role="presentation"><a href="#">예매</a></li>
+	  		<li role="presentation"><a href="index01.jsp?mode=SNS/ReviewList">리뷰</a></li>
+	  		<li role="presentation"><a href="SNS/Index.jsp">공지사항</a></li>
+		</ul>
+</nav>
+	</div>
+	
+	<div id="contents">
+	
+	<%-- --%>
+	
+<header1>
+<h5><%=memberdto.getM_name() %>님 반갑습니다!</h5>
+</header1>
+
+<nav1>
 <a href ="Index.jsp"><h4><b>마이시네마</b></h4></a>
   &nbsp;&nbsp;<a href = "LoginUpdate.jsp">회원정보</a><br>
  
   &nbsp;&nbsp;<a href = "Ticket.jsp">내 티켓</a><br>
   
   &nbsp;&nbsp;<a href = "MovieHistory.jsp">나의 관람 영화</a><br>
-</nav>
+</nav1>
 
-<section>
+<section1>
 
 <%
 ReservationDAO dao = ReservationDAO.getInstance();
@@ -85,8 +122,8 @@ for(int i=0; i<rLists.size();i++){
 		%>
 
 		<tr align = "center">
-		   <td><%=tdto.getTh_time() %></td>
-		   <td><a href = "#"><%=rdto.getR_seq() %></a></td> <%--예매detail로 이동 --%>
+		   <td><%=rdto.getR_time() %></td>
+		   <td><%=rdto.getR_seq() %></td> <%--예매detail로 이동 --%>
 		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
 		   <td><%=tdto.getTh_name() %></td>
 		   <td><%=tdto.getTh_cinema() %></td>
@@ -100,12 +137,16 @@ for(int i=0; i<rLists.size();i++){
 
 </table>
 
-</section>
+</section1>
 
-<footer>
+<footer1>
 Copyright@우리조
-</footer>
+</footer1>
 
+<%-- --%>
+  	</div>
+	
+</div>
 
 </body>
 </html>

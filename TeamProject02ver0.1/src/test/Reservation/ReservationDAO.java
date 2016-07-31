@@ -24,7 +24,7 @@ public class ReservationDAO implements iReservateionDAO {
 	
 	@Override
 	public List<ReservationDTO> getHistoryList(String m_id) {
-		String sql = " SELECT * FROM RESERVATION WHERE R_TIME<SYSDATE and m_id=?";
+		String sql = " SELECT * FROM RESERVATION WHERE R_TIME<SYSDATE AND M_ID=? ";
 		//지난 예매내역
 		
 		Connection conn = null;
@@ -78,8 +78,8 @@ public class ReservationDAO implements iReservateionDAO {
 	}
 
 	@Override
-	public List<ReservationDTO> getTicketList() {
-		String sql = " SELECT * FROM RESERVATION WHERE R_TIME>SYSDATE ";
+	public List<ReservationDTO> getTicketList(String m_id) {
+		String sql = " SELECT * FROM RESERVATION WHERE R_TIME>SYSDATE AND M_ID=? ORDER BY R_TIME ASC, R_SEQ ASC ";
 		//내 티켓보기
 		
 		Connection conn = null;
@@ -96,6 +96,7 @@ public class ReservationDAO implements iReservateionDAO {
 			pstmt = conn.prepareStatement(sql);
 			log("3/6 success getTicketList");
 			
+			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 			log("4/6 success getTicketList");
 			
@@ -132,7 +133,7 @@ public class ReservationDAO implements iReservateionDAO {
 		return rList;
 	}
 
-	@Override
+/*	@Override
 	public ReservationDTO getTicket(int r_seq) {
 		 String sql = " SELECT * FROM RESERVATION WHERE R_SEQ=? ";
 			
@@ -185,10 +186,13 @@ public class ReservationDAO implements iReservateionDAO {
 			}
 			
 			return rdto;
-	}
+	}*/
+	
 	@Override
-	public boolean cancleReserv(int r_seq) {
-		String sql = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
+	public boolean cancleReserv(int r_seq, int th_seq) {
+		String sql1 = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
+		String sql2 = " UPDATE SEAT SET S1=' ',S2=' ',S3=' ',S4=' ',S5=' ',S6=' ',S7=' ',S8=' ',S9=' ',S10=' ' "
+                    + " WHERE S1||S2||S3||S4||S5||S6||S7||S8||S9||S10 like 'S%' AND TH_SEQ=? ";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -197,9 +201,10 @@ public class ReservationDAO implements iReservateionDAO {
 		
 		try{
 			conn = DBManager.getConnection();
+			conn.setAutoCommit(false);//자동 커밋 안됨
 			log("2/6 success cancleReserv");
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql1);
 			log("3/6 success cancleReserv");
 			
 			pstmt.setInt(1, r_seq);
@@ -207,16 +212,45 @@ public class ReservationDAO implements iReservateionDAO {
 			count = pstmt.executeUpdate();
 			log("4/6 success cancleReserv");
 			
+			pstmt.clearParameters();
+			log("5/6/1 success cancleReserv");
+			pstmt = conn.prepareStatement(sql2);
+			
+			pstmt.setInt(1, th_seq);
+			log("5/6/2 success cancleReserv");
+			
+			pstmt.executeBatch();
+			log("5/6/3 success cancleReserv");
+			
+			conn.commit(); //수동커밋
+			log("5/6/4 success cancleReserv");
 			
 		}catch(SQLException e){
-			
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+			}
 			log("Fail cancleReserv");
 			
 		}finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+			}
 			DBManager.close(conn, pstmt);
+			
 			log("6/6 success cancleReserv");
 		}
+		System.out.println(count);
 		return count>0?true:false;
+	}
+	
+	
+
+	@Override
+	public int countPeople(int r_seq) {
+		
+		return 0;
 	}
 
 	public void log(String msg){
