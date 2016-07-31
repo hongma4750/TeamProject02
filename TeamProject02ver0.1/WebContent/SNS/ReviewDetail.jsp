@@ -8,6 +8,7 @@
      <%@ page import="java.util.*" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,8 +21,41 @@
 
 <script src="javascript/review.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+$(function(){
+    //전역변수선언
+    var editor_object = [];
+     
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: editor_object,
+        elPlaceHolder: "r_content",
+        sSkinURI: "smarteditor/SmartEditor2Skin.html", 
+        htParams : {
+            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseToolbar : true,             
+            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,     
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true, 
+        }
+    });
+
+    //전송버튼 클릭이벤트
+    $("#savebutton").click(function(){
+        //id가 smarteditor인 textarea에 에디터에서 대입
+        
+        editor_object.getById["r_content"].exec("UPDATE_CONTENTS_FIELD", []);
+         
+        // 이부분에 에디터 validation 검증
+         
+        //폼 submit
+        $("#frm").submit();
+    })
+})
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -121,47 +155,64 @@ request.setAttribute("comList", comList);
 <div id="middle_wrap">
 	<form name="frm" action="SNS/CommentWrite.jsp">
 	<table class="table table-bordered">
-		<col width="75%"/><col width="25%"/><col width="75%"/><col width="25%"/>
-		<tr>
-			<td><%=redto.getR_title() %></td><td><%=redto.getR_writedate() %></td>
-		</tr>
 		
 		<tr>
-			<td>
-				[<%=redto.getM_id() %>] 님 작성글&nbsp;&nbsp;&nbsp;&nbsp;
-			</td>
-			<td>
-				좋아요:
-				<input type="text" id ="like" value="<%=redto.getR_like() %>" size="2" readonly> 
-				<input type="button" value="좋아용" id="addlike">
+			<td>제목</td>
+			<td><%=redto.getR_title() %></td>
+			<td rowspan="4">
+				<div>
+					<img src="" alt="영화이미지" id="movieImg">
+				</div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td colspan="2"><textarea rows="20" cols="110" readonly ><%=redto.getR_content()%></textarea></td>
+			<td>작성자</td>
+			<td>
+				[<%=redto.getM_id() %>] 님 작성글
+			</td>
+			
+		</tr>
+		
+		<tr>
+			<td>작성일</td>
+			<td><%=redto.getR_writedate().toString().substring(0,10) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				좋아요: <input type="text" id ="like" value="<%=redto.getR_like() %>" size="2" readonly> 
+				<input type="button" value="좋아용" id="addlike"></td>
+		</tr>
+		
+		<tr>
+			<td>별점</td>
+			<td>개발중...</td>
+		</tr>
+		
+			
+		<tr>
+			
+			<td colspan="3"  style="background:white"><textarea rows="20" cols="110" readonly id="r_content"><%=redto.getR_content()%></textarea></td>
 		</tr>
 		
 		<c:if test="${comList.size() == 0 }">
-			<tr style="background-color:#C9AA56">
-				<td colspan="2">등록된 댓글이 없습니다.</td>
+			<tr >
+				<td colspan="3" style="background-color:#C9AA56">등록된 댓글이 없습니다.</td>
 			</tr>
 		</c:if>
 		
 		<c:if test="${comList.size() > 0}">
 			<c:forEach var="comment" items="${comList }">
 				<tr style="background-color:#C9AA56">
-					<td colspan="2">
+					<td colspan="3">
 					
 						<div class="comments">
-						
+
 						<h4 class="view-commnet"> 
 							[${comment.m_id}] 
 							<small>${comment.com_writedate }</small>
 							<c:if test="${login.m_id == comment.m_id }">		
 									<a href="#" ><small class="comment-toggle">수정</small></a>
 									<a href="SNS/CommentDelete.jsp?com_seq=${comment.com_seq }&r_seq=${comment.r_seq}"><small class="comment-delete">삭제</small></a>
-									
-									
+	
+	
 								<!--  댓글 수정!!!!!!!!!!!!!!!!!!!!!!!!!!!!jquery -->	
 											
 								<div class="modify-comment" style="display: none">
@@ -191,7 +242,8 @@ request.setAttribute("comList", comList);
 		</c:if>
 		
 			<tr >
-				<td colspan="2" >
+			
+				<td colspan="3" >
 					
 						<textarea rows="4" cols="80" name ="com_content"></textarea>
 						&nbsp;&nbsp;

@@ -11,6 +11,7 @@ public class ReviewDTO {
 	private Timestamp r_writedate;
 	private int r_like;
 	private int r_readcount;
+	private int mv_seq;
 	
 	public ReviewDTO(){
 		
@@ -73,11 +74,21 @@ public class ReviewDTO {
 		this.r_readcount = r_readcount;
 	}
 
+	public int getMv_seq() {
+		return mv_seq;
+	}
+
+	public void setMv_seq(int mv_seq) {
+		this.mv_seq = mv_seq;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", r_title=" + r_title + ", r_content=" + r_content
-				+ ", r_writedate=" + r_writedate + ", r_like=" + r_like + ", r_readcount=" + r_readcount + "]";
+				+ ", r_writedate=" + r_writedate + ", r_like=" + r_like + ", r_readcount=" + r_readcount + ", mv_seq="
+				+ mv_seq + "]";
 	}
+
 	
 	
 }

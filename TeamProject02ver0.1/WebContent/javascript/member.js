@@ -77,13 +77,62 @@ function emailDupchk(){
 
 
 function idCheck(){
-		
-	   if(document.joinmem.id.value==""){
+	   if(document.frm.m_id.value.length==0){
 	      alert("아이디를 입력해 주세요");
-	      joinmem.id.focus();
+	      frm.m_id.focus();
 	      return;
 	   }
 	   
-	   var url="idCheck.jsp?id="+document.joinmem.id.value;
+	   var url="Member/idCheck.jsp?m_id="+document.frm.m_id.value;
 	   window.open(url,"_black_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
 	}
+
+
+function joinCheck(){
+	if(document.frm.m_id.value.length==0){
+		alert("아이디를 입력해 주세요");
+		frm.m_id.focus();
+		return false;
+	}else if(document.frm.m_pw.value.length==0){
+		alert("비밀 번호를 입력해 주세요");
+		frm.m_pw.focus();
+		return false;
+	}else if(document.frm.m_pw.value != document.frm.m_pwcheck.value){
+		alert("암호가 일치하지 않습니다.");
+		frm.m_pwcheck.focus();
+		return false;
+	}else if(document.frm.m_name.value.length==0){
+		
+		alert("이름을 입력해 주세요");
+		frm.m_name.focus();
+		
+		return false;
+		
+	}else if(document.frm.m_email.value.length==0){
+		alert("이메일을 입력해 주세요");
+		frm.m_email.focus();
+		return false;
+	}else if(document.frm.reid.value.length==0){
+		alert("중복검사를 하지 않았습니다.");
+		frm.m_id.focus();
+		return false;
+	}else if(document.frm.reid.value != document.frm.m_id.value){
+		alert("아이디 중복검사를 다시 실시해 주세요");
+		frm.m_id.focus();
+		return false;
+	}
+	return true;
+}
+
+function checkLogout(){
+	if(confirm("정말 삭제하시겠습니까~?") == true){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+
+
+

@@ -5,6 +5,8 @@
      <%@ page import="sist.co.Review.ReviewDTO" %>
      <%@ page import="java.util.*" %>
      <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+     
 <!DOCTYPE html>
 <html>
 
@@ -20,6 +22,7 @@
 
 </head>
 <body>
+
 
 <%!
 	public Integer toInt(String x){
@@ -50,6 +53,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	<%
 		ReviewDAO redao = ReviewDAO.getInstance();
 		List<ReviewDTO> reList = redao.selectAllReview();
+		request.setAttribute("reList",reList);
 		
 		 int pageno = toInt(request.getParameter("pageno"));
 		   if(pageno<1){//현재 페이지
@@ -144,9 +148,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd"); 
 				String year = (String)simpleDate.format(date);
 				String yea = redto.getR_writedate().toString().substring(0,10);
-			%>
-			
-			
+			%>	
 			<tr>
 				<td><%=reList.size()-i %></td>
 				<td><%=redto.getM_id() %></td>
@@ -165,11 +167,40 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	
 	
 </table>
+<!-- 글쓰기 버튼!!!! -->
+<div style="text-align:right;">
 <input type="button" value="글쓰기" onclick="location.href='index01.jsp?mode=SNS/ReviewWrite'">
+</div>
 
+	<!-- 페이징 하는 부분!!! -->
 	<div style="text-align:center;">
 		<nav>
 		  <ul class="pagination">
+		  <c:if test="${ reList.size()==0}">
+		  	<li>
+		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=prev_pageno%>" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    
+		  	<li>
+		  		<a href="index01.jsp?mode=SNS/ReviewList&pageno=1">1</a>
+		  	</li>
+		  	
+		  	<li>
+		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=next_pageno%>" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		    </ul>
+			</nav>
+		</div>
+		  	
+		  </c:if>
+		  
+		  <c:if test="${ reList.size()>0}">
+		  	
+		  
 		    <li>
 		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=prev_pageno%>" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
@@ -188,8 +219,20 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		  </ul>
 		</nav>
 	</div>
+	</c:if>
+	<!-- 페이징 하는 부분!!! -->
 	
-	
+	<!-- 검색 기능 부분!!!!! -->
+	<div style="text-align:center; ">
+		 <select >
+			<option>제목</option>
+			<option>본문</option>
+		</select>
+		
+    	<input type="text" placeholder="검색내용">
+  		
+		<input type="button" name="findBtn" value="검색">
+	</div>
 
 </div>
 

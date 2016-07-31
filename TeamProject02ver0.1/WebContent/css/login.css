@@ -32,9 +32,9 @@
 
 .loginA { 
 	position: absolute; /*상위요소 기준으로 위치 조정됨*/
-	top: 50%;
-	left: 50%;
-	margin: -150px 0 0 -150px;
+	top:70%;
+	left: 30%;
+	margin: auto;
 	width:300px;
 	height:300px;
 }

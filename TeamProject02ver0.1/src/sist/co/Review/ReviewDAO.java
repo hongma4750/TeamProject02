@@ -46,11 +46,13 @@ public class ReviewDAO {
 				int i = 1;
 				redto.setR_seq(rs.getInt(i++));
 				redto.setM_id(rs.getString(i++));
+				redto.setMv_seq(rs.getInt(i++));
 				redto.setR_title(rs.getString(i++));
 				redto.setR_content(rs.getString(i++));
 				redto.setR_writedate(rs.getTimestamp(i++));
 				redto.setR_like(rs.getInt(i++));
 				redto.setR_readcount(rs.getInt(i++));
+				
 				
 				list.add(redto);
 			}
@@ -68,7 +70,7 @@ public class ReviewDAO {
 	public int addReview(ReviewDTO redto){
 		int result = -1;
 		
-		String sql ="insert into review values (review_seq.nextval,?,?,?,sysdate,0,0)";
+		String sql ="insert into review values (review_seq.nextval,?,0,?,?,sysdate,0,0)";
 		
 		Connection conn=null;
 		PreparedStatement pstmt = null;
@@ -118,6 +120,7 @@ public class ReviewDAO {
 				
 				redto.setR_seq(rs.getInt(i++));
 				redto.setM_id(rs.getString(i++));
+				redto.setMv_seq(rs.getInt(i++));
 				redto.setR_title(rs.getString(i++));
 				redto.setR_content(rs.getString(i++));
 				redto.setR_writedate(rs.getTimestamp(i++));

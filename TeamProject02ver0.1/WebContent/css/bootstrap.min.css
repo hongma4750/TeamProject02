@@ -2806,7 +2806,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 input[type=file] {
-	display: block
+	display: inline;
 }
 
 input[type=range] {
@@ -2834,7 +2834,7 @@ output {
 }
 
 .form-control {
-	display: block;
+	display: inline;
 	width: 100%;
 	height: 34px;
 	padding: 6px 12px;
@@ -2978,7 +2978,8 @@ fieldset[disabled] input[type=checkbox], fieldset[disabled] input[type=radio],
 
 .form-control-static.input-lg, .form-control-static.input-sm {
 	padding-right: 0;
-	padding-left: 0
+	padding-left: 0;
+	
 }
 
 .input-sm {
@@ -2986,7 +2987,8 @@ fieldset[disabled] input[type=checkbox], fieldset[disabled] input[type=radio],
 	padding: 5px 10px;
 	font-size: 12px;
 	line-height: 1.5;
-	border-radius: 3px
+	border-radius: 3px;
+	width:100px;
 }
 
 select.input-sm {
@@ -3070,7 +3072,8 @@ select[multiple].form-group-lg .form-control, textarea.form-group-lg .form-contr
 }
 
 .has-feedback .form-control {
-	padding-right: 42.5px
+	padding-right: 42.5px;
+	
 }
 
 .form-control-feedback {

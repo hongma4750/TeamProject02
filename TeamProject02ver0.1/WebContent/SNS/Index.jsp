@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+
 </head>
 <body>
 
@@ -24,7 +25,7 @@ memberdto.setM_email("ddd");
 session.setAttribute("login",memberdto);
 %>
 
-<a href="ReviewList.jsp">게시판 이동</a>
+<a href="../index01.jsp?mode=SNS/ReviewList">게시판 이동</a>
 
 
 
