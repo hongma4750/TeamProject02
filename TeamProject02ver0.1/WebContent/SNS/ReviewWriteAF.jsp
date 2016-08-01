@@ -5,9 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 
 <%request.setCharacterEncoding("utf-8");  %>
-
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html> 
 <head>
 
 
@@ -22,13 +22,15 @@
 	String m_id = request.getParameter("m_id");
 	String r_title = request.getParameter("r_title");
 	String r_content = request.getParameter("r_content");
+	int r_star = Integer.parseInt(request.getParameter("r_star"));
 	
-	ReviewDTO redto = new ReviewDTO();
 	ReviewDAO redao = ReviewDAO.getInstance();
-	
+	ReviewDTO redto = new ReviewDTO();
+
 	redto.setM_id(m_id);
 	redto.setR_title(r_title);
 	redto.setR_content(r_content);
+	redto.setR_star(r_star);
 	
 	int result = redao.addReview(redto);
 	session.setAttribute("result", result);

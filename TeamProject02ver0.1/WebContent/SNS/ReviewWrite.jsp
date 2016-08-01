@@ -3,7 +3,7 @@
 <%@ page import="sist.co.Member.MemberDTO"%>
 <%@ page import="sist.co.Review.ReviewDAO"%>
 <%@ page import="sist.co.Review.ReviewDTO"%>
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,11 +11,10 @@
 
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="star/jquery.raty.js"></script>
-        <link rel="stylesheet" href="star/jquery.raty.css"/>
+<link rel="stylesheet" href="star/jquery.raty.css"/>
 
 <script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
@@ -94,7 +93,7 @@
 						<div id="default" style="cursor:pointer;" ></div>
 						
 						<div id=target>
-				        	<input type="text" id="re_star">
+				        	<input type="text" id="re_star" name="r_star">
        					 </div>
         			</td>
 				</tr>

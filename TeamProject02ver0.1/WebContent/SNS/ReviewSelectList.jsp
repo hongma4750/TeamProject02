@@ -6,7 +6,7 @@
      <%@ page import="java.util.*" %>
      <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
-        
+       
 <!DOCTYPE html>
 <html>
 
@@ -40,6 +40,9 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 <h3><%=memberdto.getM_id() %>님 하이요</h3>
 <hr>
 
+
+
+
 <div id="middle_wrap">
 <table class="table table-bordered">
 	<col width="50"/><col width="70"/><col width="200"/><col width="100"/>
@@ -49,11 +52,21 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		<th>작성일</th><th>조회수</th><th>좋아요</th>
 	</tr>
 	
+	
 	<!-- 잠깐 스탑 여기서 review dto,dao 만들어서 불러야될듯 -->
 	<%
-		ReviewDAO redao = ReviewDAO.getInstance();
-		List<ReviewDTO> reList = redao.selectAllReview();
-		request.setAttribute("reList",reList);
+	request.setCharacterEncoding("utf-8");
+	
+	/* String check = request.getParameter("check");
+	String selecting = request.getParameter("selecting");
+	
+	ReviewDAO redao = ReviewDAO.getInstance();
+	List<ReviewDTO> reList = redao.selectContent(check, selecting); */
+	
+	List<ReviewDTO> reList = (ArrayList<ReviewDTO>)session.getAttribute("selList");
+	
+	
+	
 		
 		 int pageno = toInt(request.getParameter("pageno"));
 		   if(pageno<1){//현재 페이지
@@ -119,15 +132,12 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		   
 		   // [1][2][3].[10]
 		   // [11][12]
-		%>
-		
-		
-		<%
+	
 				if(reList.size()==0){
 					%>
 						
 						<tr>
-							<td colspan="6">등록된 게시글이 없습니다.</td>
+							<td colspan="6">검색된 게시글이 없습니다.</td>
 						</tr>
 					
 					
@@ -176,7 +186,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	<div style="text-align:center;">
 		<nav>
 		  <ul class="pagination">
-		  <c:if test="${ reList.size()==0}">
+		  <c:if test="${ selList.size()==0}">
 		  	<li>
 		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=prev_pageno%>" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
@@ -198,7 +208,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		  	
 		  </c:if>
 		  
-		  <c:if test="${ reList.size()>0}">
+		  <c:if test="${ selList.size()>0}">
 		  	
 		  
 		    <li>
@@ -215,7 +225,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=next_pageno%>" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
-		    </li>
+		    </li> 
 		  </ul>
 		</nav>
 	</div>
@@ -223,7 +233,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 	<!-- 페이징 하는 부분!!! -->
 	
 	<!-- 검색 기능 부분!!!!! -->
-	<form name="frm1" action="SNS/ReviewSelect.jsp">
+	<form action="SNS/ReviewSelect.jsp">
 	<div style="text-align:center; ">
 		 <select name="check">
 			<option value="1">제목</option>
@@ -232,9 +242,10 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		
     	<input type="text" placeholder="검색내용" name="selecting">
   		
-		<input type="submit" name="findBtn" value="검색" >
+		<input type="submit" name="findBtn" value="검색">
 	</div>
 	</form>
+
 </div>
 
 

@@ -3,7 +3,7 @@ package sist.co.Review;
 import java.sql.Timestamp;
 
 public class ReviewDTO {
-
+  
 	private int r_seq;
 	private String m_id;
 	private String r_title;
@@ -12,6 +12,7 @@ public class ReviewDTO {
 	private int r_like;
 	private int r_readcount;
 	private int mv_seq;
+	private int r_star;
 	
 	public ReviewDTO(){
 		
@@ -82,12 +83,22 @@ public class ReviewDTO {
 		this.mv_seq = mv_seq;
 	}
 
+	public int getR_star() {
+		return r_star;
+	}
+
+	public void setR_star(int r_star) {
+		this.r_star = r_star;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", r_title=" + r_title + ", r_content=" + r_content
 				+ ", r_writedate=" + r_writedate + ", r_like=" + r_like + ", r_readcount=" + r_readcount + ", mv_seq="
-				+ mv_seq + "]";
+				+ mv_seq + ", r_star=" + r_star + "]";
 	}
+
+	
 
 	
 	
