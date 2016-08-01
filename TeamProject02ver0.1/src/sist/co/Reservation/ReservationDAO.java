@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sist.co.DBManager.DBManager;
-import test.Movie.MovieDTO;
+import sist.co.Reservation.ReservationDTO;
 
 public class ReservationDAO implements iReservateionDAO {
   
@@ -24,7 +24,7 @@ public class ReservationDAO implements iReservateionDAO {
 	
 	@Override
 	public List<ReservationDTO> getHistoryList(String m_id) {
-		String sql = " SELECT * FROM RESERVATION WHERE R_TIME<SYSDATE AND M_ID=? ";
+		String sql = " SELECT * FROM RESERVATION WHERE R_VIEWTIME<SYSTIMESTAMP AND M_ID=? ORDER BY R_VIEWTIME DESC ";
 		//지난 예매내역
 		
 		Connection conn = null;
@@ -57,9 +57,12 @@ public class ReservationDAO implements iReservateionDAO {
 				dto.setR_adult(rs.getInt(i++));
 				dto.setR_student(rs.getInt(i++));
 				dto.setR_elder(rs.getInt(i++));
-				dto.setR_time(rs.getDate(i++));
+				dto.setR_seat(rs.getString(i++));
+				dto.setR_time(rs.getTimestamp(i++));
+				dto.setR_viewtime(rs.getTimestamp(i++));
 				dto.setR_thname(rs.getString(i++));
 				dto.setR_cinema(rs.getString(i++));
+				
 						 
 				rList.add(dto);	
 			}
@@ -79,7 +82,7 @@ public class ReservationDAO implements iReservateionDAO {
 
 	@Override
 	public List<ReservationDTO> getTicketList(String m_id) {
-		String sql = " SELECT * FROM RESERVATION WHERE R_TIME>SYSDATE AND M_ID=? ORDER BY R_TIME ASC, R_SEQ ASC ";
+		String sql = " SELECT * FROM RESERVATION WHERE R_VIEWTIME>SYSTIMESTAMP AND M_ID=? ORDER BY R_VIEWTIME ASC, R_SEQ ASC ";
 		//내 티켓보기
 		
 		Connection conn = null;
@@ -113,7 +116,9 @@ public class ReservationDAO implements iReservateionDAO {
 				dto.setR_adult(rs.getInt(i++));
 				dto.setR_student(rs.getInt(i++));
 				dto.setR_elder(rs.getInt(i++));
-				dto.setR_time(rs.getDate(i++));
+				dto.setR_seat(rs.getString(i++));
+				dto.setR_time(rs.getTimestamp(i++));
+				dto.setR_viewtime(rs.getTimestamp(i++));
 				dto.setR_thname(rs.getString(i++));
 				dto.setR_cinema(rs.getString(i++));
 						 
@@ -189,10 +194,10 @@ public class ReservationDAO implements iReservateionDAO {
 	}*/
 	
 	@Override
-	public boolean cancleReserv(int r_seq, int th_seq) {
+	public boolean cancleReserv(int r_seq, int s_seq) {
 		String sql1 = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
-		String sql2 = " UPDATE SEAT SET S1=' ',S2=' ',S3=' ',S4=' ',S5=' ',S6=' ',S7=' ',S8=' ',S9=' ',S10=' ' "
-                    + " WHERE S1||S2||S3||S4||S5||S6||S7||S8||S9||S10 like 'S%' AND TH_SEQ=? ";
+		String sql2 = " UPDATE SEAT SET S_CHECK=0 "
+                    + " WHERE S_CHECK=1 AND S_SEQ=? ";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -216,7 +221,8 @@ public class ReservationDAO implements iReservateionDAO {
 			log("5/6/1 success cancleReserv");
 			pstmt = conn.prepareStatement(sql2);
 			
-			pstmt.setInt(1, th_seq);
+			
+			pstmt.setInt(1, s_seq);
 			log("5/6/2 success cancleReserv");
 			
 			pstmt.executeBatch();
@@ -246,12 +252,6 @@ public class ReservationDAO implements iReservateionDAO {
 	}
 	
 	
-
-	@Override
-	public int countPeople(int r_seq) {
-		
-		return 0;
-	}
 
 	public void log(String msg){
 		if(isS){ //isS가 true일때

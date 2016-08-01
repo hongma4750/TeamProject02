@@ -57,11 +57,12 @@ public class ReservationDAO implements iReservateionDAO {
 				dto.setR_adult(rs.getInt(i++));
 				dto.setR_student(rs.getInt(i++));
 				dto.setR_elder(rs.getInt(i++));
+				dto.setR_seat(rs.getString(i++));
 				dto.setR_time(rs.getTimestamp(i++));
 				dto.setR_viewtime(rs.getTimestamp(i++));
 				dto.setR_thname(rs.getString(i++));
 				dto.setR_cinema(rs.getString(i++));
-				dto.setS_seq(rs.getInt(i++));
+				
 						 
 				rList.add(dto);	
 			}
@@ -115,11 +116,11 @@ public class ReservationDAO implements iReservateionDAO {
 				dto.setR_adult(rs.getInt(i++));
 				dto.setR_student(rs.getInt(i++));
 				dto.setR_elder(rs.getInt(i++));
+				dto.setR_seat(rs.getString(i++));
 				dto.setR_time(rs.getTimestamp(i++));
 				dto.setR_viewtime(rs.getTimestamp(i++));
 				dto.setR_thname(rs.getString(i++));
 				dto.setR_cinema(rs.getString(i++));
-				dto.setS_seq(rs.getInt(i++));
 						 
 				rList.add(dto);	
 			}

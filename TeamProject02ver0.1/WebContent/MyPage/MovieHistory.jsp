@@ -1,4 +1,4 @@
-<%@page import="test.Movie.MovieDTO"%>
+ <%@page import="test.Movie.MovieDTO"%>
 <%@page import="sist.co.Member.MemberDTO"%>
 <%@page import="test.Reservation.ReservationDTO"%>
 <%@page import="test.Reservation.ReservationDAO"%>
