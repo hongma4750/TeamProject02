@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css">
 <script type="text/javascript" src="javascript/member.js"></script>
 
 
@@ -45,7 +45,7 @@ session.setAttribute("login",memberdto);
 
 <section1>
 
-<form action="LoginUpdateAF.jsp" method="post">
+<form action="index01.jsp?mode=MyPage/LoginUpdateAF" method="post">
 <table>
 
 <tr>
@@ -68,7 +68,7 @@ session.setAttribute("login",memberdto);
 </section1>
 
 <footer1>
-Copyright@우리조
+
 </footer1>
 
 </body>

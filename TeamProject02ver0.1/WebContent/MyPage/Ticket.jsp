@@ -21,8 +21,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- 
+
 <link rel="stylesheet" type="text/css" href="css/mypage.css"/>
+<!-- 
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
  -->
 
@@ -42,6 +43,7 @@ session.setAttribute("login",memberdto);
 
 //예매내역이 있으면 보여주기
 %>
+
 
 <header1>
 
@@ -70,9 +72,8 @@ MovieDAO mdao = MovieDAO.getInstance();
 SeatDAO sdao = SeatDAO.getInstance();
 
 List<ReservationDTO> rlist = rdao.getTicketList(memberdto.getM_id());
-
-//MovieDTO mdto = mdao.getMovie(1);
 %>
+
 <form action = "index01.jsp?mode=MyPage/CancleReserv" method = "post">
 
 
@@ -81,7 +82,7 @@ for(int i=0; i<rlist.size();i++){
 	ReservationDTO rdto = rlist.get(i);
 	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
 	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
-	List<SeatDTO> slist = sdao.getSeatList(tdto.getTh_seq());
+	List<SeatDTO> slist = sdao.getSeatList(rdto.getS_seq());
 	
     
 	if(rlist.size() == 0){ //내역이 없을때
@@ -97,7 +98,7 @@ for(int i=0; i<rlist.size();i++){
     <td rowspan="7" valign="top" style="padding:30px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster"/></td>  
   
     <td>예매번호</td>
-    <td><%=rdto.getR_seq() %><input type = "hidden" name="r_seq" value="<%=rdto.getR_seq()%>"/><input type = "hidden" name="th_seq" value="<%=tdto.getTh_seq()%>"/></td> <%--예매번호 46328332--%>
+    <td><%=rdto.getR_seq() %><input type = "hidden" name="r_seq" value="<%=rdto.getR_seq()%>"/><input type = "hidden" name="th_seq" value="<%=tdto.getTh_seq()%>"/><input type = "hidden" name="s_seq" value="<%=rdto.getS_seq()%>"/></td> <%--예매번호 46328332--%>
     
     <td><input type = "submit" name="R_Cancle" value = "예매취소"/></td>
   </tr>
@@ -106,7 +107,7 @@ for(int i=0; i<rlist.size();i++){
 
   <tr> 
     <td>관람일</td>
-    <td colspan="2"><%=rdto.getR_time() %></td>
+    <td colspan="2"><%=rdto.getR_viewtime() %></td>
   </tr>
   
   <tr>
@@ -128,7 +129,7 @@ for(int i=0; i<rlist.size();i++){
     	SeatDTO sdto = slist.get(j);
     	System.out.println(sdto.toString());
     	%>
-    	<%=sdto.getS1() %> <%=sdto.getS2() %> <%=sdto.getS3() %> <%=sdto.getS4() %> <%=sdto.getS5() %> <%=sdto.getS6() %> <%=sdto.getS7() %> <%=sdto.getS8() %> <%=sdto.getS9() %> <%=sdto.getS10() %>
+    	<%=sdto.getS_name() %> 
     	<%
     }
     %>
@@ -154,7 +155,7 @@ for(int i=0; i<rlist.size();i++){
 </section1>
 
 <footer1>
-Copyright@우리조
+<!-- Copyright@우리조 -->
 </footer1>
 
 

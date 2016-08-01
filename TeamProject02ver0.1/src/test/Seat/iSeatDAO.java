@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface iSeatDAO {
 	
-	List<SeatDTO> getSeatList(int th_seq);
+	List<SeatDTO> getSeatList(int s_seq);
 
 }

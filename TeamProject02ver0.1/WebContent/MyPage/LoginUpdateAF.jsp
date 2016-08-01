@@ -9,7 +9,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css">
 <script type="text/javascript" src="javascript/member.js"></script>
 </head>
 <body>
@@ -47,7 +47,7 @@ if(pw.equals(memberdto.getM_pw())){
 	%>
 	<script type="text/javascript">
 	alert("확인 완료되었습니다.");
-	location.href="UpdateMemInfo.jsp";
+	location.href="index01.jsp?mode=MyPage/UpdateMemInfo";
 	</script>
 	
 	<%
@@ -55,7 +55,7 @@ if(pw.equals(memberdto.getM_pw())){
 	%>
 	<script type="text/javascript">
 	alert("패스워드를 다시 확인하세요.");
-	location.href="LoginUpdate.jsp";
+	location.href="index01.jsp?mode=MyPage/LoginUpdate";
 	</script>
 	
 	<%
@@ -67,7 +67,7 @@ if(pw.equals(memberdto.getM_pw())){
 </section1>
 
 <footer1>
-Copyright@우리조
+
 </footer1>
 
 </body>

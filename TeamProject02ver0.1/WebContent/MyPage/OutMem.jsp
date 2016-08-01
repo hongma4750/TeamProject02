@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 <script type="text/javascript" src="javascript/member.js"></script>
@@ -57,7 +57,7 @@ session.setAttribute("login",memberdto);
 </section1>
 
 <footer1>
-Copyright@우리조
+<!-- Copyright@우리조 -->
 </footer1>
 
 </body>

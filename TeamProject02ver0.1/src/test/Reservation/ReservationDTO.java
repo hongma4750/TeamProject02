@@ -14,9 +14,12 @@ public class ReservationDTO {
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
-	private Date r_time;///////////////////timestamp
+	private Timestamp r_time; //예약한 날짜
+	private Timestamp r_viewtime; //볼 날짜
 	private String r_thname;
 	private String r_cinema;
+	private int s_seq; //좌석정보
+	
 	
 	public ReservationDTO() {
 	}
@@ -93,12 +96,21 @@ public class ReservationDTO {
 		this.r_elder = r_elder;
 	}
 
-	public Date getR_time() {
+	public Timestamp getR_time() {
 		return r_time;
 	}
 
-	public void setR_time(Date r_time) {
+	public void setR_time(Timestamp r_time) {
 		this.r_time = r_time;
+	}
+	
+
+	public Timestamp getR_viewtime() {
+		return r_viewtime;
+	}
+
+	public void setR_viewtime(Timestamp r_viewtime) {
+		this.r_viewtime = r_viewtime;
 	}
 
 	public String getR_thname() {
@@ -117,12 +129,21 @@ public class ReservationDTO {
 		this.r_cinema = r_cinema;
 	}
 
+	public int getS_seq() {
+		return s_seq;
+	}
+
+	public void setS_seq(int s_seq) {
+		this.s_seq = s_seq;
+	}
+
 	@Override
 	public String toString() {
 		return "ReservationDTO [r_seq=" + r_seq + ", m_id=" + m_id + ", th_seq=" + th_seq + ", mv_seq=" + mv_seq
 				+ ", r_poll=" + r_poll + ", r_totalprice=" + r_totalprice + ", r_adult=" + r_adult + ", r_student="
-				+ r_student + ", r_elder=" + r_elder + ", r_time=" + r_time + ", r_thname=" + r_thname + ", r_cinema="
-				+ r_cinema + "]";
+				+ r_student + ", r_elder=" + r_elder + ", r_time=" + r_time + ", r_viewtime=" + r_viewtime
+				+ ", r_thname=" + r_thname + ", r_cinema=" + r_cinema + ", s_seq=" + s_seq + "]";
 	}
 
+	
 }

@@ -12,7 +12,7 @@ public class TheaterDTO {
 	private int th_num;
 	private int th_totalseat;
 	private int th_leftseat;
-	private Date th_time; /////////////timestamp
+	private Timestamp th_time; /////////////timestamp
 	
 	public TheaterDTO() { 
 	}
@@ -73,11 +73,11 @@ public class TheaterDTO {
 		this.th_leftseat = th_leftseat;
 	}
 
-	public Date getTh_time() {
+	public Timestamp getTh_time() {
 		return th_time;
 	}
 
-	public void setTh_time(Date th_time) {
+	public void setTh_time(Timestamp th_time) {
 		this.th_time = th_time;
 	}
 

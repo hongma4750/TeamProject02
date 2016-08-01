@@ -24,9 +24,9 @@ public class SeatDAO implements iSeatDAO{
 	}
 
 	@Override
-	public List<SeatDTO> getSeatList(int th_seq) {
+	public List<SeatDTO> getSeatList(int s_seq) {
 		
-		String sql = " SELECT * FROM SEAT WHERE TH_SEQ=? ";
+		String sql = " SELECT * FROM SEAT WHERE S_SEQ=? ";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -41,7 +41,7 @@ public class SeatDAO implements iSeatDAO{
 			
 			pstmt = conn.prepareStatement(sql);
 			log("3/6 success getSeatList");
-			pstmt.setInt(1, th_seq);
+			pstmt.setInt(1, s_seq);
 			rs = pstmt.executeQuery();
 			log("4/6 success getSeatList");
 			

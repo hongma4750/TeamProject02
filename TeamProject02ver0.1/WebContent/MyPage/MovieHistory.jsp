@@ -19,7 +19,7 @@
 <!-- 
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 <script type="text/javascript" src="javascript/member.js"></script>
@@ -75,6 +75,16 @@ MovieDAO mdao = MovieDAO.getInstance();
   <td>상영관</td>
 </tr>
 
+<%///////////////////////////////////////////////
+    if(rLists.size()==0){
+    	%>
+    	<tr>
+    	  <td colspan="5">지난 예매내역이 없습니다.</td>
+    	</tr>
+    	<%
+    }
+%>
+
 <%
 for(int i=0; i<rLists.size();i++){ 
 	ReservationDTO rdto = rLists.get(i);
@@ -93,7 +103,7 @@ for(int i=0; i<rLists.size();i++){
 		%>
 
 		<tr align = "center">
-		   <td><%=rdto.getR_time() %></td>
+		   <td><%=rdto.getR_viewtime() %></td>
 		   <td><%=rdto.getR_seq() %></td> <%--예매detail로 이동 --%>
 		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
 		   <td><%=tdto.getTh_name() %></td>
@@ -111,7 +121,7 @@ for(int i=0; i<rLists.size();i++){
 </section1>
 
 <footer1>
-Copyright@우리조
+<!-- Copyright@우리조 -->
 </footer1>
 
 

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 
@@ -50,18 +50,25 @@ String srseq = request.getParameter("r_seq");
 int rseq = Integer.parseInt(srseq);
 String stseq = request.getParameter("th_seq");
 int thseq = Integer.parseInt(stseq);
+String strsseq = request.getParameter("s_seq");
+int sseq = Integer.getInteger(strsseq);
 
 ReservationDAO rdao = ReservationDAO.getInstance();
-boolean isS = rdao.cancleReserv(rseq,thseq);
+boolean isS = rdao.cancleReserv(rseq,sseq);
 
 if(isS){
 	%>
 	예매 취소가 정상적으로 처리 되었습니다.
-	
+	<script type="text/javascript">
+	location.href="../MyPage/Ticket.jsp";
+	</script>
 	<%
 }else{
 	%>
 	취소되었습니다.
+	<script type="text/javascript">
+	location.href="../MyPage/Ticket.jsp";
+	</script>
 	<%
 }
 %>
@@ -69,7 +76,7 @@ if(isS){
 </section1>
 
 <footer1>
-Copyright@우리조
+
 </footer1>
 
 

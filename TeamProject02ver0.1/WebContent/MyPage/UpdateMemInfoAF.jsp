@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script type="text/javascript" src="javascript/member.js"></script>
 
@@ -69,12 +69,12 @@ System.out.println("isS: " + isS);
 	%> 
 	<script type="text/javascript">
 	    alert("회원정보 수정을 성공했습니다.");
-		location.href = "Index.jsp";
+		location.href = "index01.jsp?mode=MyPage/Index";
 	</script> <%
    }else{
 	%> <script type="text/javascript">
 		alert("회원정보 수정을 실패했습니다.");
-		location.href = "UpdateMemInfo.jsp";
+		location.href = "index01.jsp?mode=MyPage/UpdateMemInfo";
 	</script> <%
    }
 //}
@@ -83,7 +83,7 @@ System.out.println("isS: " + isS);
 </section1>
 
 <footer1>
-Copyright@우리조
+<!-- Copyright@우리조 -->
 </footer1>
 
 

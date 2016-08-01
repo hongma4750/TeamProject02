@@ -24,7 +24,7 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
- 
+session.invalidate();
 %>
 
 
@@ -49,7 +49,7 @@ session.setAttribute("login",memberdto);
 </section1>
 
 <footer1>
-
+<!-- Copyright@우리조 -->
 </footer1> 
 
 

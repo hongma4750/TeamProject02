@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- <link rel="stylesheet" type="text/css" href="css/mypage.css"/> -->
+<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script type="text/javascript" src="javascript/member.js"></script>
 
@@ -22,7 +22,7 @@ if(objlogin==null){
 	%>
 	<script type="text/javascript">
 	alert("다시 로그인 하세요.");
-	location.href="index.jsp";
+	location.href="index01.jsp?mode=MyPage/Index";
 	</script>
 	<%
 	return; //빠져나감
@@ -50,7 +50,7 @@ MemberDTO mem = (MemberDTO)objlogin;
 <section1>
 
 
-<form action="UpdateMemInfoAF.jsp" method= "post">
+<form action="index01.jsp?mode=MyPage/UpdateMemInfoAF" method= "post">
 <table>
 <tr>
 <td>아이디</td>
@@ -79,7 +79,7 @@ MemberDTO mem = (MemberDTO)objlogin;
 
 
 
-<form action="OutMem.jsp" method= "post">
+<form action="index01.jsp?mode=MyPage/OutMem" method= "post">
 <input type = "submit" name = "Btn_Out" value = "탈퇴" />
 </form><form action="Index.jsp" method= "post">
 <input type = "submit" name = "Btn_Cancel" value = "취소" />
@@ -88,7 +88,7 @@ MemberDTO mem = (MemberDTO)objlogin;
 </section1>
 
 <footer1>
-Copyright@우리조
+<!-- Copyright@우리조 -->
 </footer1>
 
 </body>
