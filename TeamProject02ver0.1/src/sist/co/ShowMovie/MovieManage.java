@@ -11,7 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class MovieManage {
-	
+	 
 	
 	public List<MovieVO> getMovieVO() throws IOException{
 		

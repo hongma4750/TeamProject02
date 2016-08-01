@@ -1,7 +1,7 @@
 package sist.co.ShowMovie;
 
 public class MovieVO {
-	
+	 
 	private String title;
 	private int like;
 	private String date;

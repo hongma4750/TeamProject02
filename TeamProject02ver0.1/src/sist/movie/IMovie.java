@@ -9,6 +9,6 @@ public interface IMovie {
 	List<MovieDTO> getOnMovieList();
 	
 	// SNS/ReviewWrite에서 사용됨
-	List<MovieDTO> getMovie();
+	List<MovieDTO> getMovie(); 
 	
 }

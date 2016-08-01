@@ -3,7 +3,7 @@ package sist.movie;
 import java.util.Date;
 
 public class MovieDTO {
-
+  
 	private int mv_seq;
 	private String mv_title;
 	private Date mv_openday;

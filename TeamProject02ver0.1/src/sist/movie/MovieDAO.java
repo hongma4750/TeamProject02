@@ -16,7 +16,7 @@ public class MovieDAO implements IMovie{
 	
 	public MovieDAO() {
 	
-	}
+	} 
 
 	public void log(String msg){
 		if(isS){
