@@ -14,6 +14,7 @@ public class ReservationDTO {
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
+	private String r_seat;
 	private Timestamp r_time;	///////////////////timestamp // 예약한 날짜
 	private Timestamp r_viewtime;///////////////////timestamp // 관람할 날짜 및 시간
 	private String r_thname;
@@ -40,6 +41,14 @@ public class ReservationDTO {
 
 	public int getTh_seq() {
 		return th_seq;
+	}
+
+	public String getR_seat() {
+		return r_seat;
+	}
+
+	public void setR_seat(String r_seat) {
+		this.r_seat = r_seat;
 	}
 
 	public void setTh_seq(int th_seq) {

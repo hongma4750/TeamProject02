@@ -19,22 +19,25 @@ if(rdto.getM_id()==null){ %>
 <%	
 }else if(rdto.getTh_seq()==0){  %>
 	<script type="text/javascript">
-		alert("영화관을 선택하지 않았습니다.");
-		location.href = "login.jsp";
+		alert("영화관을 선택하지 않았습니다");
+		location.href = "Reserve.jsp";
 	</script>
 <%
 }else if(rdto.getMv_seq()==0){  %>
 	<script type="text/javascript">
-		alert("로그인하십시오");
-		location.href = "login.jsp";
+		alert("영화를 선택하지 않았습니다");
+		location.href = "Reserve.jsp";
 	</script>
 <%
 }else if(rdto.getR_totalprice()==0){  %>
 	<script type="text/javascript">
-		alert("로그인하십시오");
-		location.href = "login.jsp";
+		alert("관람인원을 선택하지 않았습니다");
+		location.href = "Reserve.jsp";
 	</script>
 <%	
+}else{
+	System.out.println(rdto.toString());
+	
 }
 %>
 

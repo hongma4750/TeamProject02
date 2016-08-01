@@ -345,7 +345,7 @@ public class ReservationDAO implements iReservateionDAO {
 	@Override
 	public boolean reserve(ReservationDTO rdto) {
 
-		String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?) ";
+		String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -365,6 +365,11 @@ public class ReservationDAO implements iReservateionDAO {
 			psmt.setInt(i++, rdto.getR_adult());
 			psmt.setInt(i++, rdto.getR_student());
 			psmt.setInt(i++, rdto.getR_elder());
+			psmt.setString(i++, rdto.getR_seat());
+			psmt.setTimestamp(i++, rdto.getR_time());	// (0801수정할거) DATE형에 timestamp형 넣어도 잘 들어가는지 확인해보기
+			psmt.setTimestamp(i++, rdto.getR_viewtime());
+			psmt.setString(i++, rdto.getR_thname());
+			psmt.setString(i++, rdto.getR_cinema());
 			log("3/6 Success reserve");
 			
 			count = psmt.executeUpdate();

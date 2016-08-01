@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="sist.co.Reservation.ReservationDTO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="sist.co.Price.PriceDTO"%>
@@ -43,6 +45,9 @@ td.eachone{
 <%!
 public boolean nvl(String msg){
 	return msg==null || msg.trim().equals("")?true:false; 	
+}
+public String two(String msg){	// 날짜가 한자리 수일때 두자리로 표현하기 위한 함수 (ex. 1월 => 01월 )
+	return msg.trim().length()<2?"0"+msg:msg.trim();
 }
 public String timestamp2string(Timestamp t){ 	// timestamp를 String으로 변환
 	return (""+t+"").substring(11, 16);
@@ -95,7 +100,10 @@ public String getChooseTime(List<TheaterDTO> thelist, int th_seq){	// 고객이 
 			return timestamp2string(thelist.get(i).getTh_time());
 		}
 	}
-	return "";
+	return null;	// return "";
+}
+public Timestamp getTimestamp(String str){	// date => timestamp
+    return Timestamp.valueOf(str);
 }
 %>
 
@@ -183,6 +191,15 @@ List<PriceDTO> plist = pdao.getPriceList();
 MovieDAO mdao = MovieDAO.getInstance();
 List<MovieDTO> mlist = mdao.getOnMovieList();
 
+// Theater Data 취득
+TheaterDAO thdao = TheaterDAO.getInstance();
+List<TheaterDTO> thlist = thdao.getTheaterList(seq);
+
+
+// 예매관련 r_time 넣기 위한 작업 => timestamp에 값 못넣겟음. 그래서 그냥 DB에 String식으로 넣는 방식으로 바꿈 (0801 수정할거) => 좌석선택후 이런식으로 넣을꺼임
+/* String s  = year+"-"+two(month+"")+"-"+two(sdate+"")+" "+getChooseTime(thlist, th_seq)+":00";
+System.out.println("s:" + s); */
+
 // 예매관련
 ReservationDTO rdto = new ReservationDTO();
 rdto.setM_id(mem.getM_id());
@@ -192,6 +209,15 @@ rdto.setR_totalprice(getTotalPrice(plist, adult, student, elder));
 rdto.setR_adult(adult);
 rdto.setR_student(student);
 rdto.setR_elder(elder);
+/*  if(syear != null && smonth != null && sdate != null && getChooseTime(thlist, th_seq)!= null){
+	rdto.setR_viewtime(getTimestamp(s)); //yyyy-mm-dd hh:mm:ss형식
+	System.out.println("rdto.setR_viewtime((Timestamp)t):" + rdto.getR_viewtime()); 
+} */ 
+ /* rdto.setR_viewtime(getTimestamp("2016-08-02 11:00:00")); //yyyy-mm-dd hh:mm:ss형식 */
+ /* s = "2016-08-02 11:00:00"; */
+/*  rdto.setR_viewtime(getTimestamp(s));  *///yyyy-mm-dd hh:mm:ss형식
+ 
+
 
 session.setAttribute("rdto", rdto);
 
@@ -219,9 +245,8 @@ session.setAttribute("rdto", rdto);
 		</td>
 		<td width="100px">
 			<!-- <select size="10" name="th_name_selec"> -->
-			<%	TheaterDAO thdao = new TheaterDAO();
-				List<TheaterDTO> thlist = new ArrayList<TheaterDTO>();
-				thlist = thdao.getTheaterList(seq);
+			<%	
+				
 				String th_name_duple[] = new String[thlist.size()];	// 해당영화 상영을 명동 1관, 2관 혹은 1관 1회 2회일 경우, 명동이 두번 나오기떄문에, 한번만 나오도록함
 				for(int i = 0; i < th_name_duple.length; i++){		// 초기화. 초기화안시키면 null이라 다음 for문에서 오류남
 					th_name_duple[i] = "";
@@ -338,7 +363,7 @@ session.setAttribute("rdto", rdto);
 							<td>관람일을 선택하세요</td>
 					<%	}else{ %>
 							<td><%=year %>-<%=month %>-<%=sdate %> <%=getChooseTime(thlist, th_seq) %></td>
-					<%	} %>
+					<%	}	%>
 				</tr>
 				<tr>
 					<th>인원</th>
