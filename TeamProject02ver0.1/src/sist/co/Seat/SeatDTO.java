@@ -1,4 +1,4 @@
-package test.Seat;
+package sist.co.Seat;
 
 public class SeatDTO {
 
@@ -8,6 +8,7 @@ public class SeatDTO {
 	private int s_check;
 	
 	public SeatDTO() {
+	
 	}
 
 	public int getS_seq() {
@@ -41,10 +42,10 @@ public class SeatDTO {
 	public void setS_check(int s_check) {
 		this.s_check = s_check;
 	}
-
-	@Override
-	public String toString() {
-		return "SeatDTO [s_seq=" + s_seq + ", th_seq=" + th_seq + ", s_name=" + s_name + ", s_check=" + s_check + "]";
+	
+	public String toString(){
+		return "SEAT[s_seq:" + s_seq + ",th_seq:" + th_seq + ",s_name:" + s_name + ",s_check:" + s_check + "]";
 	}
-
+	
+	
 }
