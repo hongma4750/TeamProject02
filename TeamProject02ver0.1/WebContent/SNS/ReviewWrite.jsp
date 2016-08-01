@@ -3,7 +3,7 @@
 <%@ page import="sist.co.Member.MemberDTO"%>
 <%@ page import="sist.co.Review.ReviewDAO"%>
 <%@ page import="sist.co.Review.ReviewDTO"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
