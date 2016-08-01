@@ -1,3 +1,4 @@
+<%@page import="sist.co.Reservation.ReservationDTO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="sist.co.Price.PriceDTO"%>
 <%@page import="sist.co.Price.PriceDAO"%>
@@ -181,6 +182,19 @@ List<PriceDTO> plist = pdao.getPriceList();
 // Movie Data 취득
 MovieDAO mdao = MovieDAO.getInstance();
 List<MovieDTO> mlist = mdao.getOnMovieList();
+
+// 예매관련
+ReservationDTO rdto = new ReservationDTO();
+rdto.setM_id(mem.getM_id());
+rdto.setTh_seq(th_seq);
+rdto.setMv_seq(seq);
+rdto.setR_totalprice(getTotalPrice(plist, adult, student, elder));
+rdto.setR_adult(adult);
+rdto.setR_student(student);
+rdto.setR_elder(elder);
+
+session.setAttribute("rdto", rdto);
+
 %>
 
 <form action="ReserveAf.jsp">
@@ -335,7 +349,7 @@ List<MovieDTO> mlist = mdao.getOnMovieList();
 					<%	if((adult + student + elder) == 0){ %>
 							<td>인원을 선택하세요</td>
 					<%	}else{ %>
-							<td><%=getTotalPrice(plist, adult, student, elder) %>원</td>
+							<td><%=getTotalPrice(plist, adult, student, elder) %>원</td>	<%--(0801수정할거)가격 comma표시 --%>
 					<%	} %>
 				</tr>
 				<tr>

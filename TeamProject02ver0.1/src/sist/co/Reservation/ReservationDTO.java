@@ -14,7 +14,8 @@ public class ReservationDTO {
 	private int r_adult;
 	private int r_student;
 	private int r_elder;
-	private Date r_time;///////////////////timestamp
+	private Timestamp r_time;	///////////////////timestamp // 예약한 날짜
+	private Timestamp r_viewtime;///////////////////timestamp // 관람할 날짜 및 시간
 	private String r_thname;
 	private String r_cinema;
 	
@@ -92,13 +93,21 @@ public class ReservationDTO {
 	public void setR_elder(int r_elder) {
 		this.r_elder = r_elder;
 	}
-
-	public Date getR_time() {
+	
+	public Timestamp getR_time() {
 		return r_time;
 	}
 
-	public void setR_time(Date r_time) {
+	public void setR_time(Timestamp r_time) {
 		this.r_time = r_time;
+	}
+
+	public Timestamp getR_viewtime() {
+		return r_viewtime;
+	}
+
+	public void setR_viewtime(Timestamp r_viewtime) {
+		this.r_viewtime = r_viewtime;
 	}
 
 	public String getR_thname() {
