@@ -120,6 +120,10 @@ function joinCheck(){
 		alert("아이디 중복검사를 다시 실시해 주세요");
 		frm.m_id.focus();
 		return false;
+	}else if(document.frm.m_id.value.length>4){
+		alert("4글자 이상 아이디 적어주세요");
+		frm.m_id.focus();
+		return false;
 	}
 	return true;
 }

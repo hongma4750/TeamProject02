@@ -24,6 +24,9 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+<script type="text/javascript" src="star/jquery.raty.js"></script>
+<link rel="stylesheet" href="star/jquery.raty.css"/>
+
 <script type="text/javascript">
 $(function(){
     //전역변수선언
@@ -63,11 +66,11 @@ $(document).ready(function() {
 	$('.comment-toggle').click(function(e) {
 		
 	        var $form = $(e.target).parent().parent().find('.modify-comment');
-	        
+
 	        var $p = $(e.target).parent().parent().find('.comment-toggle');
 	        var $o = $(e.target).parent().parent().find('.comment-delete');
 	        var $c = $(e.target).parent().parent().parent().find('.comment-content');
-	        
+      
 	        if ($form.is(':hidden') == true) {
 	            $form.show();
 	            $p.hide();
@@ -110,13 +113,18 @@ $(document).ready(function() {
         var $o = $(e.target).parents().find('.comment-delete');
         var $c = $(e.target).parents().find('.comment-content');
         
+        
+        /* alert("1 : "+$('#com_seq_check').attr('value'));
+        alert("2 : "+$(e.target).parents().find('.cancel').attr('id')); */
+        
 	    if ($form.is(':hidden') == true) {
-	        $form.show();
+	    	$form.show();
 	        $p.hide();
         	$o.hide();
         	$c.hide();
 	    } else {
-	        $form.hide();
+	    	
+	    	$form.hide();
 	        $p.show();
             $o.show();
             $c.show();
@@ -183,7 +191,14 @@ request.setAttribute("comList", comList);
 		
 		<tr>
 			<td>별점</td>
-			<td>개발중...</td>
+			<td>
+				<div id="default" style="cursor:pointer;" ></div>
+						
+						<div id=target>
+				        	<input type="text" id="re_star" name="r_star">
+       					</div>
+				
+			</td>
 		</tr>
 		
 			
@@ -223,7 +238,7 @@ request.setAttribute("comList", comList);
 							    </div>
 							    
 							    <div>
-							    	<input type="hidden" value="${comment.com_seq }" class="com_seq_re">
+							    	<input type="hidden" value="${comment.com_seq }" class="com_seq_re" id="com_seq_check">
 							    	<input type="hidden" value="${comment.r_seq }" class="r_seq_re">
 							      <textarea class="modify-comment-ta" name="com_content_re" rows="4" cols="50">${comment.com_content }</textarea>
 							    </div>
@@ -291,6 +306,15 @@ request.setAttribute("comList", comList);
 	    	
 	    });
 	
+</script>
+
+<script type="text/javascript">
+	$('div#default').raty({
+		score:<%=redto.getR_star()%>,
+		path:'star/images',
+		targetScore:'#re_star',
+		readOnly:true
+	});
 </script>
 </body>
 </html>

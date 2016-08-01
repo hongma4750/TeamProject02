@@ -220,7 +220,8 @@ CREATE TABLE REVIEW(
 	r_content varchar2(3000) not null,
 	r_writedate date default sysdate,
 	r_like number default 0,
-	r_readcount number default 0
+	r_readcount number default 0,
+	r_star number
 )
 
 alter table REVIEW
@@ -235,7 +236,7 @@ drop sequence review_seq;
 create sequence review_seq
 start with 1 increment by 1;
 
-
+select * from review where r_title like '%ㅋㅋ';
 
 insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요1','안녕하세요1');
 insert into review (r_seq,m_id,r_title,r_content) values (review_seq.nextval,'hong','안녕하세요2','안녕하세요2');
