@@ -1,4 +1,4 @@
-package sist.movie;
+package sist.co.movie;
 
 import java.io.IOException;
 import java.util.ArrayList;

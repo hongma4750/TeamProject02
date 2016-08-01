@@ -1,4 +1,4 @@
-package sist.movie;
+package sist.co.movie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
