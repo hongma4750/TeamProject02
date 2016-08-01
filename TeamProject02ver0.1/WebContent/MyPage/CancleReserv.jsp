@@ -88,6 +88,7 @@ boolean isS = rdao.cancleReserv(rseq,thseq);
 if(isS){
 	%>
 	예매 취소가 정상적으로 처리 되었습니다.
+	
 	<%
 }else{
 	%>
