@@ -270,6 +270,8 @@ List<MovieDTO> mlist = mdao.getOnMovieList();
 					if(mysysdate.get(Calendar.DATE) == i || (mysysdate.get(Calendar.DATE)+1) == i || (mysysdate.get(Calendar.DATE)+2) == i){	// 오늘날짜~+2까지 예매가능 
 						if(mysysdate.get(Calendar.YEAR) == year && (mysysdate.get(Calendar.MONTH)+1) == month){ %>	
 							<td align="center"><a href="Reserve.jsp?seq=<%=seq%>&th_name=<%=th_name%>&date=<%=i%>"><%=i %></a></td>
+					<%	}else{	%>
+							<td align="center"><%=i %></td>
 					<%	}
 					}else{ %>
 						<td align="center"><%=i %></td>
@@ -333,7 +335,7 @@ List<MovieDTO> mlist = mdao.getOnMovieList();
 					<%	if((adult + student + elder) == 0){ %>
 							<td>인원을 선택하세요</td>
 					<%	}else{ %>
-							<td><%=getTotalPrice(plist, adult, student, elder) %></td>
+							<td><%=getTotalPrice(plist, adult, student, elder) %>원</td>
 					<%	} %>
 				</tr>
 				<tr>
