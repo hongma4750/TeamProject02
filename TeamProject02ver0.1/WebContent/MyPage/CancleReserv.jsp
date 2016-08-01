@@ -1,4 +1,4 @@
- <%@page import="test.Reservation.ReservationDAO"%>
+ <%@page import="sist.co.Reservation.ReservationDAO"%>
 <%@page import="sist.co.Member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -48,26 +48,27 @@ session.setAttribute("login",memberdto);
 <%
 String srseq = request.getParameter("r_seq");
 int rseq = Integer.parseInt(srseq);
-String stseq = request.getParameter("th_seq");
-int thseq = Integer.parseInt(stseq);
-String strsseq = request.getParameter("s_seq");
-int sseq = Integer.getInteger(strsseq);
+
+String srseat = request.getParameter("r_seat");
+
 
 ReservationDAO rdao = ReservationDAO.getInstance();
-boolean isS = rdao.cancleReserv(rseq,sseq);
+boolean isS = rdao.cancleReserv(rseq,srseat);
 
 if(isS){
 	%>
-	예매 취소가 정상적으로 처리 되었습니다.
+	
 	<script type="text/javascript">
-	location.href="../MyPage/Ticket.jsp";
+	alert('예매 취소가 정상적으로 처리 되었습니다.');
+	location.href="index01.jsp?mode=MyPage/Ticket";
 	</script>
 	<%
 }else{
 	%>
-	취소되었습니다.
+	
 	<script type="text/javascript">
-	location.href="../MyPage/Ticket.jsp";
+	alert('취소되었습니다.');
+	location.href="index01.jsp?mode=MyPage/Ticket";
 	</script>
 	<%
 }

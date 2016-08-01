@@ -194,10 +194,16 @@ public class ReservationDAO implements iReservateionDAO {
 	}*/
 	
 	@Override
-	public boolean cancleReserv(int r_seq, int s_seq) {
+	public boolean cancleReserv(int r_seq, String r_seat) {
+		
+		for(int i=0;i<r_seat.length();i++){
+			if(r_seat.charAt(i)==' '){
+				
+			}
+		}
 		String sql1 = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
-		String sql2 = " UPDATE SEAT SET S_CHECK=0 "
-                    + " WHERE S_CHECK=1 AND S_SEQ=? ";
+		/*String sql2 = " UPDATE SEAT SET S_CHECK=0 "
+                    + " WHERE S_CHECK=1 AND S_SEQ=? ";*/
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -206,7 +212,7 @@ public class ReservationDAO implements iReservateionDAO {
 		
 		try{
 			conn = DBManager.getConnection();
-			conn.setAutoCommit(false);//자동 커밋 안됨
+			//conn.setAutoCommit(false);//자동 커밋 안됨
 			log("2/6 success cancleReserv");
 			
 			pstmt = conn.prepareStatement(sql1);
@@ -217,32 +223,32 @@ public class ReservationDAO implements iReservateionDAO {
 			count = pstmt.executeUpdate();
 			log("4/6 success cancleReserv");
 			
-			pstmt.clearParameters();
+			//pstmt.clearParameters();
 			log("5/6/1 success cancleReserv");
-			pstmt = conn.prepareStatement(sql2);
+			//pstmt = conn.prepareStatement(sql2);
 			
 			
-			pstmt.setInt(1, s_seq);
+			//pstmt.setString(1, r_seat);
 			log("5/6/2 success cancleReserv");
 			
-			pstmt.executeBatch();
+			//pstmt.executeBatch();
 			log("5/6/3 success cancleReserv");
 			
-			conn.commit(); //수동커밋
+			//conn.commit(); //수동커밋
 			log("5/6/4 success cancleReserv");
 			
 		}catch(SQLException e){
-			try {
+			/*try {
 				conn.rollback();
 			} catch (SQLException e1) {
-			}
+			}*/
 			log("Fail cancleReserv");
 			
 		}finally {
-			try {
+			/*try {
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
-			}
+			}*/
 			DBManager.close(conn, pstmt);
 			
 			log("6/6 success cancleReserv");
