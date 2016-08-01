@@ -42,7 +42,7 @@ td.eachone{
 </style>
 </head>
 <body>
-<%!
+<%!  
 public boolean nvl(String msg){
 	return msg==null || msg.trim().equals("")?true:false; 	
 }
