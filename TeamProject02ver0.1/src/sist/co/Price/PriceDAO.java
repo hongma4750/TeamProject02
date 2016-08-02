@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sist.co.DBManager.DBManager;
-import sist.movie.MovieDAO;
-import sist.movie.MovieDTO;
+import sist.co.Movie.MovieDAO;
+import sist.co.Movie.MovieDTO;
 
 public class PriceDAO implements IPrice{
 

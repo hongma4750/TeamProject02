@@ -3,6 +3,12 @@
 <%@ page import="sist.co.Member.MemberDTO"%>
 <%@ page import="sist.co.Review.ReviewDAO"%>
 <%@ page import="sist.co.Review.ReviewDTO"%>
+<%@ page import="sist.movie.MovieDTO" %>
+<%@ page import="sist.movie.MovieDAO" %>
+<%@ page import="java.util.*" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+ 
 <!DOCTYPE html>  
 <html>
 <head>
@@ -10,15 +16,20 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-
+<!-- jquery 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- jquery 링크 -->
+
+<!-- 별 링크 -->
 <script type="text/javascript" src="star/jquery.raty.js"></script>
 <link rel="stylesheet" href="star/jquery.raty.css"/>
+<!-- 별 링크 -->
 
+<!-- 스마트 에디터 링크 -->
 <script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
-
+<!-- 스마트 에디터 링크 -->
 <script type="text/javascript">
 	$(
 			function() {
@@ -65,6 +76,14 @@
 	</h3>
 	<hr>
 
+	<%
+		MovieDAO modao = MovieDAO.getInstance();
+		List<MovieDTO> moList = modao.getMovie();
+		
+		session.setAttribute("re_movie",moList);
+	%>
+	
+	
 	<div id="middle_wrap">
 		<form action="SNS/ReviewWriteAF.jsp" method="post" name="frm" id="frm">
 			<table class="table table-bordered" border="1">
@@ -75,8 +94,14 @@
 
 					<td rowspan="3">
 						<div>
-							<img src="" alt="영화이미지" id="movieImg"> <br> <select>
+							<img src="img/no_image.gif" alt="영화이미지" id="movieImg" width="90px"height="140px;">
+							<select name="mv_seq" id="mv" onchange="changeImg()">
 								<option>영화제목들</option>
+								
+								<c:forEach var="movie" items="${re_movie }">
+									<option value="${movie.mv_seq }" id="${movie.mv_img }">${movie.mv_title }</option>
+								</c:forEach>
+								
 							</select>
 						</div>
 
@@ -126,6 +151,14 @@
 		path:'star/images',
 		targetScore:'#re_star'
 	});
+</script>
+
+<script type="text/javascript">
+
+	function changeImg(){
+		$('#movieImg').attr('src',$('#mv option:selected').attr('id'));
+	}
+
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package sist.movie;
+package sist.co.Theater;
 
 import java.sql.Timestamp;
 import java.util.Date;
