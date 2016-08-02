@@ -13,35 +13,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Seat</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 nu = 0;	/* 전역변수 */
 function setDisable(elementid) {
-	alert("\"" + elementid +"\"를 누르셨습니다.");
 	var el = document.getElementById(elementid);
 	changeValue(elementid);
+	el.style.backgroundColor='#ff8c00';
+	el.style.color='#ffffff';
 	el.disabled = 'true';
-	
 }
 function changeValue(elementid){
-	alert(elementid);
 	var str = "p" + nu;
 	var divTest = document.getElementById(str);
 	divTest.innerHTML=elementid;
 	nu++;
 }
 function doSubmit() {
-   	var arr = [3];
-	//arr[0] = $("div:last").text();	// div중 마지막 값만 출력
-	//arr[0] = $("div:first").text();		// div중 첫번째 값만 출력
-	arr[0] = $("p:eq(0)").text();
-	arr[1] = $("p:eq(1)").text();
-	arr[2] = $("p:eq(2)").text();
+   	var arr = [nu];
 
-/*   var arr = [1,2,3,4,5,6]; //배열 */
-     document.from.arr.value = arr.join(","); //arr에다가 실어 보냅니다.
-     document.from.method = "POST";
-     document.from.action = "SeatAf.jsp";
-     document.from.submit();
+	for(var i = 0; i < nu; i++){
+		arr[i] = $("p:eq("+i+")").text();
+	}
+ 
+     document.myform.arr.value = arr.join(","); 
+     document.myform.method = "POST";
+     document.myform.action = "SeatAf.jsp";
+     document.myform.submit();
+}
+function goReserve(){
+	location.href="Reserve.jsp";
+}
+function ini(){
+	var iniarr = [nu];
+	for(var i = 0; i < nu; i++){
+		// 선택한 좌석 버튼 초기화
+		iniarr[i] = $("p:eq("+i+")").text();
+		document.getElementById(iniarr[i]).disabled='false';
+		document.getElementById(iniarr[i]).style.backgroundColor='#4169e1';
+		// 선택한 좌석번호 초기화
+		var str = "p" + i;
+		document.getElementById(str).innerHTML="좌석"+(i+1);
+	}
+	
+	// 전역변수 초기화
+	nu=0;
+	
 }
 </script>
 <style type="text/css">
@@ -68,6 +85,22 @@ th,td{
 	width: 500px;
 	height: 20px;
 	border: 0px;
+}
+.btsable{
+	background-color: #4169e1;
+	color: white;
+	width: 100%;
+	height: 100%;
+}
+.btsdisable{
+	background-color: gray;
+	width: 100%;
+	height: 100%;
+}
+.btschoose{
+	background-color: #ff8c00;
+	width: 100%;
+	height: 100%;
 }
 </style>
 </head>
@@ -118,12 +151,13 @@ TheaterDAO thdao = TheaterDAO.getInstance();
 TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 
 %>
-<h6>3명test</h6>
+
 <a href="tmpadmin.jsp">tmpadmin</a>	<%-- 임시 좌석 DB insert에 해당. 원래 admin이 하는일 --%>
+
 
 <table>
 	<tr>
-		<td>
+		<td colspan="3">
 			<table>
 				<tr>
 					<th colspan="14" id="screen">Screen</th>
@@ -139,10 +173,11 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 								for(int j = 0; j < slist.size(); j++){
 									if(rowname[i].equals(slist.get(j).getS_name().substring(0, 1))){
 										if(slist.get(i).getS_check()==0){	// 빈자리 : anchor%>			
-											<%-- <td><a href="Seat.jsp"><%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length()))+1 %></a></td> --%>
-											<td><input type='button' id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length()))+1 %>' onclick="setDisable('<%=slist.get(j).getS_name() %>')" /></td>
+										 	<%-- <td><a href="Seat.jsp"><%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length()))+1 %></a></td> --%>
+											<td><input class="btsable" type='button' id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) %>' onclick="setDisable('<%=slist.get(j).getS_name() %>')" /></td>
 							<%			}else{ %> 									
-											<td><%=slist.get(j).getS_name().substring(1,2) %></td> 
+											<%-- <td><%=slist.get(j).getS_name().substring(1,2) %></td> --%> 
+											<td><input class="btsdisable" type='button' id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) %>' disabled="disabled" /></td>
 							<%			}
 									}
 								} %>
@@ -157,15 +192,15 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 			</table>
  		</td>
  		<td>
- 			<table height="100%">
+ 			<table height="200px">
  				<tr><th>선택한 좌석번호</th></tr>
  			<%	for(int i = 0; i < people; i++){ %>
- 					<tr><td><p id="p<%=i%>">p<%=i%></p></td></tr>
+ 					<tr><td><p id="p<%=i%>">좌석<%=i+1%></p></td></tr>
  			<%	} %>
- 				<tr><td><button>다시선택</button></td></tr>
+ 				<!-- <tr><td><button>다시선택</button></td></tr> -->
  			</table>
  		</td>
- 		<td>
+ 		<td rowspan="2">
  			<td rowspan="3" width="225px" align="center">
 			<table width="100%" height="100%">
 				<tr> <!-- <td colspan="2"><img src="../img/arrow.png" alt="포스터"></td> -->
@@ -197,32 +232,33 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 					<td colspan="2"><%=thdto.getTh_leftseat() %>석</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="button" value="이전단계" ><input type="button" value="다음단계" onclick="doSubmit()"></td>
+					<td colspan="2" align="center">
+					<form name="myform">
+						<input type="button" value="이전단계" onclick="goReserve()">
+					
+						<input type="hidden" name="arr">
+						<input type="submit" value="다음단계" onclick="doSubmit()">
+					</form>	
+					</td>				
 				</tr>
 			</table>
 		</td>
 	</tr>
+	<tr>
+		<td><button class="btsable" disabled="disabled" style="width: 20px; height: 20px;"></button> : 선택가능좌석</td>
+		<td><button class="btschoose" disabled="disabled" style="width: 20px; height: 20px;"></button> : 선택한좌석</td>
+		<td><button class="btsdisable" disabled="disabled" style="width: 20px; height: 20px;"></button> : 선택불가좌석</td>
+		<td><button style="width:100%; height:100%;" onclick="ini()">다시선택</button></td>
+	</tr>
 </table>
-
-
-<a href="Seat.jsp"></a>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 <a href="Index.jsp">HOME</a>
-<a href="Reserve.jsp">예매다시하기</a>
+
+
+  
 
 
 </body>

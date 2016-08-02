@@ -26,7 +26,7 @@ for(int i = 0; i < thdto.getTh_totalseat(); i++){
 		if(i/10==j)	alpha+=j;
 	}
 	
-	String str = ""+ alpha + (i%10);
+	String str = ""+ alpha + ((i%10)+1);
 	//System.out.print(str);
 	boolean isS = sdao.adminSeatSetting(thdto.getTh_seq(), str);
 	if(!isS)	break;
