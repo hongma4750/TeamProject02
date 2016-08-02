@@ -1,7 +1,7 @@
 package sist.co.Comment;
 
 import java.sql.Timestamp;
-
+ 
 public class CommentDTO {
 	private int com_seq;
 	private int r_seq;

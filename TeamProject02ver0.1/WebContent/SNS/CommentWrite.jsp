@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-     
+      
     <%@ page import ="sist.co.Comment.CommentDTO" %>
     <%@ page import ="sist.co.Comment.CommentDAO" %>
     <%request.setCharacterEncoding("utf-8"); %>

@@ -10,7 +10,7 @@ import java.util.List;
 import sist.co.DBManager.DBManager;
 
 public class MovieDAO implements IMovie{
-
+ 
 	private boolean isS = true;
 	private static MovieDAO movieDao;
 	

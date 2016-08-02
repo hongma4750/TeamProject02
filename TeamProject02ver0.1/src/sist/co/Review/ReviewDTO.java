@@ -1,7 +1,7 @@
 package sist.co.Review;
 
 import java.sql.Timestamp;
-
+ 
 public class ReviewDTO {
   
 	private int r_seq;

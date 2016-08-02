@@ -57,7 +57,7 @@ if(result  == 1){
 		</script>
 	<%
 }
-
+ 
 %>
 
 </body>

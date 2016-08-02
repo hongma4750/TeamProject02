@@ -11,10 +11,10 @@ import sist.co.DBManager.DBManager;
 import java.sql.Connection;
 
 public class MemberDAO implements iMember {
-	
+	 
 	private boolean isS = true;
 	private static MemberDAO memberDAO;
-	
+	 
 	
 	public static MemberDAO getInstance(){
 		if(memberDAO==null){
