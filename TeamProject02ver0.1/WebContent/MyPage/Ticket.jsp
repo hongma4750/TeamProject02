@@ -1,12 +1,11 @@
  <%@page import="sist.co.Member.MemberDTO"%>
-<%@page import="test.Movie.MovieDTO"%>
 <%@page import="sist.co.Member.MemberDTO"%>
 <%@page import="test.Reservation.ReservationDTO"%>
 <%@page import="test.Reservation.ReservationDAO"%>
 <%@page import="test.Theater.TheaterDTO"%>
 <%@page import="test.Theater.TheaterDAO"%>
-<%@page import="test.Movie.MovieDAO"%>
-<%@page import="test.Movie.MovieDTO"%>
+<%@page import="sist.co.Movie.MovieDAO"%>
+<%@page import="sist.co.Movie.MovieDTO"%>
 <%@page import="test.Seat.SeatDTO"%>
 <%@page import="test.Seat.SeatDAO"%>
 <%@page import="test.Price.PriceDTO"%>
@@ -165,7 +164,7 @@ for(int j = record_start_no; j < record_start_no+page_per_record_cnt; j++){
 	//
 	ReservationDTO rdto = rLists.get(j);
 	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
-	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
+	MovieDTO mdto = mdao.getmoviedetail(tdto.getMv_seq());
 	List<SeatDTO> slist = sdao.getSeatList(rdto.getTh_seq());
 	
     

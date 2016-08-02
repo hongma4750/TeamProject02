@@ -51,7 +51,12 @@ MemberDTO mem = (MemberDTO)objlogin;
 
 
 <form action="index01.jsp?mode=MyPage/UpdateMemInfoAF" method= "post">
-<table>
+<table align="center">
+
+<tr>
+<td colspan="2" style="text-align: center"><h4>회원정보 수정</h4><hr></td>
+</tr>
+
 <tr>
 <td>아이디</td>
 <td><input type = "text" name = "id" size="20" value = "<%=mem.getM_id() %>" readonly="readonly"/></td>
@@ -70,6 +75,10 @@ MemberDTO mem = (MemberDTO)objlogin;
 </tr>
 
 <tr>
+<td colspan="2" style="text-align: center"><hr></td>
+</tr>
+
+<tr>
 <td colspan="2">
 <input type = "submit" name = "Btn_Update" value = "수정" />
 </td>
@@ -77,11 +86,11 @@ MemberDTO mem = (MemberDTO)objlogin;
 </table>
 </form>
 
-
-
 <form action="index01.jsp?mode=MyPage/OutMem" method= "post">
 <input type = "submit" name = "Btn_Out" value = "탈퇴" />
-</form><form action="Index.jsp" method= "post">
+</form>
+
+<form action="index01.jsp?mode=MyPage/Index" method= "post">
 <input type = "submit" name = "Btn_Cancel" value = "취소" />
 </form>
 

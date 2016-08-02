@@ -1,4 +1,4 @@
-package sist.co.movie;
+package sist.co.Movie;
 
 import java.util.Date;
 
