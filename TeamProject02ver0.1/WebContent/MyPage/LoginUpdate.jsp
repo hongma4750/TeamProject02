@@ -46,7 +46,10 @@ session.setAttribute("login",memberdto);
 <section1>
 
 <form action="index01.jsp?mode=MyPage/LoginUpdateAF" method="post">
-<table>
+<table align="center">
+<tr>
+<td colspan="2" style="text-align: center"><h4>비밀번호 확인</h4><hr></td>
+</tr>
 
 <tr>
 <td>아이디</td>
@@ -59,6 +62,10 @@ session.setAttribute("login",memberdto);
 </tr>
 
 <tr>
+<td colspan="2" style="text-align: center"><hr></td>
+</tr>
+
+<tr align="center">
 <td colspan = "2"><input type = "submit" value= "확인"/></td>
 </tr>
 

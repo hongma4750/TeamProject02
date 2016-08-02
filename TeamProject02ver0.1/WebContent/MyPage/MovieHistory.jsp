@@ -1,11 +1,11 @@
- <%@page import="test.Movie.MovieDTO"%>
+
 <%@page import="sist.co.Member.MemberDTO"%>
 <%@page import="test.Reservation.ReservationDTO"%>
 <%@page import="test.Reservation.ReservationDAO"%>
 <%@page import="test.Theater.TheaterDTO"%>
 <%@page import="test.Theater.TheaterDAO"%>
-<%@page import="test.Movie.MovieDAO"%>
-<%@page import="test.Movie.MovieDTO"%>
+<%@page import="sist.co.Movie.MovieDAO"%>
+<%@page import="sist.co.Movie.MovieDTO"%>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,6 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>나의 관람영화</title>
 
 <!-- 
@@ -24,20 +25,7 @@
 <link href="css/main.css" rel="stylesheet">
 <script type="text/javascript" src="javascript/member.js"></script>
 
-<script type="text/javascript">
-function clickLikeOr(i){
-	String res;
-	//한번만 선택되도록
-	if(i=0){//싫어요
-		alert("싫어요를 선택했습니다.");
-		return res="싫어요";
-	}else id(i=1){//좋아요
-		alert("좋아요를 선택했습니다.");
-		return res="좋아요";
-	}
-}
 
-</script>
 
 </head>
 <body>
@@ -77,14 +65,20 @@ List<ReservationDTO> rLists = dao.getHistoryList(memberdto.getM_id());
 TheaterDAO tdao = TheaterDAO.getInstance();
 MovieDAO mdao = MovieDAO.getInstance();
 %>
+
 <table align = "center">
+
+<tr>
+<td colspan="5" style="text-align: center"><h4>나의 관람 영화</h4><hr></td>
+</tr>
+
 <col width="150"/><col width="150"/><col width="150"/><col width="150"/><col width="150"/>
 <tr align = "center">  
   <td>관람일</td>
   <td>예매번호</td>
   <td>영화</td>
   <td>상영관</td>
-  <td>좋아요싫어요</td>
+  <td>선호도투표</td>
 </tr>
 
 <%///////////////////////////////////////////////
@@ -101,7 +95,7 @@ MovieDAO mdao = MovieDAO.getInstance();
 for(int i=0; i<rLists.size();i++){ 
 	ReservationDTO rdto = rLists.get(i);
 	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
-	MovieDTO mdto = mdao.getMovie(tdto.getMv_seq());
+	MovieDTO mdto = mdao.getmoviedetail(tdto.getMv_seq());
 	
 	if(rLists.size() == 0){ //내역이 없을때
 		%>
@@ -120,24 +114,28 @@ for(int i=0; i<rLists.size();i++){
 		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
 		   <td><%=rdto.getR_thname()%> <%=rdto.getR_cinema() %></td>
 		   <% 
-		   if(rdto.getR_poll()==0){
-			   //투표안한 상태
-			   %>
-			   <td><input type = "submit" onclick = "clickLikeOr(1)" name = "btnlike" value = "좋아요"/><input type = "submit" onclick = "clickLikeOr(0)" name = "btnhate" value = "싫어요"/></td>
-			   <%
-		   }else if(rdto.getR_poll()==1){
+		   if(rdto.getR_poll()==1){
 			   //좋아요 투표한 상태
 			   %>
-			   <td>좋아요</td>
+			   <td id="like">좋아요</td>
 			   <%
 		   }else if(rdto.getR_poll()==2){
 			   //싫어요 투표한 상태
 			   %>
-			   <td>싫어요</td>
+			   <td id="hate">싫어요</td>
+			   <%
+			   
+		   }else if(rdto.getR_poll()==0){
+			   //투표안한 상태
+			   %>
+			   <td>
+			   <a href = "index01.jsp?seq=<%=mdto.getMv_seq()%>&lhm=1&mode=MyPage/LikeHateMovie">좋아요</a>
+			   <a href = "index01.jsp?seq=<%=mdto.getMv_seq()%>&lhm=2&mode=MyPage/LikeHateMovie">싫어요</a>
+			   </td>
 			   <%
 		   }
 		   %>
-		   
+
 		</tr>
 
 
