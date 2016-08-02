@@ -9,8 +9,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class MovieManager {
-
+public class MovieManager { 
+ 
 	public List<MovieDTO> getCGVData() throws IOException{
 		
 		List<MovieDTO> list = new ArrayList<MovieDTO>();

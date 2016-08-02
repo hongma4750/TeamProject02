@@ -5,6 +5,8 @@
      <%@ page import="sist.co.Review.ReviewDTO" %>
      <%@ page import="sist.co.Comment.CommentDTO" %>
      <%@ page import="sist.co.Comment.CommentDAO" %>
+     <%@ page import="sist.co.Movie.MovieDAO" %>
+      
      <%@ page import="java.util.*" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -12,7 +14,7 @@
   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
+ 
 <head>
   
 
@@ -26,7 +28,7 @@
 
 <script type="text/javascript" src="star/jquery.raty.js"></script>
 <link rel="stylesheet" href="star/jquery.raty.css"/>
-
+<script type="text/javascript" src="javascript/review.js"></script>
 <script type="text/javascript">
 $(function(){
     //전역변수선언
@@ -140,12 +142,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-<%
-MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
-%>
 
-<h3><%=memberdto.getM_id() %>님 하이요</h3>
-<hr>
 <%
 
 String r_seqs = request.getParameter("r_seq");
@@ -154,6 +151,7 @@ ReviewDAO redao = ReviewDAO.getInstance();
 
 redao.addReadCount(r_seq);
 ReviewDTO redto = redao.getReviewDTO(r_seq);
+session.setAttribute("redto",redto);
 
 CommentDAO comdao = CommentDAO.getInstance();
 List<CommentDTO> comList = comdao.selectComment(r_seq);
@@ -166,10 +164,16 @@ request.setAttribute("comList", comList);
 		
 		<tr>
 			<td>제목</td>
-			<td><%=redto.getR_title() %></td>
+			<td><%=redto.getR_title() %><input type="hidden" value="<%=redto.getR_seq() %>" name="r_seq"></td>
 			<td rowspan="4">
 				<div>
-					<img src="" alt="영화이미지" id="movieImg">
+					<%
+						MovieDAO moviedao = MovieDAO.getInstance();
+						String mv_img = moviedao.getMvIMG(redto.getMv_seq());
+						
+						session.setAttribute("re_mv_img",mv_img);
+					%>
+					<img src="${re_mv_img }" alt="영화이미지" id="movieImg">
 				</div>
 			</td>
 		</tr>
@@ -239,7 +243,7 @@ request.setAttribute("comList", comList);
 							    
 							    <div>
 							    	<input type="hidden" value="${comment.com_seq }" class="com_seq_re" id="com_seq_check">
-							    	<input type="hidden" value="${comment.r_seq }" class="r_seq_re">
+							    	<input type="hidden" value="${comment.r_seq }" class="r_seq_re" >
 							      <textarea class="modify-comment-ta" name="com_content_re" rows="4" cols="50">${comment.com_content }</textarea>
 							    </div>
 							    
@@ -259,14 +263,29 @@ request.setAttribute("comList", comList);
 			<tr >
 			
 				<td colspan="3" >
-					
-						<textarea rows="4" cols="80" name ="com_content"></textarea>
-						&nbsp;&nbsp;
-						<input type="submit" value="등록" 
-							<%-- onclick="location.href='SNS/CommentWrite.jsp?r_seq=<%=r_seq %>&com_content=&m_id=${login.m_id }'" --%>
-							class="btn btn-danger">
-						<input type="hidden" value="${login.m_id }" name="m_id">
-						<input type="hidden" value=<%=r_seq %> name="r_seq">
+						<c:choose>
+							<c:when test="${login.m_id != null }">
+								<textarea rows="4" cols="80" name ="com_content"></textarea>
+									&nbsp;&nbsp;
+								<input type="submit" value="등록" 
+								<%-- onclick="location.href='SNS/CommentWrite.jsp?r_seq=<%=r_seq %>&com_content=&m_id=${login.m_id }'" --%>
+								class="btn btn-danger">
+								<input type="hidden" value="${login.m_id }" name="m_id">
+								<input type="hidden" value=<%=r_seq %> name="r_seq">
+							</c:when>
+							
+							<c:when test="${login.m_id ==null }">
+								
+								<textarea rows="4" cols="80" name ="com_content"></textarea>
+									&nbsp;&nbsp;
+								<input type="submit" value="등록" 
+								<%-- onclick="location.href='SNS/CommentWrite.jsp?r_seq=<%=r_seq %>&com_content=&m_id=${login.m_id }'" --%>
+								class="btn btn-danger">
+								<input type="hidden" name="m_id" value="비로그인회원">
+								<input type="hidden" value=<%=r_seq %> name="r_seq">
+							</c:when>
+						</c:choose>
+						
 					
 				</td>
 			</tr>
@@ -274,7 +293,18 @@ request.setAttribute("comList", comList);
 		
 	</table>
 	</form>
-	<input type="button" value="돌아가기" onclick="location.href='index01.jsp?mode=SNS/ReviewList'">
+	
+	
+	<div style="text-align:right;">
+		<c:if test="${login.m_id eq redto.m_id }">
+			<input type="button" value="수정" onclick="location.href='index01.jsp?mode=SNS/ReviewUpdate&r_seq=<%=r_seq%>'">
+			<input type="button" value="삭제" onclick="deleteCheck()">
+		</c:if> 
+		<input type="button" value="돌아가기" onclick="location.href='index01.jsp?mode=SNS/ReviewList'">
+	
+	
+	
+	
 </div>
 <hr>
 

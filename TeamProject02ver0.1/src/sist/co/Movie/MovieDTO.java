@@ -3,7 +3,7 @@ package sist.co.Movie;
 import java.util.Date;
 
 public class MovieDTO {
-  
+   
 	private int mv_seq;
 	private String mv_title;
 	private Date mv_openday;
@@ -97,7 +97,7 @@ public class MovieDTO {
 	}
 
 	public void setMv_story(String mv_story) {
-		this.mv_story = mv_story;
+		this.mv_story = mv_story;    
 	}
 
 	public String toString(){

@@ -3,7 +3,7 @@ package sist.co.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+ 
 public interface iMember {
 	int AddMember(MemberDTO dto);
 	boolean IdDuple(String id);

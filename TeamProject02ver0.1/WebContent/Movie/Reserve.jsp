@@ -9,8 +9,8 @@
 <%@page import="java.util.List"%>
 <%@page import="sist.co.Theater.TheaterDTO"%>
 <%@page import="sist.co.Theater.TheaterDAO"%>
-<%@page import="sist.co.movie.MovieDAO"%>
-<%@page import="sist.co.movie.MovieDTO"%>
+<%@page import="sist.co.Movie.MovieDAO"%>
+<%@page import="sist.co.Movie.MovieDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="sist.co.Member.MemberDTO"%>

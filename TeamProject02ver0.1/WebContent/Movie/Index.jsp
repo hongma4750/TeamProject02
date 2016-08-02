@@ -1,9 +1,9 @@
 
 <%@page import="sist.co.Member.MemberDTO"%>
 
-<%@page import="sist.co.movie.MovieDTO"%>
+
 <%@page import="java.util.List"%>
-<%@page import="sist.co.movie.MovieManager"%>
+<%@page import="sist.co.Movie.MovieManager"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

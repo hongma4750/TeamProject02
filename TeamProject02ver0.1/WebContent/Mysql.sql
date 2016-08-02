@@ -3,7 +3,7 @@
 
 DROP TABLE MEMBER
 CASCADE CONSTRAINT;
-
+ 
 SELECT * FROM MEMBER
 
 CREATE TABLE MEMBER(
@@ -19,7 +19,8 @@ INSERT INTO MEMBER
 VALUES('qwer', 'qwer', 'kwon', 'qwer@qwer')
 INSERT INTO MEMBER
 VALUES('hong', 'hong', 'hong', 'hong@hong')
-
+insert into member
+values('admin','admin','admin','admin@naver.com',1,'admin')
 --[2] movie : MV_LIKE : 좋아요, MV_ON : 상영중인영화
 
 DROP TABLE MOVIE
