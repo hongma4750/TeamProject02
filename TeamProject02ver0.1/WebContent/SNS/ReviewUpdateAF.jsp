@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ 
 <!-- 받는 값  r_title,r_content,r_seq,mv_seq -->
 
 <%

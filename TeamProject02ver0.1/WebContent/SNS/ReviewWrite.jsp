@@ -3,12 +3,14 @@
 <%@ page import="sist.co.Member.MemberDTO"%>
 <%@ page import="sist.co.Review.ReviewDAO"%>
 <%@ page import="sist.co.Review.ReviewDTO"%>
+
 <%@ page import="sist.co.Movie.MovieDTO" %>
 <%@ page import="sist.co.Movie.MovieDAO" %>
+
 <%@ page import="java.util.*" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
- 
+  
 <!DOCTYPE html>  
 <html>
 <head>

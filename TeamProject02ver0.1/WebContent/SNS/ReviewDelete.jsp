@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body> 
 
 <%
 	int r_seq = Integer.parseInt(request.getParameter("r_seq"));

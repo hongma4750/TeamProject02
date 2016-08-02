@@ -172,7 +172,10 @@ public class MemberDAO implements iMember {
 			while(rs.next()){
 				if(rs.getString("m_pw").equals(m_pw)){
 					//나중에 admin 계정 아이디 비밀번호 필요할시 여기서 조건문
-					
+					if(m_id.equals("admin")){
+						result=2;
+						return result;
+					}
 					//입력받은 m_id 와 m_pw 가 모두 일치
 					//1을 리턴함  -->무엇이 잘못됐는지 확인가능
 					result = 1;	

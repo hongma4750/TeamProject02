@@ -4,7 +4,7 @@
 
 function reviewCheck(){
 	
-	
+	 
 		if(document.frm.mv_seq.value==0){
 			alert("영화를 선택해 주세요");
 			frm.mv_seq.focus();

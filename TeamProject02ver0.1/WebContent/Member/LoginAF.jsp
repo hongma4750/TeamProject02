@@ -24,11 +24,11 @@ String m_pw = request.getParameter("m_pw");
 MemberDAO memdao = MemberDAO.getInstance();
 
 int result = memdao.login(m_id, m_pw);
-
-if(result >0){
+MemberDTO memberdto = null;
+if(result  == 1){
 	//로그인 성공
 	
-	MemberDTO memberdto = memdao.selectMemberDTO(m_id);
+	memberdto = memdao.selectMemberDTO(m_id);
 	session.setAttribute("login",memberdto);
 	%>
 		<script type="text/javascript">
@@ -39,12 +39,21 @@ if(result >0){
 	
 	
 	
-}else {
+}else if (result < 1){
 	//로그인 실패
 	%>
 		<script type="text/javascript">
 			alert("로그인 실패");
 			location.href="../index01.jsp?mode=Member/Login";
+		</script>
+	<%
+}else if(result == 2){
+	memberdto = memdao.selectMemberDTO(m_id);
+	session.setAttribute("login",memberdto);
+	%>
+		<script type="text/javascript">
+			alert("관리자님 환영합니다.");
+			location.href="../admin.jsp"
 		</script>
 	<%
 }

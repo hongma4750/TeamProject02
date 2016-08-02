@@ -19,7 +19,8 @@ INSERT INTO MEMBER
 VALUES('qwer', 'qwer', 'kwon', 'qwer@qwer')
 INSERT INTO MEMBER
 VALUES('hong', 'hong', 'hong', 'hong@hong')
-
+insert into member
+values('admin','admin','admin','admin@naver.com',1,'admin')
 --[2] movie : MV_LIKE : 좋아요, MV_ON : 상영중인영화
 
 DROP TABLE MOVIE
@@ -93,22 +94,22 @@ ADD CONSTRAINT FK_THEATER_MV_SEQ FOREIGN KEY(MV_SEQ)
 REFERENCES MOVIE(MV_SEQ);
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, 10, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 90, 90, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 10, 10, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 90, 90, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 90, 90, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 90, 90, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 10, 10, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 90, 90, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 10, 10, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 90, 90, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'));
 
 
 --[4] SEAT : 좌석 수 == COLUMN 수 

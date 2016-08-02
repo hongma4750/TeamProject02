@@ -24,7 +24,7 @@
 <body>
 
 
-<%!
+<%! 
 	public Integer toInt(String x){
 		int a = 0;
 		try{
