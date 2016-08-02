@@ -1,7 +1,7 @@
 <%@page import="sist.co.Theater.TheaterDTO"%>
 <%@page import="sist.co.Theater.TheaterDAO"%>
-<%@page import="sist.co.movie.MovieDTO"%>
-<%@page import="sist.co.movie.MovieDAO"%>
+<%@page import="sist.co.Movie.MovieDTO"%>
+<%@page import="sist.co.Movie.MovieDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="sist.co.Seat.SeatDTO"%>
 <%@page import="sist.co.Seat.SeatDAO"%>

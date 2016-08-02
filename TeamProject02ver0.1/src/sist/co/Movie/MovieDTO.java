@@ -97,7 +97,7 @@ public class MovieDTO {
 	}
 
 	public void setMv_story(String mv_story) {
-		this.mv_story = mv_story;
+		this.mv_story = mv_story;    
 	}
 
 	public String toString(){
