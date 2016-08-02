@@ -71,7 +71,7 @@ public class ReviewDAO {
 	public int addReview(ReviewDTO redto){
 		int result = -1;
 		
-		String sql ="insert into review values (review_seq.nextval,?,0,?,?,sysdate,0,0,?)";
+		String sql ="insert into review values (review_seq.nextval,?,?,?,?,sysdate,0,0,?)";
 		
 		Connection conn=null;
 		PreparedStatement pstmt = null;
@@ -82,9 +82,10 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, redto.getM_id());
-			pstmt.setString(2, redto.getR_title());
-			pstmt.setString(3, redto.getR_content());
-			pstmt.setInt(4, redto.getR_star());
+			pstmt.setInt(2, redto.getMv_seq());
+			pstmt.setString(3, redto.getR_title());
+			pstmt.setString(4, redto.getR_content());
+			pstmt.setInt(5, redto.getR_star());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -278,14 +279,112 @@ public class ReviewDAO {
 	}
 	
 	
+	// ReviewList에서 댓글 수 표시할때 사용
+	public int countComment(int r_seq){
+		int count = 0;
+		
+		String sql = "select * from r_comment where r_seq=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, r_seq);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				count += 1;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return count;
+	}
 	
 	
+	// ReviewDelete에서 삭제할때
+	public int deleteReview(int r_seq){
+		int result = -1;
+		
+		String sql1 = "delete from review where r_seq=?";
+		String sql2 = "delete from r_comment where r_seq=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			conn.setAutoCommit(false);
+			
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, r_seq);
+			
+			result = pstmt.executeUpdate();
+			
+			pstmt.clearParameters();
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, r_seq);
+			result *= pstmt.executeUpdate();
+			
+			conn.commit();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			try{
+				conn.rollback();
+			}catch(Exception e1){
+				System.out.println(e1.getMessage());
+			}
+		}finally{
+			try{
+				conn.setAutoCommit(true);
+			}catch(Exception e2){
+				System.out.println(e2.getMessage());
+			}
+			
+			DBManager.close(conn, pstmt);
+		}
+		
+		
+		
+		return result;
+	}
 	
-	
-	
-	
-	
-	
+	public void updateReview(ReviewDTO dto){
+		String sql = "update review set r_title = ?,r_content=?,mv_seq=? where r_seq=?";
+		
+		Connection conn=null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn=DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getR_title());
+			pstmt.setString(2, dto.getR_content());
+			pstmt.setInt(3, dto.getMv_seq());
+			
+			pstmt.setInt(4, dto.getR_seq());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt);
+		}
+		
+		
+	}
 	
 	
 	

@@ -2,44 +2,26 @@
  * 
  */
 
-
- 
-
-$(document).ready(function() {
+function reviewCheck(){
 	
-	alert("오나요?");
-	$('.comments').click(function(e) {
-		alert("수정누름");
-	    	
-	        var $form = $(e.target).parent().parent().find('.modify-comment');
-	        var $p = $(e.target).parent().parent().find('.view-comment');
-	        if ($form.is(':hidden') == true) {
-	            $form.show();
-	            $p.hide();
-	        } else {
-	            $form.hide();
-	            $p.show();
-	        }
-	        return false;
-	    
-	});
-	//form 안의 수정하기 링크
-	$('.modify-comment a:contains("수정")').click(function(e) {
-	    $(e.target).parent().parent().submit();
-	    return false;
-	});
-	//form 안의 취소 링크
-	$('.modify-comment a:contains("취소")').click(function(e) {
-	    var $form = $(e.target).parent().parent();
-	    var $p = $(e.target).parent().parent().parent().find('.view-comment');
-	    if ($form.is(':hidden') == true) {
-	        $form.show();
-	        $p.hide();
-	    } else {
-	        $form.hide();
-	        $p.show();
-	    }
-	    return false;
-	});
+	
+		if(document.frm.mv_seq.value==0){
+			alert("영화를 선택해 주세요");
+			frm.mv_seq.focus();
+			return false;
+		}else if(document.frm.r_title.value.length==0){
+			alert("제목을 입력해 주세요");
+			frm.r_title.focus();
+			return false;
+		}
+	return true;
+}
 
-});
+function deleteCheck(){
+	if(confirm("정말 삭제 하시겠습니까~?") == true){
+		location.href="SNS/ReviewDelete.jsp?r_seq="+$('.r_seq_re').val();
+		return true;
+	}else{
+		return false;
+	}
+}

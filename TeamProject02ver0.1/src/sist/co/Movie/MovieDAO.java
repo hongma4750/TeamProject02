@@ -228,6 +228,38 @@ public class MovieDAO implements IMovie{
 
 	
 	
+	// SNS/ReviewDetail 에서 영화 이미지 뿌릴때 필요함
+	@Override
+	public String getMvIMG(int mv_seq) {
+		String mv_img = null;
+		String sql = "select mv_img from movie where mv_seq = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mv_seq);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				mv_img = rs.getString("mv_img");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt, rs);
+		}
+		return mv_img;
+	}
+
+	
+	
 
 
 	

@@ -11,5 +11,5 @@ public interface IMovie {
 	// SNS/ReviewWrite에서 사용됨
 	List<MovieDTO> getMovie(); 
 	
-	
+	String getMvIMG(int mv_seq);
 }

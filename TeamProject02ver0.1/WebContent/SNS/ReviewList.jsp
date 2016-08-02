@@ -34,12 +34,6 @@
 	}
 %>
 
-<%
-MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
-%>
-<h3><%=memberdto.getM_id() %>님 하이요</h3>
-<hr>
-
 <div id="middle_wrap">
 <table class="table table-bordered">
 	<col width="50"/><col width="70"/><col width="200"/><col width="100"/>
@@ -56,6 +50,7 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 		request.setAttribute("reList",reList);
 		
 		 int pageno = toInt(request.getParameter("pageno"));
+		 
 		   if(pageno<1){//현재 페이지
 		      pageno = 1;
 		   }
@@ -148,13 +143,17 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd"); 
 				String year = (String)simpleDate.format(date);
 				String yea = redto.getR_writedate().toString().substring(0,10);
+				
+				int count = redao.countComment(redto.getR_seq());
 			%>	
 			<tr>
 				<td><%=reList.size()-i %></td>
 				<td><%=redto.getM_id() %></td>
 				<td>
 					<a href="index01.jsp?mode=SNS/ReviewDetail&r_seq=<%=redto.getR_seq() %>">
-						<%=redto.getR_title()%> <%if(year.equals(yea)){ %><img src="img/new.jpg"> <%} %>
+						<%=redto.getR_title()%>&nbsp;
+						<%if(count !=0){%><p style="color:red;display:inline;">[<%=count %>]</p><%} %>
+						<%if(year.equals(yea)){ %><img src="img/new.jpg"> <%} %>
 					</a>
 				</td>
 				<td><%=redto.getR_writedate().toString().substring(0,10) %></td>
@@ -169,7 +168,9 @@ MemberDTO memberdto = (MemberDTO)session.getAttribute("login");
 </table>
 <!-- 글쓰기 버튼!!!! -->
 <div style="text-align:right;">
+<c:if test="${login != null }">
 <input type="button" value="글쓰기" onclick="location.href='index01.jsp?mode=SNS/ReviewWrite'">
+</c:if>
 </div>
 
 	<!-- 페이징 하는 부분!!! -->

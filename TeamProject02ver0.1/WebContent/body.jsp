@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -58,8 +58,8 @@ session.setAttribute("showMovie",list);
 				      	<img src=${vo.movie_img } width="400px" height="600px">
 				      	
 				      	<div class="carousel-caption">
-						<h3>${vo.title }</h3>
-						<p style="color:black">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						<h1>${vo.title }</h1>
+						<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
 			     		 </div>
 		    		</div> 
 	      		</c:when>
@@ -69,8 +69,8 @@ session.setAttribute("showMovie",list);
 			      		<img src=${vo.movie_img } width="400px" height="600px">
 			      		
 			      		<div class="carousel-caption">
-							<h3>${vo.title }</h3>
-							<p style="color:black">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+							<h1>${vo.title }</h1>
+						<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
 			      		</div>    
 		      	</div>
 	      		</c:when>

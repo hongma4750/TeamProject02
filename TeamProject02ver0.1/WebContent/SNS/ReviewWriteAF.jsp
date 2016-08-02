@@ -24,10 +24,14 @@
 	String r_content = request.getParameter("r_content");
 	int r_star = Integer.parseInt(request.getParameter("r_star"));
 	
+	String mv_seqs = request.getParameter("mv_seq");
+	int mv_seq = Integer.parseInt(mv_seqs);
+	
 	ReviewDAO redao = ReviewDAO.getInstance();
 	ReviewDTO redto = new ReviewDTO();
 
 	redto.setM_id(m_id);
+	redto.setMv_seq(mv_seq);
 	redto.setR_title(r_title);
 	redto.setR_content(r_content);
 	redto.setR_star(r_star);

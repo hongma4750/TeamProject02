@@ -88,29 +88,48 @@
 	<hr>
 
 	<%
+		
+		
+		int r_seq = Integer.parseInt(request.getParameter("r_seq"));
+		ReviewDAO redao = ReviewDAO.getInstance();
+		ReviewDTO redto = redao.getReviewDTO(r_seq);
+		
 		MovieDAO modao = MovieDAO.getInstance();
 		List<MovieDTO> moList = modao.getMovie();
+		String mv_img = modao.getMvIMG(redto.getMv_seq());
 		
+		session.setAttribute("redto",redto);
 		session.setAttribute("re_movie",moList);
+		
+		
+		
 	%>
 	
 	
 	<div id="middle_wrap">
-		<form action="SNS/ReviewWriteAF.jsp" method="post" name="frm" id="frm">
+		<form action="SNS/ReviewUpdateAF.jsp" method="post" name="frm" id="frm">
 			<table class="table table-bordered" border="1">
 				<tr>
 					<td>작성자</td>
-					<td><input type="text" name="m_id" readonly
-						value="<%=memberdto.getM_id()%>"></td>
+					<td><input type="text" name="m_id" readonly value="<%=memberdto.getM_id()%>">
+						<input type="hidden" name="r_seq" value="<%=redto.getR_seq() %>">
+					</td>
 
 					<td rowspan="3">
 						<div>
-							<img src="img/no_image.gif" alt="영화이미지" id="movieImg" width="90px"height="140px;">
+							<img src="<%=mv_img %>" alt="영화이미지" id="movieImg" width="90px"height="140px;">
 							<select name="mv_seq" id="mv" onchange="changeImg()">
 								<option value="0">영화제목들</option>
 								
 								<c:forEach var="movie" items="${re_movie }">
-									<option value="${movie.mv_seq }" id="${movie.mv_img }">${movie.mv_title }</option>
+									<c:if test="${redto.mv_seq == movie.mv_seq }">
+										<option value="${movie.mv_seq }" id="${movie.mv_img }" selected>${movie.mv_title }</option>
+									</c:if>
+									
+									<c:if test="${redto.mv_seq != movie.mv_seq }">
+										<option value="${movie.mv_seq }" id="${movie.mv_img }">${movie.mv_title }</option>
+									</c:if>
+									
 								</c:forEach>
 								
 							</select>
@@ -121,7 +140,7 @@
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="r_title"></td>
+					<td><input type="text" name="r_title" value="<%=redto.getR_title() %>"></td>
 				</tr>
 				<tr>
 					<td>별점</td>
@@ -136,9 +155,11 @@
 
 				<tr>
 					<td>내용</td>
-					<td style="background: white" colspan="2"><textarea rows="20"
-							cols="50" name="r_content" id="r_content"
-							style="background: #8C8C8C"></textarea></td>
+					<td style="background: white" colspan="2">
+						<textarea rows="20" cols="50" name="r_content" id="r_content"style="background: #8C8C8C">
+							<%=redto.getR_content() %>
+						</textarea>
+					</td>
 
 
 
@@ -159,10 +180,11 @@
 
 <script type="text/javascript">
 	$('div#default').raty({
-		score:3,
+		score:<%=redto.getR_star()%>,
 		path:'star/images',
 		targetScore:'#re_star'
 	});
+	
 </script>
 
 <script type="text/javascript">
