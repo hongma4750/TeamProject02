@@ -71,8 +71,10 @@ MovieDAO mdao = MovieDAO.getInstance();
   <td>관람일</td>
   <td>예매번호</td>
   <td>영화</td>
-  <td>극장</td>
   <td>상영관</td>
+  <td>투표여부</td>
+  <td>좋아요</td>
+  <td>싫어요</td>
 </tr>
 
 <%///////////////////////////////////////////////
@@ -106,8 +108,10 @@ for(int i=0; i<rLists.size();i++){
 		   <td><%=rdto.getR_viewtime() %></td>
 		   <td><%=rdto.getR_seq() %></td> <%--예매detail로 이동 --%>
 		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
-		   <td><%=rdto.getR_thname()%></td>
-		   <td><%=rdto.getR_cinema() %></td>
+		   <td><%=rdto.getR_thname()%><%=rdto.getR_cinema() %></td>
+		   <td><%=rdto.getR_poll() %></td> 
+		   <td></td>
+		   <td></td>
 		</tr>
 
 
