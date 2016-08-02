@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sist.co.DBManager.DBManager;
-import sist.co.movie.MovieDAO;
-import sist.co.movie.MovieDTO;
+import sist.co.Movie.MovieDAO;
+import sist.co.Movie.MovieDTO;
 
 public class SeatDAO implements ISeat{
 
