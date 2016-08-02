@@ -45,18 +45,28 @@ session.setAttribute("login",memberdto);
 </nav1>
 
 <section1>
-
+<%!
+String[] tok(String str){
+	
+	String[] result =str.split("[,]");
+      
+      for (int i = 0; i < result.length; i++)
+         System.out.format("array[%d] = %s%n", i, result[i]);
+      return result;
+}
+%>
 <%
 String srseq = request.getParameter("r_seq");
 int rseq = Integer.parseInt(srseq);
 
 String srseat = request.getParameter("r_seat");
+String[] seatname = tok(srseat);
 
 String strthseq = request.getParameter("th_seq");
 int thseq = Integer.parseInt(strthseq);
 
 ReservationDAO rdao = ReservationDAO.getInstance();
-boolean isS = rdao.cancleReserv(rseq, srseat, thseq);
+boolean isS = rdao.cancleReserv(rseq, seatname, thseq);
 
 if(isS){
 	%>
@@ -70,7 +80,7 @@ if(isS){
 	%>
 	
 	<script type="text/javascript">
-	alert('취소되었습니다.');
+	alert('실패했습니다.');
 	location.href="index01.jsp?mode=MyPage/Ticket";
 	</script>
 	<%

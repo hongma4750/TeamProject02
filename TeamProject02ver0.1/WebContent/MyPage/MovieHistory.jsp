@@ -24,6 +24,21 @@
 <link href="css/main.css" rel="stylesheet">
 <script type="text/javascript" src="javascript/member.js"></script>
 
+<script type="text/javascript">
+function clickLikeOr(i){
+	String res;
+	//한번만 선택되도록
+	if(i=0){//싫어요
+		alert("싫어요를 선택했습니다.");
+		return res="싫어요";
+	}else id(i=1){//좋아요
+		alert("좋아요를 선택했습니다.");
+		return res="좋아요";
+	}
+}
+
+</script>
+
 </head>
 <body>
 <%
@@ -34,9 +49,6 @@ memberdto.setM_name("Bom");
 memberdto.setM_email("ddd");
 
 session.setAttribute("login",memberdto);
- 
-
-
 %>
 
 	
@@ -72,9 +84,7 @@ MovieDAO mdao = MovieDAO.getInstance();
   <td>예매번호</td>
   <td>영화</td>
   <td>상영관</td>
-  <td>투표여부</td>
-  <td>좋아요</td>
-  <td>싫어요</td>
+  <td>좋아요싫어요</td>
 </tr>
 
 <%///////////////////////////////////////////////
@@ -108,10 +118,26 @@ for(int i=0; i<rLists.size();i++){
 		   <td><%=rdto.getR_viewtime() %></td>
 		   <td><%=rdto.getR_seq() %></td> <%--예매detail로 이동 --%>
 		   <td><a href = "#"><%=mdto.getMv_title() %></a></td> <%--영화detail로 이동 --%>
-		   <td><%=rdto.getR_thname()%><%=rdto.getR_cinema() %></td>
-		   <td><%=rdto.getR_poll() %></td> 
-		   <td></td>
-		   <td></td>
+		   <td><%=rdto.getR_thname()%> <%=rdto.getR_cinema() %></td>
+		   <% 
+		   if(rdto.getR_poll()==0){
+			   //투표안한 상태
+			   %>
+			   <td><input type = "submit" onclick = "clickLikeOr(1)" name = "btnlike" value = "좋아요"/><input type = "submit" onclick = "clickLikeOr(0)" name = "btnhate" value = "싫어요"/></td>
+			   <%
+		   }else if(rdto.getR_poll()==1){
+			   //좋아요 투표한 상태
+			   %>
+			   <td>좋아요</td>
+			   <%
+		   }else if(rdto.getR_poll()==2){
+			   //싫어요 투표한 상태
+			   %>
+			   <td>싫어요</td>
+			   <%
+		   }
+		   %>
+		   
 		</tr>
 
 
