@@ -1,5 +1,6 @@
 package sist.co.Reservation;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import oracle.sql.ArrayDescriptor;
 import sist.co.DBManager.DBManager;
 import sist.co.Reservation.ReservationDTO;
 
@@ -193,67 +195,104 @@ public class ReservationDAO implements iReservateionDAO {
 			return rdto;
 	}*/
 	
+	
+	
 	@Override
-	public boolean cancleReserv(int r_seq, String r_seat) {
-		
-		for(int i=0;i<r_seat.length();i++){
-			if(r_seat.charAt(i)==' '){
-				
-			}
-		}
-		String sql1 = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
-		/*String sql2 = " UPDATE SEAT SET S_CHECK=0 "
-                    + " WHERE S_CHECK=1 AND S_SEQ=? ";*/
+	public boolean cancleReserv(int r_seq, String[] seatname, int th_seq) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int count = 0;
-		log("6/6 success cancleReserv");
+		log("1/6 success cancleReserv");
+		
+		String sql1 = " DELETE FROM RESERVATION WHERE R_SEQ=? ";
+		String sql2 = " UPDATE SEAT SET S_CHECK=0 WHERE ";
+		for(int j=0;j<seatname.length;j++){
+			System.out.println(seatname[j]);
+			
+			if(j==seatname.length-1){
+				sql2 += " S_NAME=? ";
+			}else{
+				sql2 += " S_NAME=? OR ";
+			}
+		}
+			sql2 += " AND TH_SEQ=? ";
+		
+		String sql3 = " UPDATE THEATER SET TH_LEFTSEAT=TH_LEFTSEAT+? WHERE TH_SEQ=? ";
+		int num=0;
+		System.out.println("num: " +num);
+		for(int j=0;j<seatname.length;j++){
+			num = seatname.length;
+		}
+		System.out.println("num: " +num);
 		
 		try{
+			
 			conn = DBManager.getConnection();
-			//conn.setAutoCommit(false);//자동 커밋 안됨
+			conn.setAutoCommit(false);//자동 커밋 안됨
 			log("2/6 success cancleReserv");
 			
 			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, r_seq);
 			log("3/6 success cancleReserv");
 			
-			pstmt.setInt(1, r_seq);
+			count = pstmt.executeUpdate();
+			System.out.println(count);
+			/////1번째 쿼리//////////
+			
+			pstmt.clearParameters();
+			
+			log("4/6 success cancleReserv");
+			System.out.println(sql2);
+		    /////2번째 쿼리//////////
+			pstmt = conn.prepareStatement(sql2);
+			int i = 1;
+			
+			
+			for(int j=0;j<seatname.length;j++){
+			pstmt.setString(i++, seatname[j]);
+			}
+			pstmt.setInt(i++, th_seq);
 			
 			count = pstmt.executeUpdate();
-			log("4/6 success cancleReserv");
+			System.out.println(count);
+			/////2번째 쿼리//////////
+
+			pstmt.clearParameters();
+			log("5/6 success cancleReserv");
 			
-			//pstmt.clearParameters();
-			log("5/6/1 success cancleReserv");
-			//pstmt = conn.prepareStatement(sql2);
+		    /////3번째 쿼리//////////
+			pstmt = conn.prepareStatement(sql3);
 			
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, th_seq);
+			log("5-6/6 success cancleReserv");
 			
-			//pstmt.setString(1, r_seat);
-			log("5/6/2 success cancleReserv");
+			count = pstmt.executeUpdate();
+			log("5-7/6 success cancleReserv");
 			
-			//pstmt.executeBatch();
-			log("5/6/3 success cancleReserv");
-			
-			//conn.commit(); //수동커밋
-			log("5/6/4 success cancleReserv");
+			conn.commit(); //수동커밋
+			log("5-8/6 success cancleReserv");
 			
 		}catch(SQLException e){
-			/*try {
+			try {
+				log("Fail cancleReserv");
 				conn.rollback();
 			} catch (SQLException e1) {
-			}*/
-			log("Fail cancleReserv");
+			}
 			
 		}finally {
-			/*try {
+			try {
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
-			}*/
+			}
 			DBManager.close(conn, pstmt);
 			
 			log("6/6 success cancleReserv");
+		 
 		}
 		System.out.println(count);
+		
 		return count>0?true:false;
 	}
 	

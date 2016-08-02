@@ -22,7 +22,7 @@
 		<c:if test="${ login!=null}">
 			<img src="d:/tmp/upload/c.jpg" alt="이미지없음" width="70px" height="50px;">
 			[${login.m_id }] 님 안녕하세요 
-			<a href="MyPage/Index.jsp">마이페이지</a>&nbsp;&nbsp;
+			<a href="index01.jsp?mode=MyPage/Index">마이페이지</a>&nbsp;&nbsp;
 			<a href="index01.jsp?mode=Member/logout" onclick="checkLogout()">로그아웃</a>&nbsp;&nbsp;
 		</c:if>
 		

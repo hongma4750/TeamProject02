@@ -182,7 +182,7 @@ for(int j = record_start_no; j < record_start_no+page_per_record_cnt; j++){
     <td rowspan="7" valign="top" style="padding:30px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster"/></td>  
   
     <td>예매번호</td>
-    <td><%=rdto.getR_seq() %><input type = "hidden" name="r_seq" value="<%=rdto.getR_seq()%>"/><input type = "hidden" name="r_seat" value="<%=rdto.getR_seat()%>"/></td> <%--예매번호 46328332--%>
+    <td><%=rdto.getR_seq() %><input type = "hidden" name="r_seq" value="<%=rdto.getR_seq()%>"/><input type = "hidden" name="r_seat" value="<%=rdto.getR_seat()%>"/><input type = "hidden" name="th_seq" value="<%=rdto.getTh_seq()%>"/></td> <%--예매번호 46328332--%>
     
     <td><input type = "submit" name="R_Cancle" value = "예매취소"/></td>
   </tr>
@@ -196,7 +196,7 @@ for(int j = record_start_no; j < record_start_no+page_per_record_cnt; j++){
   
   <tr>
     <td>상영관</td>
-    <td  colspan="2"><%=tdto.getTh_name()%> <%=tdto.getTh_cinema() %></td>
+    <td  colspan="2"><%=rdto.getR_thname()%> <%=rdto.getR_cinema() %></td>
   </tr>
 
   <tr>
