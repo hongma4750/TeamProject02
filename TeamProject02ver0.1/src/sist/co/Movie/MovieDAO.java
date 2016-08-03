@@ -225,6 +225,42 @@ public class MovieDAO implements IMovie{
 		}
 		return molist;
 	}
+	
+	
+	public List<MovieDTO> getOnMovie() {
+		MovieDTO movie = null;
+		List<MovieDTO> molist = new ArrayList<MovieDTO>();
+		
+		String sql = "select mv_seq,mv_title,mv_img from movie where mv_on=1";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				movie = new MovieDTO();
+				
+				movie.setMv_seq(rs.getInt("mv_seq"));
+				movie.setMv_title(rs.getString("mv_title"));
+				movie.setMv_img(rs.getString("mv_img"));
+				
+				molist.add(movie);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt, rs);
+		}
+		return molist;
+	}
+
 
 	
 	
