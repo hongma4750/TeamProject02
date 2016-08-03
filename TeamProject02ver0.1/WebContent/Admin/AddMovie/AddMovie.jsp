@@ -8,10 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../javascript/member.js"></script>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/main.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="../css/mypage.css"> 
+<script type="text/javascript" src="javascript/member.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -28,7 +27,7 @@ user.setM_email("test@test.com");
 %>
 
 <section1 align = "left"> 
-<form src="index01.jsp?mode=Admin/AddMovieAF" method = "post" enctype = "multipart/form-data">
+<form action="Admin/AddMovie/AddMovieAF.jsp" method = "post" enctype = "multipart/form-data">
 
 <table align = "center" >
 <tr>

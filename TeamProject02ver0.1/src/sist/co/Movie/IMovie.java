@@ -13,5 +13,7 @@ public interface IMovie {
 	
 	String getMvIMG(int mv_seq);
 	
+	//영화정보리스트
+	List<MovieDTO> getInfoMovieList();
 	
 }

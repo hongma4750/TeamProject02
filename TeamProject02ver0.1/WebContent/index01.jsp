@@ -39,7 +39,7 @@
 
     	<ul class="nav nav-tabs">
 	  		<li role="presentation" class="active"><a href="index01.jsp?mode=body">Home</a></li>
-	  		<li role="presentation"><a href="#">영화</a></li>
+	  		<li role="presentation"><a href="index01.jsp?mode=Movie/MovieList">영화</a></li>
 	  		<li role="presentation"><a href="#">예매</a></li>
 	  		<li role="presentation"><a href="index01.jsp?mode=SNS/ReviewList">리뷰</a></li>
 	  		<li role="presentation"><a href="SNS/Index.jsp">공지사항</a></li>

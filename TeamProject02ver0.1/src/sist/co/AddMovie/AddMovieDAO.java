@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import sist.co.DBManager.DBManager;
-import sist.co.Movie.MovieDTO;
 
 public class AddMovieDAO implements iAddMovieDAO {
 	
@@ -38,7 +37,7 @@ public class AddMovieDAO implements iAddMovieDAO {
 	
 	//admin
 	@Override
-	public boolean addMovie(MovieDTO mvdto) {
+	public boolean addMovie(AddMovieDTO addmdto) {
 
 		String sql = " INSERT INTO MOVIE VALUES (MV_SEQ.NEXTVAL,?,?,?,?,?,0,0,0,0) ";
 
@@ -56,14 +55,14 @@ public class AddMovieDAO implements iAddMovieDAO {
 			log("3/6 Success addMovie");
 
 			int i = 1;
-			pstmt.setString(i++, mvdto.getMv_title());
-			pstmt.setDate(i++, (Date) mvdto.getMv_openday());
-			pstmt.setString(i++, mvdto.getMv_genre());
-			pstmt.setString(i++, mvdto.getMv_story());
-			pstmt.setString(i++, mvdto.getMv_img());
+			pstmt.setString(i++, addmdto.getMv_title());
+			pstmt.setDate(i++, (Date) addmdto.getMv_openday());
+			pstmt.setString(i++, addmdto.getMv_genre());
+			pstmt.setString(i++, addmdto.getMv_story());
+			pstmt.setString(i++, addmdto.getMv_img());
 			log("4/6 Success addMovie");
 
-			pstmt.executeUpdate();
+			count = pstmt.executeUpdate();
 			log("5/6 Success addMovie");
 
 		}catch(SQLException e){
@@ -75,6 +74,10 @@ public class AddMovieDAO implements iAddMovieDAO {
 
 		return count>0?true:false;
 	}
+
+	
+	
+	
 
 
 }

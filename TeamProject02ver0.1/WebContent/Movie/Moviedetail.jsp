@@ -8,7 +8,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,12 +51,12 @@ int seq = Integer.parseInt(sseq);
 System.out.println("seq = " + seq);
 
 MovieDAO dao = MovieDAO.getInstance();
-MovieDTO mdto = dao.getmoviedetail(1); 
+MovieDTO mdto = dao.getmoviedetail(seq); 
 
 %>
 
 <form action="Reserve.jsp">
-<table border="1">
+<table>
 	<tr>
 		<th>제목</th>
 		<td><%=mdto.getMv_title() %></td>
@@ -84,16 +84,16 @@ MovieDTO mdto = dao.getmoviedetail(1);
 			ReservationDAO rdao = ReservationDAO.getInstance();
 			int confirmpoll = rdao.judgepoll(seq, mem.getM_id());	// ture : 투표했음
 			if(confirmpoll == 1){		// 투표 여부 판단 : 좋아요 로 투표했음 %>
-				<td colspan="2"><img src="../img/like.jpg">좋아요</td>
+				<td colspan="2"><img src="img/like.jpg">좋아요</td>
 		<%	}else if(confirmpoll == 2){ // 투표 여부 판단 : 싫요 로 투표했음 %>
-				<td colspan="2"><img src="../img/like.jpg">싫어요</td>
+				<td colspan="2"><img src="img/like.jpg">싫어요</td>
 		<%	}else{						// confirmpoll==0 : 해당영화 예매 했지만, 투표안함	%>
-				<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/like.jpg">좋아요</a></td>
-				<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/hate.jpg">싫어요</a></td>
+				<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="img/like.jpg">좋아요</a></td>
+				<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="img/hate.jpg">싫어요</a></td>
 		<%	}
 		}else{			// 로그인 안한 상태%>		
-			<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/like.jpg">좋아요</a></td>
-			<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="../img/hate.jpg">싫어요</a></td>
+			<td><a href="Like.jsp?poll=<%=1%>&seq=<%=mdto.getMv_seq()%>"><img src="img/like.jpg">좋아요</a></td>
+			<td><a href="Like.jsp?poll=<%=2%>&seq=<%=mdto.getMv_seq()%>"><img src="img/hate.jpg">싫어요</a></td>
 		<%
 		} %>
 	</tr>
