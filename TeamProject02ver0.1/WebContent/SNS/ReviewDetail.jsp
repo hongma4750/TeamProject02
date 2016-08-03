@@ -109,7 +109,7 @@ $(document).ready(function() {
 	
 	//form 안의 취소 링크
 	$('.cancel').click(function(e) {
-	    var $form = $(e.target).parents().find('.modify-comment');
+	    var $form = $(e.target).parent().parent().parent().parent().find('.modify-comment');
 	    
 	    var $p = $(e.target).parents().find('.comment-toggle');
         var $o = $(e.target).parents().find('.comment-delete');
@@ -238,7 +238,7 @@ request.setAttribute("comList", comList);
 							    	
 							    <div style="text-align: right;">
 							      <a href="#"><small class="modifying">수정</small></a> |
-							      <a href="#"><small class="cancel">취소</small></a>
+							      <a href="#"><small class="cancel" id="${comment.com_seq }">취소</small></a>
 							    </div>
 							    
 							    <div>

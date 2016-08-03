@@ -34,11 +34,8 @@
 	  		<li role="presentation" class="active"><a href="#">Admin</a></li>
 
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/AddMovie/AddMovie">영화추가</a></li>
-	  		<li role="presentation"><a href="#">상영정보설정</a></li>
-
-	  		<li role="presentation"><a href="#">영화</a></li>
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/showMovie/ShowMovie">상영정보설정</a></li>
-
+	  		<li role="presentation"><a href="admin.jsp?mode=Admin/showMovie/SelectMovie">상영영화설정</a></li>
 	  		<li role="presentation"><a href="#">회원정보</a></li>
 	  		<li role="presentation"><a href="#">공지사항</a></li>
 		</ul>

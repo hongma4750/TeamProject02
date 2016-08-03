@@ -311,6 +311,101 @@ public class MovieDAO implements IMovie{
 		
 		return mvList;
 	}
-
+	public List<MovieDTO> getOnMovie() {
+		MovieDTO movie = null;
+		List<MovieDTO> molist = new ArrayList<MovieDTO>();
+		
+		String sql = "select mv_seq,mv_title,mv_img from movie where mv_on=1";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				movie = new MovieDTO();
+				
+				movie.setMv_seq(rs.getInt("mv_seq"));
+				movie.setMv_title(rs.getString("mv_title"));
+				movie.setMv_img(rs.getString("mv_img"));
+				
+				molist.add(movie);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt, rs);
+		}
+		return molist;
+	}
+	
+	public List<MovieDTO> getOffMovie() {
+		MovieDTO movie = null;
+		List<MovieDTO> molist = new ArrayList<MovieDTO>();
+		
+		String sql = "select mv_seq,mv_title,mv_img from movie where mv_on=0";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				movie = new MovieDTO();
+				
+				movie.setMv_seq(rs.getInt("mv_seq"));
+				movie.setMv_title(rs.getString("mv_title"));
+				movie.setMv_img(rs.getString("mv_img"));
+				
+				molist.add(movie);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt, rs);
+		}
+		return molist;
+	}
+	
+	public void changeMovie(int mv_seq,String check){
+		String sql = null;
+		if(check.equals("off")){
+			sql = "update movie set mv_on = 0 where mv_seq=?";
+		}else if(check.equals("on")){
+			sql = "update movie set mv_on = 1 where mv_seq=?";
+		}
+		
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mv_seq);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, pstmt);
+			
+		}
+	}
+	
+	
 	
 }

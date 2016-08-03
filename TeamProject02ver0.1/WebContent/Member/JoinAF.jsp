@@ -24,10 +24,10 @@
     int maxSize  = 1024*1024*10;        
  
     // 웹서버 컨테이너 경로
-    /* String root = request.getSession().getServletContext().getRealPath("/"); */
- 	String root = "C:/tmp/";
+    String root = request.getSession().getServletContext().getRealPath("/");
+ 	/* String root = "C:/tmp/"; */
     // 파일 저장 경로(ex : /home/tour/web/ROOT/upload)
-    String savePath = root + "upload/";
+    String savePath = root +"face";
  
     // 업로드 파일명
     String uploadFile = "";
@@ -35,8 +35,14 @@
     // 실제 저장할 파일명
     String newFileName = "";
  
+    String saveFolder = savePath;
+    File targetDir = new File(saveFolder);
+    
+    if(!targetDir.exists()){
+    	targetDir.mkdirs();
+    }
  
- 
+ 	savePath +="/";
     int read = 0;
     byte[] buf = new byte[1024];
     FileInputStream fin = null;
@@ -69,7 +75,9 @@
         memberdto.setM_pw(m_pw);
         memberdto.setM_name(m_name);
         memberdto.setM_email(m_email);
-        memberdto.setM_photo(m_id);
+        
+        
+        memberdto.setM_photo(savePath+"face/"+m_id);
         
         MemberDAO memdao = MemberDAO.getInstance();
         
