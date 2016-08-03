@@ -32,8 +32,13 @@
 
     	<ul class="nav nav-tabs">
 	  		<li role="presentation" class="active"><a href="#">Admin</a></li>
+<<<<<<< HEAD
 	  		<li role="presentation"><a href="index01.jsp?mode=Admin/AddMovie">영화</a></li>
 	  		<li role="presentation"><a href="#">상영정보설정</a></li>
+=======
+	  		<li role="presentation"><a href="#">영화</a></li>
+	  		<li role="presentation"><a href="admin.jsp?mode=Admin/showMovie/ShowMovie">상영정보설정</a></li>
+>>>>>>> branch 'master' of https://github.com/hongma4750/TeamProject02.git
 	  		<li role="presentation"><a href="#">회원정보</a></li>
 	  		<li role="presentation"><a href="#">공지사항</a></li>
 		</ul>
