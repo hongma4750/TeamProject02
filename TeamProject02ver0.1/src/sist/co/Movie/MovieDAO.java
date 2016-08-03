@@ -258,38 +258,8 @@ public class MovieDAO implements IMovie{
 		return mv_img;
 	}
 
-	//admin영화추가
-	@Override
-	public boolean addMovie() {
-		
-		String sql = " INSERT INTO MOVIE VALUES (MV_SEQ.NEXTVAL,?,?,?,?,?,0,0,0,0) ";
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		int count = 0;
-		log("1/6 Success addMovie");
-		
-		try{
-			conn = DBManager.getConnection();
-			log("2/6 Success addMovie");
-			
-			pstmt = conn.prepareStatement(sql);
-			log("3/6 Success addMovie");
-			
-			int i = 1;
-			pstmt.setString(i++, );
-			
-		}catch(SQLException e){
-			log("Fail addMovie");
-		}finally {
-			DBManager.close(conn, pstmt);
-			log("6/6 Success addMovie");
-		}
-		
-		
-		return count>0?true:false;
-	}
+	
 
+	
 	
 }

@@ -13,6 +13,5 @@ public interface IMovie {
 	
 	String getMvIMG(int mv_seq);
 	
-	//admin영화추가
-	boolean addMovie(String mv);
+	
 }

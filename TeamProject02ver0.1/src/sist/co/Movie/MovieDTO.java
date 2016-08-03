@@ -1,8 +1,8 @@
 package sist.co.Movie;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class MovieDTO {
+public class MovieDTO implements Serializable{
    
 	private int mv_seq;
 	private String mv_title;
