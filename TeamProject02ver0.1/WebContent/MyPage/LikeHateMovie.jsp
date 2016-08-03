@@ -24,13 +24,9 @@
 <body> 
 
 <%
-MemberDTO memberdto = new MemberDTO();
-memberdto.setM_id("bombom");
-memberdto.setM_pw("1234");
-memberdto.setM_name("Bom");
-memberdto.setM_email("ddd");
 
-session.setAttribute("login",memberdto);
+
+//session.setAttribute("login",memberdto);
  
 String strseq = request.getParameter("seq");
 int mv_seq = Integer.parseInt(strseq);
@@ -60,6 +56,10 @@ int lhm = Integer.parseInt(strlhm);
 
 <%
 MovieDAO mdao = MovieDAO.getInstance();
+MemberDTO memberdto = new MemberDTO();
+
+
+session.setAttribute("login",memberdto);
 
 //좋아요 클릭시
 if(lhm==1){

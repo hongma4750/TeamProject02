@@ -21,7 +21,7 @@ public class MovieDAO implements iMovieDAO {
 		return movieDAO;
 	}
 
-	@Override
+	/*@Override
 	public MovieDTO getMovie(int mv_seq) {
         String sql = " SELECT * FROM MOVIE WHERE MV_SEQ=? ";
 		
@@ -71,7 +71,7 @@ public class MovieDAO implements iMovieDAO {
 		}
 		
 		return mdto;
-	}
+	}*/
 	
 	
 	

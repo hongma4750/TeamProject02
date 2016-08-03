@@ -12,4 +12,7 @@ public interface IMovie {
 	List<MovieDTO> getMovie(); 
 	
 	String getMvIMG(int mv_seq);
+	
+	//admin영화추가
+	boolean addMovie(String mv);
 }

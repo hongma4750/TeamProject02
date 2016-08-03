@@ -31,10 +31,7 @@
 <body>
 <%
 MemberDTO memberdto = new MemberDTO();
-memberdto.setM_id("bombom");
-memberdto.setM_pw("1234");
-memberdto.setM_name("Bom");
-memberdto.setM_email("ddd");
+
 
 session.setAttribute("login",memberdto);
 %>

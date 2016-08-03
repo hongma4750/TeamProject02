@@ -29,6 +29,10 @@ if(objlogin==null){
 }
 
 MemberDTO mem = (MemberDTO)objlogin;
+MemberDTO memberdto = new MemberDTO();
+
+
+session.setAttribute("login",memberdto);
 %>
 
 <header1>
