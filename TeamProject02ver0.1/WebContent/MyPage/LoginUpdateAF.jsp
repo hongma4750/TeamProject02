@@ -1,4 +1,4 @@
-  <%@page import="sist.co.Member.MemberDTO"%>
+  <%@page import="sist.co.Member.MemberDTO, sist.co.Member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,10 +16,12 @@
 
 <%
 MemberDTO memberdto = new MemberDTO();
+memberdto = (MemberDTO)session.getAttribute("login");
 
-
-session.setAttribute("login",memberdto);
+String id = request.getParameter("id");
 String pw = request.getParameter("pw"); 
+
+MemberDAO mdao =  MemberDAO.getInstance();
 %>
 
 <header1>

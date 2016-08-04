@@ -1,6 +1,7 @@
 <%--톰캣에서 파일사용할때 쓰는것// org.apache:아파치소속--%>
 <%@page import="sist.co.AddMovie.AddMovieDTO"%>
-<%@page import="java.text.*, java.sql.*"%>
+<%@page import="java.text.*"%>
+<%@page import="java.util.Date"%>
 <%@ page import ="org.apache.commons.fileupload.disk.DiskFileItemFactory"%> 
 <%@ page import ="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import ="org.apache.commons.fileupload.FileItem"%>
@@ -16,6 +17,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%-- <%!
+public Date convertStringToDate(String dateString)
+{
+	Date df;
+	System.out.println("df임~~~~~~~~~~~~~~~~~~~~~~~");
+    try{
+    	System.out.println("try임~~~~~~~~~~~~~~~~~~~~~~~");
+    	df = new SimpleDateFormat("yyyy/MM/dd").parse(dateString);
+    	
+    	
+    	System.out.println("df임"+df);
+    }
+    catch ( Exception ex ){
+    	df= null;
+        System.out.println(ex);
+    }
+    return df;
+}
+%> --%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,9 +48,7 @@
 <%
 //어드민으로 로그인했을 때!!
 
-%>
 
-<%
  request.setCharacterEncoding("utf-8");
 
 String dir = application.getRealPath("/upload");
@@ -41,7 +59,9 @@ String mv_openday = "";
 String mv_genre = "";
 String mv_story = "";
 String filename = "";
- 
+
+
+
 //실제 파일 업로드 부분
  try{
 	 MultipartRequest m = new MultipartRequest(request, dir, max, "utf-8", new DefaultFileRenamePolicy());
@@ -58,6 +78,7 @@ String filename = "";
 	 
 	 mv_story = m.getParameter("mv_story");
 	 System.out.println("mv_story: " + mv_story);
+	 System.out.println("dir :" +dir);
 	 
 	 //업로드한 파일들을 Enumeration타입으로 반환한다.
 	 Enumeration files=m.getFileNames();         
@@ -72,32 +93,28 @@ String filename = "";
 
 AddMovieDAO addmdao = AddMovieDAO.getInstance();
 
-/* SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
-Date d_mv_openday = transFormat.parse(mv_openday); */
-java.sql.Date date=java.sql.Date.valueOf("mv_openday");
-
-boolean isS = addmdao.addMovie(new AddMovieDTO(mv_title, date, mv_genre, mv_story, dir));
+/* Date df =  new SimpleDateFormat("yyyy/MM/dd").parse(mv_openday);
+System.out.println("df임"+df);
+ */
+ 
+ /* SimpleDateFormat formatter = 
+ new SimpleDateFormat ("yyyy-MM-dd"); 
+ Date d = formatter.parse(mv_openday); 
+ System.out.println("d : "+d); */
+ //formatter = new java.text.SimpleDateFormat ("yyyy/MM/dd", java.util.Locale.KOREA); 
+ 
+ 
+/* Date datemvopen = convertStringToDate(mv_openday);
+System.out.println("datemvopen : "+datemvopen);
+ */
+boolean isS = addmdao.addMovie(new AddMovieDTO(mv_title, mv_openday, mv_genre, mv_story, dir));
 %>
 <title>Insert title here</title>
 </head>
 <body>
-<%
-if(isS){
-	%>
-	<script type="text/javascript">
-	alert="영화 추가를 성공했습니다.";
-	location.href="admin.jsp?mode=Admin/Index";	
-	</script>
-	<%
-}else{ 
-	%>
-	<script type="text/javascript">
-	alert="영화 추가를 실패했습니다.";
-	location.href="admin.jsp?mode=Admin/Index";	
-	</script>
-<%
-}
-%>
+
+location.href="admin.jsp?mode=Admin/AddMovie/Index";
+
 
 
 </body>

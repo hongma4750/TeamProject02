@@ -18,9 +18,7 @@
 
 <%
 MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
+memberdto = (MemberDTO)session.getAttribute("login");
 %>
 
 	

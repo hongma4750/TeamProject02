@@ -20,10 +20,12 @@
 MemberDTO memberdto = new MemberDTO();
 
 
-session.setAttribute("login",memberdto);
+memberdto=(MemberDTO)session.getAttribute("login");
 
 testMemberDAO dao = new testMemberDAO();
 boolean isS = dao.outMember(memberdto);
+
+System.out.println("id: "+memberdto.getM_id());
 
 %>
 
@@ -50,10 +52,14 @@ boolean isS = dao.outMember(memberdto);
 //member DB에 해당 사용자 delete 작업한 후 
 //성공시 사이트 메인페이지로 
 if(isS){	
+	
 	%> 
 	<script type="text/javascript">
 	alert("탈퇴되었습니다.");
-	location.href="../index01.jsp";
+	<%
+	session.invalidate();
+	%>
+	location.href="index01.jsp?mode=body";
 	</script>
 	
 	<%
@@ -61,7 +67,7 @@ if(isS){
 	%>
 	<script type="text/javascript">
 	alert("취소되었습니다.");
-	location.href="OutMem.jsp";
+	location.href="index01.jsp?mode=MyPage/OutMem";
 	</script>
 	
 	<%

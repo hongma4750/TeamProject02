@@ -1,4 +1,4 @@
- <%@page import="sist.co.Member.MemberDTO"%>
+ <%@page import="sist.co.Member.MemberDTO,sist.co.Member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,16 +17,19 @@
 <body> 
 
 <%
-MemberDTO memberdto = new MemberDTO();
-/* memberdto.setM_id("bom");
-memberdto.setM_pw("123");
-memberdto.setM_name("봄이");
-memberdto.setM_email("b@b.b");
-memberdto.setM_auth(3); */
-session.setAttribute("login",memberdto);
+Object ologin  = session.getAttribute("login");
+MemberDTO mem = null;
+if(ologin==null){
+	%>
+	<script>
+	alert('로그인 하십시오');
+	location.href="index01.jsp";
+	</script>
+	<%
+	return;
+}
+mem = (MemberDTO)ologin;
 %>
-
-
  <header1>
 
 </header1>
@@ -44,7 +47,13 @@ session.setAttribute("login",memberdto);
 </nav1>
 
 <section1> 
+
+
+
+
 <a href = "index01.jsp?mode=MyPage/Ticket"><h3>내 티켓 바로가기</h3></a><br><br>
+
+
 </section1>
 
 <footer1>

@@ -39,7 +39,7 @@ public class AddMovieDAO implements iAddMovieDAO {
 	@Override
 	public boolean addMovie(AddMovieDTO addmdto) {
 
-		String sql = " INSERT INTO MOVIE VALUES (MV_SEQ.NEXTVAL,?,?,?,?,?,0,0,0,0) ";
+		String sql = " INSERT INTO MOVIE VALUES (MV_SEQ.NEXTVAL,?, to_date(?,'YY-MM-DD'),?,?,?,0,0,0,0) ";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -56,7 +56,7 @@ public class AddMovieDAO implements iAddMovieDAO {
 
 			int i = 1;
 			pstmt.setString(i++, addmdto.getMv_title());
-			pstmt.setDate(i++, (Date) addmdto.getMv_openday());
+			pstmt.setString(i++, addmdto.getMv_openday());
 			pstmt.setString(i++, addmdto.getMv_genre());
 			pstmt.setString(i++, addmdto.getMv_story());
 			pstmt.setString(i++, addmdto.getMv_img());

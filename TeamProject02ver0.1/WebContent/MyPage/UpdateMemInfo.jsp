@@ -14,25 +14,18 @@
 </head>
 <body>
 <%
-
-Object objlogin = session.getAttribute("login");//로그인으로 mem 정보 가져옴
-
- 
-if(objlogin==null){
+Object ologin  = session.getAttribute("login");
+MemberDTO mem = null;
+if(ologin==null){
 	%>
-	<script type="text/javascript">
-	alert("다시 로그인 하세요.");
-	location.href="index01.jsp?mode=MyPage/Index";
+	<script>
+	alert('로그인 하십시오');
+	location.href="index01.jsp";
 	</script>
 	<%
-	return; //빠져나감
+	return;
 }
-
-MemberDTO mem = (MemberDTO)objlogin;
-MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
+mem = (MemberDTO)ologin;
 %>
 
 <header1>
@@ -55,48 +48,70 @@ session.setAttribute("login",memberdto);
 
 
 <form action="index01.jsp?mode=MyPage/UpdateMemInfoAF" method= "post">
-<table align="center">
 
-<tr>
-<td colspan="2" style="text-align: center"><h4>회원정보 수정</h4><hr></td>
-</tr>
+	<form name="frm" action="Member/JoinAF.jsp" method="post" enctype="multipart/form-data">
+		<div class="form-group" >
+			<label for="exampleInputName2">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="text" class="form-control" id="exampleInputName2" value = "<%=mem.getM_id() %>" readonly="readonly" name = "id" style="width:40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="hidden" name="reid">
+    		
+    		<br><br>
+    		
+    		
+    		<label for="exampleInputName2">비밀번호</label>&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="password" class="form-control" id="exampleInputPassword3" name = "pw" size="20" placeholder="수정가능" value = "<%=mem.getM_pw() %>" style="width:40%;">
+    		<br><br>
+    		
+ 
+    		<label for="exampleInputName2">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="text" class="form-control" id="exampleInputName2" name = "name" readonly="readonly" value = "<%=mem.getM_name()%>" style="width:40%;">
+    		<br><br>
+    		
+    		
+    		<label for="exampleInputEmail1">이메일 주소</label>&nbsp;&nbsp;
+    		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="수정가능" name = "email" value = "<%=mem.getM_email() %>"style="width:40%;">
+    		<br><br>
+    	
+    		<img src="img/no_image.gif" alt="이미지 못찾음" class="img-thumbnail" style="width:140px;height:140px;" id="imgimg"><br><br>
+    		<input type="file" id="exampleInputFile" name="m_photo" onchange="readURL(this)">
+    		<input type="button" value="삭제" onclick="deleteURL()">
 
-<tr>
-<td>아이디</td>
-<td><input type = "text" name = "id" size="20" value = "<%=mem.getM_id() %>" readonly="readonly"/></td>
-</tr>
-<tr>
-<td>비밀번호</td>
-<td><input type = "password" name = "pw" size="20" value = "<%=mem.getM_pw() %>" /></td>
-</tr>
-<tr>
-<td>이름</td>
-<td><input type = "text" name = "name" size="20" readonly="readonly" value = "<%=mem.getM_name()%>"/></td>
-</tr>
-<tr>
-<td>이메일</td>
-<td><input type = "email" name = "email" size="20" value = "<%=mem.getM_email() %>"/></td>
-</tr>
+    		<br><br><br>
+    		<hr>
+    		<input type="submit" value="수정">
+    		<input type="reset" value="리셋">
+    		<input type="button" value="취소" onclick="location.href='index01.jsp?mode=body'">
+    	
+    	</div>
+    		  		
+    		  		
+    		  		
+	</form>
+	
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgimg').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        function deleteURL(){
+        	$('#imgimg').attr('src','img/no_image.gif');
+        	$('#exampleInputFile').val("");
+        }
+</script>
 
-<tr>
-<td colspan="2" style="text-align: center"><hr></td>
-</tr>
 
-<tr>
-<td colspan="2">
-<input type = "submit" name = "Btn_Update" value = "수정" />
-</td>
-</tr>
-</table>
-</form>
 
 <form action="index01.jsp?mode=MyPage/OutMem" method= "post">
 <input type = "submit" name = "Btn_Out" value = "탈퇴" />
 </form>
 
-<form action="index01.jsp?mode=MyPage/Index" method= "post">
-<input type = "submit" name = "Btn_Cancel" value = "취소" />
-</form>
+
 
 </section1>
 

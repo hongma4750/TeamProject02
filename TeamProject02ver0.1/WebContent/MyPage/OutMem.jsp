@@ -19,7 +19,7 @@
 MemberDTO memberdto = new MemberDTO();
 
 
-session.setAttribute("login",memberdto);
+memberdto=(MemberDTO)session.getAttribute("login");
  
 %>
 
@@ -41,7 +41,7 @@ session.setAttribute("login",memberdto);
 
 <section1>
 
-<form action = "OutMemAF.jsp" method = "post">
+<form action = "index01.jsp?mode=MyPage/OutMemAF" method = "post">
 ●사용하고 계신 아이디(<%=memberdto.getM_id()%>)는 탈퇴할 경우 재사용 및 복구가 불가능합니다.<br>
 ●탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.<br>
 ●탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.<br><br>

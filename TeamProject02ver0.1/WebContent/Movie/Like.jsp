@@ -17,7 +17,7 @@ String sseq = request.getParameter("seq");
 int seq = Integer.parseInt(sseq);
 System.out.println("seq = " + seq);
 
-String url = String.format("%s?seq=%s", "moviedetail.jsp", sseq);
+String url = String.format("%s?seq=%s&mode=%s", "index01.jsp", sseq, "Movie/MovieListdetail");
 
 Object ologin = session.getAttribute("login");
 MemberDTO mem = null;

@@ -56,6 +56,8 @@ public class TheaterDAO implements iTheaterDAO {
 				tdto.setTh_num(rs.getInt(i++));
 				tdto.setTh_totalseat(rs.getInt(i++));
 				tdto.setTh_time(rs.getTimestamp(i++));
+				tdto.setTh_s_date(rs.getTimestamp(i++));
+				tdto.setTh_e_date(rs.getTimestamp(i++));
 			}
 			log("5/6 success getTheater");
 			
