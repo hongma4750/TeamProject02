@@ -32,7 +32,7 @@ if(radioValue.equals("ID")){
 %>
  --%>
 
-<form action="MemberInfoAf.jsp">
+<form action="Admin/MemberInfoAf.jsp">
 <table border="1" width ="60%">
 	<tr>
 		<th>No.</th>

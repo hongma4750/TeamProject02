@@ -21,7 +21,7 @@ session.setAttribute("memlist",memlist);
 %>
 
 <script type="text/javascript">
-	location.href="MemberInfo.jsp";
+	location.href="../admin.jsp?mode=Admin/MemberInfo";
 </script>
 
 </body>
