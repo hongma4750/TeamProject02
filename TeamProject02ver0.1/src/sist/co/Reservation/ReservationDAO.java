@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -399,6 +401,9 @@ public class ReservationDAO implements iReservateionDAO {
 	            
 	      int count = 0;
 	      //System.out.println("(method)rdto.getR_viewtime() : "+rdto.getR_viewtime());
+	      DateFormat df = new SimpleDateFormat("yyyymmdd");
+	      String ss = df.format(rdto.getR_viewtime());
+	      System.out.println("ss : "+ss);
 	      Date tmp = new Date(rdto.getR_viewtime().getTime());
 	      System.out.println("tmp:" + tmp);   // YYYY-MM-DD HH24:MI 형태가 되어야함
 	      
@@ -417,7 +422,7 @@ public class ReservationDAO implements iReservateionDAO {
 	         psmt.setInt(i++, rdto.getR_elder());
 	         psmt.setString(i++, rdto.getR_seat());
 	         //psmt.setTimestamp(i++, rdto.getR_viewtime());   // (0801수정할거) DATE형에 timestamp형 넣어도 잘 들어가는지 확인해보기 : timestamp => date
-	         psmt.setDate(i++, tmp);
+	         psmt.setString(i++, ss);
 	         psmt.setString(i++, rdto.getR_thname());
 	         psmt.setString(i++, rdto.getR_cinema());
 	         log("3/6 Success reserve");

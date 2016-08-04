@@ -436,7 +436,67 @@ public class ReviewDAO {
 		return pointList;
 	}
 	
+	public List<ReviewDTO> getPointChargePageList(int page,String check,String selecting) {
+		
+		String sql = "";
+		if(check.equals("1")){
+			//타이틀
+			sql = "SELECT * FROM (SELECT sub.*, ROWNUM AS RNUM "
+					+ "FROM ( select * from review where regexp_like(r_title,?) order by r_writedate desc) sub)"
+					+ "WHERE RNUM >= ? AND RNUM <= ? ";
+		}else if(check.equals("2")){
+			//컨텐츠
+			sql = "SELECT * FROM (SELECT sub.*, ROWNUM AS RNUM "
+					+ "FROM ( select * from review where regexp_like(r_content,?) order by r_writedate desc) sub)"
+					+ "WHERE RNUM >= ? AND RNUM <= ? ";
+		}
+		
+				
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<ReviewDTO>pointList = new ArrayList<ReviewDTO>();
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, selecting);
+			psmt.setInt(2, (page - 1) * 10 + 1);
+			psmt.setInt(3, page * 10);
+			
+			
+			rs = psmt.executeQuery();
+
+			while(rs.next()){
+				int i = 1;
+				ReviewDTO dto = new ReviewDTO();
+				dto.setR_seq(rs.getInt(i++));
+				dto.setM_id(rs.getString(i++));
+				dto.setMv_seq(rs.getInt(i++));
+				dto.setR_title(rs.getString(i++));
+				dto.setR_content(rs.getString(i++));
+				dto.setR_writedate(rs.getTimestamp(i++));
+				dto.setR_like(rs.getInt(i++));
+				dto.setR_readcount(rs.getInt(i++));
+				dto.setR_star(rs.getInt(i++));
+				
+				pointList.add(dto);
+			}
 	
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, psmt, rs);
+			
+		}
+		
+		
+		return pointList;
+	}
 	
 	
 	

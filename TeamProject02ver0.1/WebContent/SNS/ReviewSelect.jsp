@@ -18,9 +18,11 @@
 	String selecting = request.getParameter("selecting");
 	
 	ReviewDAO redao = ReviewDAO.getInstance();
-	List<ReviewDTO> reList = redao.selectContent(check, selecting);
+	List<ReviewDTO> reList = redao.selectAllReview();
 	
-	request.setAttribute("selList",reList);
+	session.setAttribute("selList",reList);
+	session.setAttribute("check",check);
+	session.setAttribute("selecting",selecting);
 %>
 
 <script type="text/javascript">

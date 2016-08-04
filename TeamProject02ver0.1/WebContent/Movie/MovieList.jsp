@@ -59,7 +59,7 @@ for(int i=0;i<mlist.size();i++){
 <table>
   <tr>
     <col width="80"/><col width="80"/><col width="150"/>
-    <td rowspan="3" valign="top" style="padding:30px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster"/></td>  
+    <td rowspan="3" valign="top" style="padding:30px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster" width="150px" height="300px"/></td>  
     <td><h1>♥</h1></td>
     <td><%=mdto.getMv_like() %></td>
   </tr>

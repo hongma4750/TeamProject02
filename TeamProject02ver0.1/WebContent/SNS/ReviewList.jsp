@@ -6,6 +6,7 @@
      <%@ page import="java.util.*" %>
      <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
          
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,9 @@
  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>리뷰 리스트</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +54,7 @@
 	<%
 		ReviewDAO redao = ReviewDAO.getInstance();
 		List<ReviewDTO> reList = redao.selectAllReview();
-		request.setAttribute("reList",reList);
+		session.setAttribute("reList",reList);
 		
 		 int pageno = toInt(request.getParameter("pageno"));
 		 %>
@@ -168,6 +172,8 @@
 				String year = (String)simpleDate.format(date);
 				String yea = redto.getR_writedate().toString().substring(0,10);
 				
+				session.setAttribute("redto",redto);
+				
 				int count = redao.countComment(redto.getR_seq());
 			%>	
 			<tr>
@@ -183,6 +189,10 @@
 				<td><%=plist.get(i).getR_writedate().toString().substring(0,10)%></td>
 				<td><%=plist.get(i).getR_readcount()%></td>
 				<td><%=plist.get(i).getR_like()%></td>
+				
+				
+
+				
 			</tr>
 			
 			<% 
@@ -353,6 +363,7 @@
 
 
 <hr>
+
 
 </body>
 </html>

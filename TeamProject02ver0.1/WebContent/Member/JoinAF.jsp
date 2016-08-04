@@ -28,7 +28,7 @@
  	/* String root = "C:/tmp/"; */
     // 파일 저장 경로(ex : /home/tour/web/ROOT/upload)
     String savePath = root +"face";
- 
+ 	
     // 업로드 파일명
     String uploadFile = "";
  
@@ -51,63 +51,75 @@
     
     long currentTime = System.currentTimeMillis();  
     SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");  
- 
+ 	
     try{
         MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
       
-        
+        System.out.println("1/5");
         // 전송받은 parameter의 한글깨짐 방지
         String m_id = multi.getParameter("m_id");
-        m_id = new String(m_id.getBytes("8859_1"), "UTF-8");
+        //m_id = new String(m_id.getBytes("8859_1"), "UTF-8");
         
         String m_pw = multi.getParameter("m_pw");
-        m_pw = new String(m_pw.getBytes("8859_1"), "UTF-8");
+        //m_pw = new String(m_pw.getBytes("8859_1"), "UTF-8");
         
         String m_name = multi.getParameter("m_name");
-        m_name = new String(m_name.getBytes("8859_1"), "UTF-8");
+        //m_name = new String(m_name.getBytes("8859_1"), "UTF-8");
         
         String m_email = multi.getParameter("m_email");
-        m_email = new String(m_email.getBytes("8859_1"), "UTF-8");
+        //m_email = new String(m_email.getBytes("8859_1"), "UTF-8");
         
-
+        System.out.println("2/5");
         MemberDTO memberdto = new MemberDTO();
         memberdto.setM_id(m_id);
         memberdto.setM_pw(m_pw);
         memberdto.setM_name(m_name);
         memberdto.setM_email(m_email);
         
-        String realPath = " ";
+        String realPath = "";
+        System.out.println("3/5");
         
         if(multi.getFilesystemName("m_photo") != null){
+        	System.out.println("1/8");
         	String[] ex = savePath.split("wtpwebapps");
+        	System.out.println("2/8");
         	String fileName2 = multi.getFilesystemName("m_photo");
+        	System.out.println("3/8");
+        	
+        	System.out.println("ex[0] = "+ex[0]);
+        	System.out.println("ex[1] = "+ex[1]);
             realPath = ex[1]+m_id+fileName2.substring(fileName2.lastIndexOf("."));
+            System.out.println("4/8");
             System.out.println("realPath = "+realPath);
-        }
+            System.out.println("5/8");
+        }//찾았다이게세키야
         
+        
+        System.out.println("4/5");
         memberdto.setM_photo(realPath);
-        
         MemberDAO memdao = MemberDAO.getInstance();
         
         
         int result = memdao.AddMember(memberdto);
-       
+        
         
         if(result==1){
         	
-        
+        	System.out.println("1/6");
             //받은 폴더 이름 값이 null 아닐때 파일생성
             if(multi.getOriginalFileName("m_photo") !=null){
+            	System.out.println("2/6");
             	String fileName = multi.getFilesystemName("m_photo");
             	// 파일업로드
+            	System.out.println("3/6");
                 uploadFile = multi.getOriginalFileName("m_photo");
                 // 실제 저장할 파일명(ex : 20140819151221.zip)
                 newFileName = m_id;
          
-                 
+                System.out.println("4/6");
                 // 업로드된 파일 객체 생성
                 File oldFile = new File(savePath + uploadFile);
-                
+                System.out.println("5/6");
                 // 실제 저장될 파일 객체 생성
                 File newFile = new File(savePath + m_id+fileName.substring(fileName.lastIndexOf(".")));
                 System.out.println("개빡친다 : "+savePath + m_id+fileName.substring(fileName.lastIndexOf(".")));
@@ -152,7 +164,7 @@
         response.sendRedirect("../index01.jsp?mode=body");
  
     }catch(Exception e){
-    	System.out.println("여기임?");
+    	System.out.println("JoinAF 이미지 관련");
         System.out.println(e.getMessage());
         response.sendRedirect("../index01.jsp?mode=body");
     }
