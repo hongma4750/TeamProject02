@@ -401,9 +401,13 @@ public class ReservationDAO implements iReservateionDAO {
 	            
 	      int count = 0;
 	      //System.out.println("(method)rdto.getR_viewtime() : "+rdto.getR_viewtime());
+	      
+	      //수정부분!!!!String 으로 형변환후 넣는ㄴ다!!!!!!!!!!!!!
 	      DateFormat df = new SimpleDateFormat("yyyymmdd");
 	      String ss = df.format(rdto.getR_viewtime());
 	      System.out.println("ss : "+ss);
+	      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	      
 	      Date tmp = new Date(rdto.getR_viewtime().getTime());
 	      System.out.println("tmp:" + tmp);   // YYYY-MM-DD HH24:MI 형태가 되어야함
 	      
