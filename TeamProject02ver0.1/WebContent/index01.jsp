@@ -20,8 +20,9 @@
 	<div id="action">
 		
 		<c:if test="${ login!=null}">
-			<img src="d:/tmp/upload/c.jpg" alt="이미지없음" width="70px" height="50px;">
-			[${login.m_id }] 님 안녕하세요 
+			<img src="${login.m_photo }.jpg" alt="이미지없음" width="70px" height="50px">
+			[${login.m_id }] 님 안녕하세요
+			
 			<a href="index01.jsp?mode=MyPage/Index">마이페이지</a>&nbsp;&nbsp;
 			<a href="index01.jsp?mode=Member/logout" onclick="checkLogout()">로그아웃</a>&nbsp;&nbsp;
 		</c:if>
@@ -50,12 +51,13 @@
 	
 	<div id="contents">
 	
-		<%-- <c:if test="${param.mode == null || param.mode==body}">
-			<jsp:include page="index01.jsp"  flush="false"/>
+		<%-- <c:if test="${param.mode == null}">
+			<jsp:include page="index01.jsp" flush="false"/>
 		</c:if> --%>
 	
 	
 		<c:if test="${param.mode != null }">
+		${login.m_photo }
 			<jsp:include page="${param.mode}.jsp" flush="false"/>	
 		</c:if>
 		

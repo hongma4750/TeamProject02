@@ -85,8 +85,6 @@
 	<%
 		MemberDTO memberdto = (MemberDTO) session.getAttribute("login");
 	%>
-	<h3><%=memberdto.getM_id()%>님 하이요
-	</h3>
 	<hr>
 
 	<%
@@ -109,7 +107,7 @@
 						<div>
 							<img src="img/no_image.gif" alt="영화이미지" id="movieImg" width="90px"height="140px;">
 							<select name="mv_seq" id="mv" onchange="changeImg()">
-								<option value="0">영화제목들</option>
+								<option value="0">영화제목</option>
 								
 								<c:forEach var="movie" items="${re_movie }">
 									<option value="${movie.mv_seq }" id="${movie.mv_img }">${movie.mv_title }</option>
