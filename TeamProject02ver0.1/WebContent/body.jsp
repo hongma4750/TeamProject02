@@ -55,23 +55,30 @@ session.setAttribute("showMovie",list);
 	      	<c:choose>
 	      		<c:when test="${vo.num == 0 }">
 	      			<div class="item active">
-				      	<img src=${vo.movie_img } width="400px" height="600px">
-				      	
-				      	<div class="carousel-caption">
-						<h1>${vo.title }</h1>
-						<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
-			     		 </div>
+				      	<img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		<img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 <img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 <img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 
+			      		   <div style="text-align:right;">
+							<h1>${vo.title }</h1>
+							<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
+			      			</div>
 		    		</div> 
 	      		</c:when>
 	      		
 	      		<c:when test="${vo.num != 0}">
 	      			<div class="item">
-			      		<img src=${vo.movie_img } width="400px" height="600px">
-			      		
-			      		<div class="carousel-caption">
+	      			
+			      		<img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		<img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 <img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 <img src=${vo.movie_img } width="264px" height="600px" style="display:inline-block">
+			      		 
+			      		   <div style="text-align:right;">
 							<h1>${vo.title }</h1>
-						<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
-			      		</div>    
+							<h4>개봉일 : ${vo.date }</h4><h4>예매율 : ${vo.reser }  </h4><h4>좋아요 : ${vo.like }</h4>
+			      			</div>
 		      	</div>
 	      		</c:when>
 	      	</c:choose>
@@ -88,8 +95,13 @@ session.setAttribute("showMovie",list);
 	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 	    <span class="sr-only">Next</span>
 	  </a>
+	  
+
 	</div>
-	
+		  <div class="embed-responsive embed-responsive-16by9">
+  				<!-- <iframe src="https://www./youtu.be/zpOULjyy-n8"></iframe> -->
+  				<iframe width="600" height="380" src="https://www.youtube.com/embed/qJs4Q8f4uwU" frameborder="0" ></iframe>
+		</div>
 
 </body>
 </html>

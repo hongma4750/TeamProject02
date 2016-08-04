@@ -77,12 +77,14 @@ MovieDAO mdao = MovieDAO.getInstance();
   <td>상영관</td>
   <td>선호도투표</td>
 </tr>
-
+<tr>
+  <td colspan="5">&nbsp;</td>
+</tr>
 <%///////////////////////////////////////////////
     if(rLists.size()==0){
     	%>
     	<tr>
-    	  <td colspan="5">지난 예매내역이 없습니다.</td>
+    	  <td colspan="5" style="text-align: center">지난 예매내역이 없습니다.</td>
     	</tr>
     	<%
     }
@@ -98,7 +100,7 @@ for(int i=0; i<rLists.size();i++){
 		%>
 		
 		<tr>
-		  <td colspan="5">지난 예매내역이 없습니다.</td>
+		  <td colspan="5" style="text-align: center">지난 예매내역이 없습니다.</td>
 		</tr>
 		
 		<%

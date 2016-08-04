@@ -25,10 +25,9 @@ function updateForm(){
 </head>
 <body>
 
-
-
 <div>
-<div style="display:inline-block;">
+	
+<div style="display:inline-block; border:1px solid;">
 	<!-- 지점 선택 부분 -->
 	<table border="1" >
 		<%
@@ -41,7 +40,7 @@ function updateForm(){
 		
 			<%for(int i =0;i<th_name_List.size();i++){
 				%>
-					<tr><td onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=th_name_List.get(i).getTh_name()%>'"><%=th_name_List.get(i).getTh_name() %></td></tr>
+					<tr><td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)"onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=th_name_List.get(i).getTh_name()%>'"><%=th_name_List.get(i).getTh_name() %></td></tr>
 				<%
 			}
 			%>
@@ -52,7 +51,7 @@ function updateForm(){
 	
 	
 	
-	<div style="display:inline-block;">
+	<div style="display:inline-block; border:1px solid;" >
 	<!-- 상영광 부분!!! -->
 	<%
 		if(request.getParameter("th_name")!=null){
@@ -66,7 +65,7 @@ function updateForm(){
 				<%
 					for(int i=0;i<th_cinema_List.size();i++){
 						%>
-							<tr><td onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=request.getParameter("th_name")%>&th_cinema=<%=th_cinema_List.get(i).getTh_cinema()%>'"><%=th_cinema_List.get(i).getTh_cinema() %></td></tr>
+							<tr><td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)"onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=request.getParameter("th_name")%>&th_cinema=<%=th_cinema_List.get(i).getTh_cinema()%>'"><%=th_cinema_List.get(i).getTh_cinema() %></td></tr>
 							
 						<%
 						
@@ -83,15 +82,12 @@ function updateForm(){
 	</div>
 	
 	<%!
-
 public String two(String msg){	//날짜 01월,02월 이런식으로 만들기위해 사용되는 메서드
 	return msg.trim().length()<2 ? "0"+msg:msg.trim();
 }
-
 public boolean nvl(String msg){
 	return msg==null || msg.trim().equals("")? true: false;
 }//빈 문자열인지 확인하는 메서드....
-
 public String dot3(String msg){			//캘린더 안에 글자 15글자 이상일시 짜르기 메서드
 	String s ="";
 	
@@ -104,12 +100,10 @@ public String dot3(String msg){			//캘린더 안에 글자 15글자 이상일�
 	
 	return s;
 }
-
-
 %>
 
 
-	<div style="display : inline-block; color:#a94442;">
+	<div style="display : inline-block; color:#a94442; border:1px solid;">
 		<!-- 시작 날짜 달력 부분 -->
 		<%
 			if(request.getParameter("th_cinema") !=null ){
@@ -117,21 +111,16 @@ public String dot3(String msg){			//캘린더 안에 글자 15글자 이상일�
 					<%
 Calendar cal = Calendar.getInstance();
 cal.set(Calendar.DATE,1);		//이거 아마 달력 1일째 사이에 빈 공간 넣을려고 1일 체크하는거 인듯
-
 String s_year = request.getParameter("m_year");		//Calendar에서 Calendar로 보내고 받을때 사용
 String s_month = request.getParameter("m_month");	//언제 사용하는지 체크!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 int m_year = cal.get(Calendar.YEAR);
 if(!nvl(s_year)){
 	m_year = Integer.parseInt(s_year);
 }
-
 int m_month = cal.get(Calendar.MONTH) +1 ;
 if(!nvl(s_month)){
 	m_month = Integer.parseInt(s_month);
 }
-
-
 if(m_month<1){
 	m_month=12;
 	m_year--;							//달 체크하고 년수 올리거나 내리거나
@@ -140,23 +129,14 @@ if(m_month>12){
 	m_month=1;
 	m_year++;
 }
-
-
 cal.set(m_year,m_month-1,1);	//달 1일 체크하고 빈칸 넣을려고 세팅함
-
 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-
 ///////////////////////////////////////////////	전년도,전월,다음달,다음년 표시
 String pp = String.format("<a href='%s&m_year=%d&m_month=%d'><img src='img/left.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema"),m_year-1,m_month);
-
 String p = String.format("<a href='%s&m_year=%d&m_month=%d'><img src='img/prec.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema"),m_year,m_month-1);	
-
 String nn = String.format("<a href='%s&m_year=%d&m_month=%d'><img src='img/last.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema"),m_year+1,m_month);
-
 String n = String.format("<a href='%s&m_year=%d&m_month=%d'><img src='img/next.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema"),m_year,m_month+1);
 ///////////////////////////////////////////////
-
 %>
 <!-- 폼~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -191,13 +171,11 @@ for(int i=1;i<dayOfWeek;i++){		//dayOfWeek-->달 시작하기 전날까지 공�
 	<td>&nbsp;</td>
 	<% 
 }
-
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);		//달력 마지막 날 이후 빈 공간 채우기 위해 사용
-
 for(int i=1;i<=lastDay;i++){
 	%>
 
-	<td>
+	<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">
 	<%String th_s_date = m_year+"-"+two(m_month+"")+"-"+two(i+"")+" 00:00:00"; %>
 	<a href = "admin.jsp?mode=Admin/showMovie/ShowMovie
 	&th_name=<%=request.getParameter("th_name") %>
@@ -216,7 +194,7 @@ for(int i=1;i<=lastDay;i++){
 	<%
 	for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){			//마지막 날 이후 빈공간 채우기
 		%>
-		<td>&nbsp;</td>
+		<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">&nbsp;</td>
 		<%}%>
 
 </tr>
@@ -227,7 +205,7 @@ for(int i=1;i<=lastDay;i++){
 		
 	</div>
 	
-	<div style="display : inline-block; color:#a94442;">
+	<div style="display : inline-block; color:#a94442; border:1px solid;">
 		<!-- 상영 종료 시간 부분 -->
 		
 		<%if(request.getParameter("th_s_date") != null){
@@ -235,21 +213,16 @@ for(int i=1;i<=lastDay;i++){
 			<%
 Calendar cal = Calendar.getInstance();
 cal.set(Calendar.DATE,1);		//이거 아마 달력 1일째 사이에 빈 공간 넣을려고 1일 체크하는거 인듯
-
 String q_year = request.getParameter("w_year");		//Calendar에서 Calendar로 보내고 받을때 사용
 String q_month = request.getParameter("w_month");	//언제 사용하는지 체크!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 int w_year = cal.get(Calendar.YEAR);
 if(!nvl(q_year)){
 	w_year = Integer.parseInt(q_year);
 }
-
 int w_month = cal.get(Calendar.MONTH) +1 ;
 if(!nvl(q_month)){
 	w_month = Integer.parseInt(q_month);
 }
-
-
 if(w_month<1){
 	w_month=12;
 	w_year--;							//달 체크하고 년수 올리거나 내리거나
@@ -258,23 +231,14 @@ if(w_month>12){
 	w_month=1;
 	w_year++;
 }
-
-
 cal.set(w_year,w_month-1,1);	//달 1일 체크하고 빈칸 넣을려고 세팅함
-
 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-
 ///////////////////////////////////////////////	전년도,전월,다음달,다음년 표시
 String pp = String.format("<a href='%s&w_year=%d&w_month=%d'><img src='img/left.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema")+"&th_s_date="+request.getParameter("th_s_date"),w_year-1,w_month);
-
 String p = String.format("<a href='%s&w_year=%d&w_month=%d'><img src='img/prec.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema")+"&th_s_date="+request.getParameter("th_s_date"),w_year,w_month-1);	
-
 String nn = String.format("<a href='%s&w_year=%d&w_month=%d'><img src='img/last.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema")+"&th_s_date="+request.getParameter("th_s_date"),w_year+1,w_month);
-
 String n = String.format("<a href='%s&w_year=%d&w_month=%d'><img src='img/next.gif'></a>","admin.jsp?mode=Admin/showMovie/ShowMovie&th_name="+request.getParameter("th_name")+"&th_cinema="+request.getParameter("th_cinema")+"&th_s_date="+request.getParameter("th_s_date"),w_year,w_month+1);
 ///////////////////////////////////////////////
-
 %>
 <!-- 폼~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -309,14 +273,13 @@ for(int i=1;i<dayOfWeek;i++){		//dayOfWeek-->달 시작하기 전날까지 공�
 	<td>&nbsp;</td>
 	<% 
 }
-
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);		//달력 마지막 날 이후 빈 공간 채우기 위해 사용
-
 for(int i=1;i<=lastDay;i++){
 	%>
 
-	<td>
+	<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">
 	<%String th_e_date = w_year+"-"+two(w_month+"")+"-"+two(i+"")+" 00:00:00"; %>
+	
 	
 	<a href = "admin.jsp?mode=Admin/showMovie/ShowMovie
 			&th_name=<%=request.getParameter("th_name") %>
@@ -324,7 +287,7 @@ for(int i=1;i<=lastDay;i++){
 			&th_s_date=<%=request.getParameter("th_s_date")%>
 			&th_e_date=<%=th_e_date%>">
 			<%=i %>
-			</a>
+	</a>
 	
 		
 	</td>
@@ -337,7 +300,7 @@ for(int i=1;i<=lastDay;i++){
 	<%
 	for(int i=0; i<(7-(dayOfWeek+lastDay-1)%7)%7; i++){			//마지막 날 이후 빈공간 채우기
 		%>
-		<td>&nbsp;</td>
+		<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">&nbsp;</td>
 		<%}%>
 
 </tr>
@@ -423,7 +386,7 @@ for(int i=1;i<=lastDay;i++){
 			%>
 		</div>
 		
-		<div style="display:inline-block; color:#a94442; ">
+		<div style="display:inline-block; color:#a94442; border:1px solid;">
 			<!-- 상영차 선택 -->
 			<%
 				if(request.getParameter("mv_seq") !=null){
@@ -434,7 +397,7 @@ for(int i=1;i<=lastDay;i++){
 								for(int i=0;i<th_num_List.size();i++){
 									%>
 										<tr>
-											<td onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=request.getParameter("th_name")%>&th_cinema=<%=request.getParameter("th_cinema")%>&th_s_date=<%=request.getParameter("th_s_date")%>&th_e_date=<%=request.getParameter("th_e_date")%>&mv_seq=<%=request.getParameter("mv_seq")%>&th_num=<%=th_num_List.get(i).getTh_num()%>'">
+											<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)" onclick="location.href='admin.jsp?mode=Admin/showMovie/ShowMovie&th_name=<%=request.getParameter("th_name")%>&th_cinema=<%=request.getParameter("th_cinema")%>&th_s_date=<%=request.getParameter("th_s_date")%>&th_e_date=<%=request.getParameter("th_e_date")%>&mv_seq=<%=request.getParameter("mv_seq")%>&th_num=<%=th_num_List.get(i).getTh_num()%>'">
 												[<%=th_num_List.get(i).getTh_num() %>] 회차
 											</td>
 										</tr>
@@ -543,7 +506,6 @@ for(int i=1;i<=lastDay;i++){
 
 
 <script type="text/javascript">
-
 	function changeImg(){
 		$('#movieImg').attr('src',$('#mv option:selected').attr('id'));
 		location.href="admin.jsp?mode=Admin/showMovie/ShowMovie"+
@@ -558,8 +520,6 @@ for(int i=1;i<=lastDay;i++){
 
 
 <script type="text/javascript">
-
-
 function clickSelect(){
 	location.href="admin.jsp?mode=Admin/showMovie/ShowMovie"+
 	"&th_name=<%=request.getParameter("th_name")%>"+
@@ -571,7 +531,15 @@ function clickSelect(){
 	"&th_time="+$('#th_time option:selected').attr('value');
 	
 }
-
+</script>
+<script type="text/javascript">
+	function changeBg(a,b){
+		if(a==1){
+			b.style.background="white";
+		}if(a==2){
+			b.style.background="#282828";
+		}
+	}
 </script>
 
 

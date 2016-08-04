@@ -153,9 +153,14 @@ int pageno = toInt(request.getParameter("pageno"));
 
 %>
 <%
+if(rLists.size() == 0){ //내역이 없을때
+	%>
+	<p style = "text-align: center">예매내역이 없습니다.</p>	
+	<%
+}
+%>
 
-//for(int i=0; i<rlist.size();i++){
-	//
+<%
 for(int j = record_start_no; j < record_start_no+page_per_record_cnt; j++){
             if(rLists.size() == j) break;
 	//

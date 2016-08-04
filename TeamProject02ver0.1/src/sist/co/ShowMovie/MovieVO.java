@@ -1,6 +1,6 @@
 package sist.co.ShowMovie;
-
-public class MovieVO {
+import java.io.Serializable;
+public class MovieVO implements Serializable{
 	 
 	private String title;
 	private int like;

@@ -18,8 +18,11 @@
 
 <%
 MemberDTO memberdto = new MemberDTO();
-
-
+/* memberdto.setM_id("bom");
+memberdto.setM_pw("123");
+memberdto.setM_name("봄이");
+memberdto.setM_email("b@b.b");
+memberdto.setM_auth(3); */
 session.setAttribute("login",memberdto);
 %>
 

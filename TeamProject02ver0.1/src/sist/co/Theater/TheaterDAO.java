@@ -252,7 +252,7 @@ public class TheaterDAO implements ITheater{
 		}
 		return list;
 	}
-	
+
 	
 	
 	public int findTh_seq(String th_name, String th_cinema, int th_num){
@@ -309,10 +309,6 @@ public class TheaterDAO implements ITheater{
 		}
 		
 	}
-	
-	
-	
-	
 	
 	
 	

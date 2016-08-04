@@ -1,10 +1,9 @@
-  
 --[1] member
 
 DROP TABLE MEMBER
 CASCADE CONSTRAINT;
- 
-SELECT * FROM MEMBER
+
+ SELECT * FROM MEMBER
 
 CREATE TABLE MEMBER(
 	M_ID VARCHAR2(50) PRIMARY KEY,
@@ -12,7 +11,7 @@ CREATE TABLE MEMBER(
 	M_NAME VARCHAR2(100) NOT NULL,
 	M_EMAIL VARCHAR2(200) NOT NULL,
 	M_AUTH NUMBER NOT NULL,
-	M_PHOTO VARCHAR2(100)
+	M_PHOTO VARCHAR2(1000)
 )
 
 INSERT INTO MEMBER
@@ -62,7 +61,7 @@ VALUES(MV_SEQ.NEXTVAL, '인천상륙작전', '20160727', '드라마, 전쟁', '1
 
 INSERT INTO MOVIE
 VALUES(MV_SEQ.NEXTVAL, '도리를찾아서', '20160706', '애니메이션, 어드벤처, 코미디, 가족', '무엇을 상상하든 그 이상을 까먹는 ‘도리’의 어드벤쳐가 시작된다! 니모를 함께 찾으면서 베스트 프렌드가 된 도리와 말린은 우여곡절 끝에 다시 고향으로 돌아가 평화로운 일상을 보내고 있다. 모태 건망증 도리가 ‘기억’이라는 것을 하기 전까지! 도리는 깊은 기억 속에 숨어 있던 가족의 존재를 떠올리고 니모와 말린과 함께 가족을 찾아 대책 없는 어드벤쳐를 떠나게 되는데…깊은 바다도 막을 수 없는 스펙터클한 어드벤쳐가 펼쳐진다! 
-', 'http://img.cgv.co.kr/Movie/Thumbnail/Poster/000078/78907/78907_185.jpg', '0', '0', '0', '1');
+', 'http://img.cgv.co.kr/Movie/Thumbnail/Poster/000078/78907/78907_185.jpg', '0', '0', '0', '0');
 
 
 
@@ -97,23 +96,34 @@ ADD CONSTRAINT FK_THEATER_MV_SEQ FOREIGN KEY(MV_SEQ)
 REFERENCES MOVIE(MV_SEQ);
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 90, 90, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 12:30:00','YY-MM-DD HH24:MI:SS'));
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 90,  to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 12:30:00','YY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 90, 90, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-12 12:30:00','YY-MM-DD HH24:MI:SS'));
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 90, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-12 12:30:00','YY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 90, 90, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-11 12:30:00','YY-MM-DD HH24:MI:SS'));
+
+VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 90, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-11 12:30:00','YY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 90, 90, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-25 12:30:00','YY-MM-DD HH24:MI:SS'));
+
+VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 90, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-25 12:30:00','YY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 90, 90, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-31 12:30:00','YY-MM-DD HH24:MI:SS'));
+
+VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 90, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-31 12:30:00','YY-MM-DD HH24:MI:SS'));
+
 
 INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 90, 90, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-12 12:30:00','YY-MM-DD HH24:MI:SS'));
+VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 90, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-12 12:30:00','YY-MM-DD HH24:MI:SS'));
 
+
+
+select th_name from theater group by th_name;
 
 select th_name from theater group by th_name;
 
@@ -220,6 +230,12 @@ CASCADE CONSTRAINT;
 
 SELECT * FROM REVIEW
 
+
+SELECT * FROM (SELECT sub.*, ROWNUM AS RNUM FROM ( select * from review order by r_writedate) sub) WHERE RNUM >= 1 AND RNUM <=10 
+
+
+
+
 CREATE TABLE REVIEW(
 	r_seq number(5) primary key,
 	m_id varchar2(50) not null,
@@ -286,3 +302,4 @@ insert into review (r_seq,m_id,mv_seq,r_title,r_content) values (review_seq.next
 SELECT TO_CHAR(TH_TIME, 'HH24:MI') 
 FROM THEATER
 WHERE TH_NAME='명동'
+

@@ -34,6 +34,9 @@
 	}
 %>
 
+
+
+
 <div id="middle_wrap">
 <table class="table table-bordered">
 	<col width="50"/><col width="70"/><col width="200"/><col width="100"/>
@@ -50,8 +53,8 @@
 		request.setAttribute("reList",reList);
 		
 		 int pageno = toInt(request.getParameter("pageno"));
-		 
-		   if(pageno<1){//현재 페이지
+		 %>
+		   <%-- if(pageno<1){//현재 페이지
 		      pageno = 1;
 		   }
 		   int total_record = reList.size();         //총 레코드 수
@@ -76,14 +79,14 @@
 		
 
 //		    현재 페이지(정수) / 한페이지 당 보여줄 페지 번호 수(정수) + (그룹 번호는 현제 페이지(정수) % 한페이지 당 보여줄 페지 번호 수(정수)>0 ? 1 : 0)
-		   int group_no = pageno/group_per_page_cnt+( pageno%group_per_page_cnt>0 ? 1:0);
+		   int group_no =      pageno/group_per_page_cnt+( pageno%group_per_page_cnt>0 ? 1:0);
 //		      현재 그룹번호 = 현재페이지 / 페이지당 보여줄 번호수 (현재 페이지 % 페이지당 보여줄 번호 수 >0 ? 1:0)   
 		//   ex)    14      =   13(몫)      =    (66 / 5)      1   (1(나머지) =66 % 5)           
 		   
-		   int page_eno = group_no*group_per_page_cnt;      
+		   int page_eno =          group_no     *    group_per_page_cnt;      
 //		      현재 그룹 끝 번호 = 현재 그룹번호 * 페이지당 보여줄 번호 
 		//   ex)    70      =   14   *   5
-		   int page_sno = page_eno-(group_per_page_cnt-1);   
+		   int page_sno =                    page_eno - (group_per_page_cnt-1);   
 //		       현재 그룹 시작 번호 = 현재 그룹 끝 번호 - (페이지당 보여줄 번호 수 -1)
 		//   ex)    66   =   70 -    4 (5 -1)
 		   
@@ -96,7 +99,7 @@
 		   int prev_pageno = page_sno-group_per_page_cnt;  // <<  *[이전]* [21],[22],[23]... [30] [다음]  >>
 //		      이전 페이지 번호   = 현재 그룹 시작 번호 - 페이지당 보여줄 번호수   
 		//   ex)      46      =   51 - 5            
-		   int next_pageno = page_sno+group_per_page_cnt;   // <<  [이전] [21],[22],[23]... [30] *[다음]*  >>
+		   int next_pageno = page_sno + group_per_page_cnt;   // <<  [이전] [21],[22],[23]... [30] *[다음]*  >>
 //		      다음 페이지 번호 = 현재 그룹 시작 번호 + 페이지당 보여줄 번호수
 		//   ex)      56      =   51 - 5
 		   if(prev_pageno<1){
@@ -114,11 +117,31 @@
 		   
 		   // [1][2][3].[10]
 		   // [11][12]
-		%>
+		%> --%>
 		
+<%
+		String pageobj = request.getParameter("page");
+		
+		int currentpage;
+		if (pageobj == null) {
+			currentpage = 1;
+		} else {
+			currentpage = Integer.parseInt(pageobj);
+		}
+
+
+		List<ReviewDTO> plist = redao.getPointChargePageList(currentpage);
+		int pnum;
+		int pageblock = 20;
+		int block = (int) Math.ceil((double) currentpage / pageblock);
+		int bstartpage = (block - 1) * pageblock + 1;
+		int bendpage = bstartpage + pageblock - 1;
+
+		pnum = (int) Math.ceil((double) reList.size() / 10);
+	%>
 		
 		<%
-				if(reList.size()==0){
+				if(plist.size()==0){
 					%>
 						
 						<tr>
@@ -132,11 +155,12 @@
 		
 		
 		<%
-		for(int i = record_start_no; i < record_start_no+page_per_record_cnt; i++){
+		/* for(int i = record_start_no; i < record_start_no+page_per_record_cnt; i++){
             if(reList.size() == i) break;
-            ReviewDTO redto = reList.get(i);
-			/* for(int i =0;i<reList.size();i++){
-			ReviewDTO redto = reList.get(i); */%>
+            ReviewDTO redto = reList.get(i); */
+            
+			for(int i =0;i<plist.size();i++){
+			ReviewDTO redto = reList.get(i); %>
 			<%
 				//new 사진 이용하기 위해 시간작업
 				Date date = new Date();
@@ -147,18 +171,18 @@
 				int count = redao.countComment(redto.getR_seq());
 			%>	
 			<tr>
-				<td><%=reList.size()-i %></td>
-				<td><%=redto.getM_id() %></td>
+				<td><%=plist.get(i).getR_seq() %></td>
+				<td><%=plist.get(i).getM_id()%></td>
 				<td>
-					<a href="index01.jsp?mode=SNS/ReviewDetail&r_seq=<%=redto.getR_seq() %>">
-						<%=redto.getR_title()%>&nbsp;
+					<a href="index01.jsp?mode=SNS/ReviewDetail&r_seq=<%=plist.get(i).getR_seq() %>">
+						<%=plist.get(i).getR_title()%>&nbsp;
 						<%if(count !=0){%><p style="color:red;display:inline;">[<%=count %>]</p><%} %>
 						<%if(year.equals(yea)){ %><img src="img/new.jpg"> <%} %>
 					</a>
 				</td>
-				<td><%=redto.getR_writedate().toString().substring(0,10) %></td>
-				<td><%=redto.getR_readcount() %></td>
-				<td><%=redto.getR_like() %></td>
+				<td><%=plist.get(i).getR_writedate().toString().substring(0,10)%></td>
+				<td><%=plist.get(i).getR_readcount()%></td>
+				<td><%=plist.get(i).getR_like()%></td>
 			</tr>
 			
 			<% 
@@ -173,7 +197,9 @@
 </c:if>
 </div>
 
-	<!-- 페이징 하는 부분!!! -->
+
+
+	<%-- <!-- 페이징 하는 부분!!! -->
 	<div style="text-align:center;">
 		<nav>
 		  <ul class="pagination">
@@ -212,16 +238,102 @@
 		    %>
 		    <li><a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=i%>"><%=i%></a></li>
 		    <%}%>
+		    
 		    <li>
 		      <a href="index01.jsp?mode=SNS/ReviewList&pageno=<%=next_pageno%>" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
+		    
 		  </ul>
 		</nav>
 	</div>
 	</c:if>
-	<!-- 페이징 하는 부분!!! -->
+	<!-- 페이징 하는 부분!!! --> --%>
+	
+	
+	<div align="center">
+		<div>
+			<nav>
+				<ul class="pagination">
+					<%
+						if (currentpage <= 1) {
+					%>
+					<li class="disabled"><span aria-hidden="true">처음</span></li>
+					<%
+						} else {
+					%>
+					<li><a style="color: black;"
+						href="index01.jsp?mode=SNS/ReviewList&page=1">처음</a></li>
+					<%
+						}
+					%>
+
+					<%
+						if (currentpage <= 1) {
+					%>
+					<li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+					<%
+						} else {
+					%>
+					<li><a style="color: black;" aria-lable="Previous"
+						href="index01.jsp?mode=SNS/ReviewList&page=<%=currentpage - 1%>"><span
+							aria-hidden="true">&laquo;</span></a></li>
+					<%
+						}
+					%>
+
+					<%
+						if (bendpage > pnum) {
+							bendpage = pnum;
+						}
+						for (int i = bstartpage; i <= bendpage; i++) {
+							if (currentpage == i) {
+					%>
+					<li class='active'><a href="#"><%=i%></a></li>
+					<%
+						} else {
+					%>
+					<li><a style="color: black;"
+						href="index01.jsp?mode=SNS/ReviewList&page=<%=i%>"><%=i%></a></li>
+					<%
+						}
+						}
+					%>
+
+					<%
+						if (currentpage >= pnum) {
+					%>
+					<li class="disabled"><span aria-hidden="true">&raquo;</span></a></li>
+					<%
+						} else {
+					%>
+					<li><a style="color: black;" aria-lable="Next"
+						href="index01.jsp?mode=SNS/ReviewList&page=<%=currentpage + 1%>"><span
+							aria-hidden="true">&raquo;</span></a></li>
+					<%
+						}
+					%>
+					<%
+						if (currentpage >= pnum) {
+					%>
+					<li class="disabled"><span aria-hidden="true">끝</span></li>
+					<%
+						} else {
+					%>
+					<li><a style="color: black;"
+						href="index01.jsp?mode=SNS/ReviewList&page=<%=pnum%>">끝</a></li>
+					<%
+						}
+					%>
+				</ul>
+			</nav>
+
+		</div>
+
+	</div>
+	
+	
 	
 	<!-- 검색 기능 부분!!!!! -->
 	<form name="frm1" action="SNS/ReviewSelect.jsp">

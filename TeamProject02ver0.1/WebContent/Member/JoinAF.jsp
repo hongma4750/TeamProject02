@@ -19,15 +19,15 @@
 <body>
 <%
     request.setCharacterEncoding("UTF-8");
- 
+ 	
     // 10Mbyte 제한
     int maxSize  = 1024*1024*10;        
  
     // 웹서버 컨테이너 경로
-    /* String root = request.getSession().getServletContext().getRealPath("/"); */
- 	String root = "C:/tmp/";
+    String root = request.getSession().getServletContext().getRealPath("/");
+ 	/* String root = "C:/tmp/"; */
     // 파일 저장 경로(ex : /home/tour/web/ROOT/upload)
-    String savePath = root + "upload/";
+    String savePath = root +"face";
  
     // 업로드 파일명
     String uploadFile = "";
@@ -35,8 +35,14 @@
     // 실제 저장할 파일명
     String newFileName = "";
  
+    String saveFolder = savePath;
+    File targetDir = new File(saveFolder);
+    
+    if(!targetDir.exists()){
+    	targetDir.mkdirs();
+    }
  
- 
+ 	savePath +="/";
     int read = 0;
     byte[] buf = new byte[1024];
     FileInputStream fin = null;
@@ -69,7 +75,17 @@
         memberdto.setM_pw(m_pw);
         memberdto.setM_name(m_name);
         memberdto.setM_email(m_email);
-        memberdto.setM_photo(m_id);
+        
+        String realPath = " ";
+        
+        if(multi.getFilesystemName("m_photo") != null){
+        	String[] ex = savePath.split("wtpwebapps");
+        	String fileName2 = multi.getFilesystemName("m_photo");
+            realPath = ex[1]+m_id+fileName2.substring(fileName2.lastIndexOf("."));
+            System.out.println("realPath = "+realPath);
+        }
+        
+        memberdto.setM_photo(realPath);
         
         MemberDAO memdao = MemberDAO.getInstance();
         

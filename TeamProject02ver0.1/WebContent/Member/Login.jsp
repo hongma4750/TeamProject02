@@ -15,7 +15,9 @@
     	<input type="text" name="m_id" required="required" placeholder="Your ID"/>  <!-- required : 값이 입력되었는지 체크 -->
         <input type="password" name="m_pw" required="required" placeholder="Your password"/> 
         <button type="submit" class="btn-set">로그인</button>
-        <button type="button" class="btn-set" onclick="location.href='../index01.jsp?mode=Member/Join'">회원가입</button>
+
+        <button type="button" class="btn-set" onclick="location.href='index01.jsp?mode=Member/Join'">회원가입</button>
+
     </form>
 </div>
 

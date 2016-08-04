@@ -386,6 +386,57 @@ public class ReviewDAO {
 		
 	}
 	
+	public List<ReviewDTO> getPointChargePageList(int page) {
+		String sql = "SELECT * FROM (SELECT sub.*, ROWNUM AS RNUM "
+				+ "FROM ( select * from review order by r_writedate desc) sub)"
+				+ "WHERE RNUM >= ? AND RNUM <= ? ";
+				
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<ReviewDTO>pointList = new ArrayList<ReviewDTO>();
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, (page - 1) * 10 + 1);
+			psmt.setInt(2, page * 10);
+			
+			
+			rs = psmt.executeQuery();
+
+			while(rs.next()){
+				int i = 1;
+				ReviewDTO dto = new ReviewDTO();
+				dto.setR_seq(rs.getInt(i++));
+				dto.setM_id(rs.getString(i++));
+				dto.setMv_seq(rs.getInt(i++));
+				dto.setR_title(rs.getString(i++));
+				dto.setR_content(rs.getString(i++));
+				dto.setR_writedate(rs.getTimestamp(i++));
+				dto.setR_like(rs.getInt(i++));
+				dto.setR_readcount(rs.getInt(i++));
+				dto.setR_star(rs.getInt(i++));
+				
+				pointList.add(dto);
+			}
+	
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally{
+			DBManager.close(conn, psmt, rs);
+			
+		}
+		
+		
+		return pointList;
+	}
+	
+	
 	
 	
 	

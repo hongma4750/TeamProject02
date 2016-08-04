@@ -17,8 +17,9 @@ CASCADE CONSTRAINT;
 
 DROP SEQUENCE MV_SEQ; 
 
-delete from movie;
+delete from movie where mv_seq=7;
 
+update movie set mv_img='img/p_abouttime.png' where mv_seq=5
 SELECT * FROM MOVIE
 
 CREATE TABLE MOVIE(
@@ -364,3 +365,10 @@ WHERE S1||S2||S3||S4||S5||S6||S7||S8||S9||S10 LIKE 'S%' AND TH_SEQ='11'
 
 
 UPDATE THEATER SET TH_TOTALSEAT=TH_TOTALSEAT+1,TH_LEFTSEAT=TH_LEFTSEAT-1 WHERE TH_SEQ=11
+
+
+--admin----------
+--mv_title, d_mv_openday, mv_genre, mv_story, filename
+--INSERT INTO MOVIE
+--VALUES (MV_SEQ.NEXTVAL, '어바웃타임', '20131205', '멜로/로맨스/코미디', '과거 시간 여행을 할 수 있는 남자와 평범한 여자의 예쁜 로맨스', '../img/p_abouttime.png',0,0,0,0);
+INSERT INTO MOVIE VALUES (MV_SEQ.NEXTVAL,'test','20160101','test','test',' ',0,0,0,0)

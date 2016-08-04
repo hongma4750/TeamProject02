@@ -11,4 +11,6 @@ public interface ITheater {
 	//지점 group by
 	List<TheaterDTO> groupByTheater();
 	
+
 }
+
