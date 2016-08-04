@@ -21,9 +21,9 @@ public class testMemberDAO implements testiMemberDAO {
 	}
 
 	@Override
-	public boolean updateMember(String pw,String email, String id) {
+	public boolean updateMember(String pw,String email, String photo, String id) {
 		
-		String sql =  " UPDATE MEMBER SET M_PW=?, M_EMAIL=? "
+		String sql =  " UPDATE MEMBER SET M_PW=?, M_EMAIL=?, M_PHOTO=? "
 				+ " WHERE M_ID=? ";
 		
 		Connection conn = null;
@@ -40,7 +40,8 @@ public class testMemberDAO implements testiMemberDAO {
 		
 		pstmt.setString(1, pw);
 		pstmt.setString(2, email);
-		pstmt.setString(3, id);
+		pstmt.setString(3, photo);
+		pstmt.setString(4, id);
 		
 	//	pstmt.setString(1, "1111");
 	//	pstmt.setString(2, "1111");
@@ -67,7 +68,7 @@ public class testMemberDAO implements testiMemberDAO {
 	@Override 
 	public boolean outMember(MemberDTO dto) {
 		
-		String sql1 = " DELETE FROM RESERVATION WHERE M_ID=? ";
+		//String sql1 = " DELETE FROM RESERVATION WHERE M_ID=? ";
 			String sql2 = " DELETE FROM MEMBER WHERE M_ID=? ";
 			
 			Connection conn = null;
@@ -80,7 +81,7 @@ public class testMemberDAO implements testiMemberDAO {
 				conn.setAutoCommit(false);//자동 커밋 안됨
 				log("2/6 Success outMember");
 				
-				pstmt = conn.prepareStatement(sql1);
+				pstmt = conn.prepareStatement(sql2);
 				log("3/6 Success outMember");
 				
 				pstmt.setString(1, dto.getM_id());
@@ -89,7 +90,7 @@ public class testMemberDAO implements testiMemberDAO {
 				count = pstmt.executeUpdate();
 				log("5/6 Success outMember");
 				
-				pstmt.clearParameters();
+				/*pstmt.clearParameters();
 				
 				pstmt = conn.prepareStatement(sql2);
 				
@@ -98,18 +99,18 @@ public class testMemberDAO implements testiMemberDAO {
 				pstmt.executeBatch();
 				
 				conn.commit(); //수동커밋
-				
+				*/
 				}catch(SQLException e){
 					log("Fail outMember");
-					try {
+					/*try {
 						conn.rollback();
 					} catch (SQLException e1) {
-					}
+					}*/
 				}finally {
-					try {
+					/*try {
 						conn.setAutoCommit(true);
 					} catch (SQLException e) {
-					}
+					}*/
 					DBManager.close(conn, pstmt);
 					log("6/6 Success outMember");
 				}

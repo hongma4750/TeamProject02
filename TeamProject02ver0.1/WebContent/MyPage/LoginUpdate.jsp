@@ -1,4 +1,4 @@
-   <%@page import="sist.co.Member.MemberDTO"%>
+   <%@page import="sist.co.Member.MemberDTO,sist.co.Member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,12 +16,18 @@
 <body>
 
 <%
-MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
-
- 
+Object ologin  = session.getAttribute("login");
+MemberDTO mem = null;
+if(ologin==null){
+	%>
+	<script>
+	alert('로그인 하십시오');
+	location.href="index01.jsp";
+	</script>
+	<%
+	return;
+}
+mem = (MemberDTO)ologin;
 %>
 
 <header1>
@@ -42,6 +48,11 @@ session.setAttribute("login",memberdto);
 
 <section1>
 
+
+<%
+
+%>
+
 <form action="index01.jsp?mode=MyPage/LoginUpdateAF" method="post">
 <table align="center">
 <tr>
@@ -50,7 +61,7 @@ session.setAttribute("login",memberdto);
 
 <tr>
 <td>아이디</td>
-<td><input type = "text" name = "id" size="20" value = "<%=memberdto.getM_id()%>"/></td>
+<td><input type = "text" name = "id" size="20" value = "<%=mem.getM_id()%>"/></td>
 </tr>
 
 <tr>
@@ -68,6 +79,7 @@ session.setAttribute("login",memberdto);
 
 </table>
 </form>
+
 
 </section1>
 

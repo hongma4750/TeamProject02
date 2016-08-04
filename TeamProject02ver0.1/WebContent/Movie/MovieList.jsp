@@ -1,4 +1,4 @@
-<%@page import="sist.co.Member.MemberDTO"%>
+<%@page import="sist.co.Member.MemberDTO, sist.co.Member.MemberDAO"%>
 <%@page import="sist.co.Movie.MovieDAO"%>
 <%@page import="sist.co.Movie.MovieDTO"%>
 <%@page import="java.util.List"%>
@@ -25,13 +25,11 @@
 <section1> 
 
 <%
+String id = request.getParameter("id");
+
+MemberDAO memdao =  MemberDAO.getInstance();
 MemberDTO memberdto = new MemberDTO();
- memberdto.setM_id("bom");
-memberdto.setM_pw("123");
-memberdto.setM_name("봄이");
-memberdto.setM_email("b@b.b");
-memberdto.setM_auth(3); 
-session.setAttribute("login",memberdto);
+memberdto = memdao.selectMemberDTO(id);
 
 MovieDAO mdao = MovieDAO.getInstance();
 %>
@@ -60,18 +58,17 @@ for(int i=0;i<mlist.size();i++){
 
 <table>
   <tr>
-    <col width="80"/><col width="80"/><col width="150"/><col width="30"/>
+    <col width="80"/><col width="80"/><col width="150"/>
     <td rowspan="3" valign="top" style="padding:30px;"><img src = "<%=mdto.getMv_img() %>" name = "MvPoster"/></td>  
     <td><h1>♥</h1></td>
     <td><%=mdto.getMv_like() %></td>
-    <td><a href = "index01.jsp?seq=<%=mdto.getMv_seq()%>&mode=Movie/Moviedetail">예매</a></td>
   </tr>
   
-  <tr><td colspan = "3"><h4><b><%=mdto.getMv_title() %></b></h4></td></tr>
+  <tr><td colspan = "2"><h4><b><a href = "index01.jsp?seq=<%=mdto.getMv_seq()%>&mode=Movie/MovieListdetail"><%=mdto.getMv_title() %></a></b></h4></td></tr>
 
   <tr> 
     <td>개봉일</td>
-    <td colspan="2"><%=mdto.getMv_openday() %></td>
+    <td><%=mdto.getMv_openday() %></td>
   </tr>
  
 </tr> 

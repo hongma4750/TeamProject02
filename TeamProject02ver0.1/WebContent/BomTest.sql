@@ -3,9 +3,15 @@ DROP TABLE MEMBER
 SELECT * FROM MEMBER
 
 INSERT INTO MEMBER (M_ID, M_PW,M_NAME,M_EMAIL,M_AUTH,M_PHOTO)
+VALUES ('bom','1234','Bom','b@b.b',3,'none');
+INSERT INTO MEMBER (M_ID, M_PW,M_NAME,M_EMAIL,M_AUTH,M_PHOTO)
 VALUES ('bombom','1234','Bom','b@b.b',3,'none');
 INSERT INTO MEMBER (M_ID, M_PW,M_NAME,M_EMAIL,M_AUTH,M_PHOTO)
 VALUES ('hong','1234','hongma','h@h.h',3,'none');
+INSERT INTO MEMBER (M_ID, M_PW,M_NAME,M_EMAIL,M_AUTH,M_PHOTO)
+VALUES ('admin','admin','admin','b@b.b',1,'none');
+
+
 
 UPDATE MEMBER SET M_PW='7', M_EMAIL='7' WHERE M_ID='bombom'
 
@@ -79,7 +85,7 @@ CREATE TABLE THEATER(
 	TH_CINEMA VARCHAR2(500) NOT NULL,
 	TH_NUM NUMBER NOT NULL,
 	TH_TOTALSEAT NUMBER NOT NULL,
-	TH_LEFTSEAT NUMBER NOT NULL,
+	--TH_LEFTSEAT NUMBER NOT NULL,
 	TH_TIME DATE NOT NULL
 )
 
@@ -90,30 +96,6 @@ START WITH 1 INCREMENT BY 1
 SELECT * FROM THEATER
 
 --timestamp
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, 10, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 10, 10, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '3관', 1, 10, 10, to_date('16-07-29 17:30:00','YY-MM-DD HH24:MI:SS'))
-
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 10, 10, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 10, 10, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'))
-
-INSERT INTO THEATER
-VALUES(TH_SEQ.NEXTVAL, '강남', 4, '1관', 1, 10, 10, to_date('20160729123000','YYYYMMDDHH24MISS'))
 ---------------------------------------------------------------------------
 SELECT * FROM THEATER
 
@@ -121,49 +103,52 @@ update theater set th_totalseat=10, th_leftseat=7 where th_seq='11'
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, 10, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, 10, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, to_date('16-07-29 12:30:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 10, 10, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 10, 10, to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 2, 10,  to_date('16-07-29 3:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, to_date('16-07-29 15:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 10, 10, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 10, 10, to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '신촌', 3, '1관', 1, 10,  to_date('16-07-29 10:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 10, 10, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 10, 10, to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '강남', 1, '1관', 1, 10,  to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '독산', 5, '6관', 5, 10, 10, to_date('14-01-01 20:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '독산', 5, '6관', 5, 10, 10, to_date('14-01-01 20:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '독산', 5, '6관', 5, 10,  to_date('14-01-01 20:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '신촌', 4, '5관', 5, 10, 10, to_date('16-07-31  10:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '신촌', 4, '5관', 5, 10, 10, to_date('16-07-31 10:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '신촌', 4, '5관', 5, 10, to_date('16-07-31 10:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'));
 
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '대학로', 4, '1관', 1, 10, 10, to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10, 10, to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '1관', 1, 10,  to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'));
 
 --11
 INSERT INTO THEATER
 --VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-08-13 13:00:00','YY-MM-DD HH24:MI:SS'))
-VALUES(TH_SEQ.NEXTVAL, '명동', 1, '2관', 1, 10, 10, to_date('16-08-13 13:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, '명동', 1, '2관', 1, 10, to_date('16-08-13 13:00:00','YY-MM-DD HH24:MI:SS'));
 
+INSERT INTO THEATER
+--VALUES(TH_SEQ.NEXTVAL, '명동', 2, '2관', 1, 10, 10, to_date('16-07-29 13:00:00','YY-MM-DD HH24:MI:SS'))
+VALUES(TH_SEQ.NEXTVAL, 'test', 2, '2관', 1, 10, to_date('16-07-29','YY-MM-DD'));
 
 --RESERVATION---------
 DROP TABLE RESERVATION
@@ -220,28 +205,28 @@ update RESERVATION set r_poll=1 where r_seq=1;
 
 --어바웃타임7 좋아요
 INSERT INTO RESERVATION 
-VALUES (R_SEQ.NEXTVAL, 'bombom', 7, 5, 1, 9000, 1,0,0,'S10',to_date('13-12-31 20:00:00','YY-MM-DD HH24:MI:SS'), to_date('14-01-01 20:00:00','YY-MM-DD HH24:MI:SS'), '독산', '6관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 7, 5, 1, 9000, 1,0,0,'S10',to_date('13-12-31 20:00:00','YY-MM-DD HH24:MI:SS'), to_date('14-01-01 20:00:00','YY-MM-DD HH24:MI:SS'), '독산', '6관');
 
 --부산행1
 INSERT INTO RESERVATION 
-VALUES (R_SEQ.NEXTVAL, 'bombom', 1, 1, 0, 27000, 3,0,0,'S8 S9 S10',to_date('16-07-28 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','1관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 1, 1, 0, 27000, 3,0,0,'S8 S9 S10',to_date('16-07-28 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','1관');
 
 --도리를찾아서8 싫어요
 INSERT INTO RESERVATION 
-VALUES (R_SEQ.NEXTVAL, 'bombom', 8, 4, 2, 9000, 1,0,0,'S10',to_date('16-07-30 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-31 20:00:00','YY-MM-DD HH24:MI:SS'), '신촌','5관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 8, 4, 2, 9000, 1,0,0,'S10',to_date('16-07-30 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-07-31 20:00:00','YY-MM-DD HH24:MI:SS'), '신촌','5관');
 
 --도리를찾아서8
 INSERT INTO RESERVATION
-VALUES (R_SEQ.NEXTVAL, 'bombom', 9, 4, 0, 9000, 1,0,0,'S8',to_date('16-08-14 15:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'), '대학로','1관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 9, 4, 0, 9000, 1,0,0,'S8',to_date('16-08-14 15:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 15:00:00','YY-MM-DD HH24:MI:SS'), '대학로','1관');
 
 --부산행1
 
 INSERT INTO RESERVATION
-VALUES (R_SEQ.NEXTVAL, 'bombom', 10, 1, 0, 27000, 3,0,0,'S5,S6,S7',to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','1관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 10, 1, 0, 27000, 3,0,0,'S5,S6,S7',to_date('16-07-29 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-15 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','1관');
 
 --부산행
 INSERT INTO RESERVATION
-VALUES (R_SEQ.NEXTVAL, 'bombom', 11, 1, 0, 27000, 3,0,0,'S5,S6,S7',to_date('16-08-11 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-13 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','2관');
+VALUES (R_SEQ.NEXTVAL, 'bom', 11, 1, 0, 27000, 3,0,0,'S5,S6,S7',to_date('16-08-11 20:00:00','YY-MM-DD HH24:MI:SS'),to_date('16-08-13 20:00:00','YY-MM-DD HH24:MI:SS'), '명동','2관');
 --
 SELECT * FROM theater
 update theater set th_totalseat=10, th_leftseat=7 where th_seq='11'

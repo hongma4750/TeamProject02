@@ -21,15 +21,15 @@
 testMemberDAO dao = new testMemberDAO();
 
 MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
+memberdto = (MemberDTO)session.getAttribute("login");
 
 String mid = memberdto.getM_id();
 String mpw = memberdto.getM_pw();
 System.out.println("mpw: " +mpw);
 String memail = memberdto.getM_email();
 System.out.println("memail: " +memail);
+
+String mphoto = request.getParameter("m_photo");
 
 //회원수정 페이지값
 String u_pw = request.getParameter("pw");
@@ -38,7 +38,7 @@ String u_email = request.getParameter("email");
 System.out.println("u_email: " +u_email);
 System.out.println("mid: " +mid);
 
-boolean isS = dao.updateMember(u_pw, u_email, mid);
+boolean isS = dao.updateMember(u_pw, u_email,mphoto, mid);
 //boolean isS = dao.updateMember("2222", "2222", "BOMBOM");
 System.out.println("isS: " + isS);
 %>

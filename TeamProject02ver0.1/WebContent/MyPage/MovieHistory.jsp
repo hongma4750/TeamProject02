@@ -30,10 +30,18 @@
 </head>
 <body>
 <%
-MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
+Object ologin  = session.getAttribute("login");
+MemberDTO mem = null;
+if(ologin==null){
+	%>
+	<script>
+	alert('로그인 하십시오');
+	location.href="index01.jsp";
+	</script>
+	<%
+	return;
+}
+mem = (MemberDTO)ologin;
 %>
 
 	
@@ -57,7 +65,7 @@ session.setAttribute("login",memberdto);
 
 <%
 ReservationDAO dao = ReservationDAO.getInstance();
-List<ReservationDTO> rLists = dao.getHistoryList(memberdto.getM_id());
+List<ReservationDTO> rLists = dao.getHistoryList(mem.getM_id());
 
 TheaterDAO tdao = TheaterDAO.getInstance();
 MovieDAO mdao = MovieDAO.getInstance();

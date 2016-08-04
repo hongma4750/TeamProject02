@@ -218,7 +218,7 @@ public class ReservationDAO implements iReservateionDAO {
 		}
 			sql2 += " AND TH_SEQ=? ";
 		
-		String sql3 = " UPDATE THEATER SET TH_LEFTSEAT=TH_LEFTSEAT+? WHERE TH_SEQ=? ";
+		//String sql3 = " UPDATE THEATER SET TH_LEFTSEAT=TH_LEFTSEAT+? WHERE TH_SEQ=? ";
 		int num=0;
 		System.out.println("num: " +num);
 		for(int j=0;j<seatname.length;j++){
@@ -258,7 +258,7 @@ public class ReservationDAO implements iReservateionDAO {
 			System.out.println(count);
 			/////2번째 쿼리//////////
 
-			pstmt.clearParameters();
+			/*pstmt.clearParameters();
 			log("5/6 success cancleReserv");
 			
 		    /////3번째 쿼리//////////
@@ -269,7 +269,7 @@ public class ReservationDAO implements iReservateionDAO {
 			log("5-6/6 success cancleReserv");
 			
 			count = pstmt.executeUpdate();
-			log("5-7/6 success cancleReserv");
+			log("5-7/6 success cancleReserv");*/
 			
 			conn.commit(); //수동커밋
 			log("5-8/6 success cancleReserv");

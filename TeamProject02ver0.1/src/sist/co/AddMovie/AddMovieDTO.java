@@ -6,7 +6,7 @@ public class AddMovieDTO {
   
 	private int mv_seq;
 	private String mv_title;
-	private Date mv_openday;
+	private String mv_openday;
 	private String mv_genre;
 	private String mv_story;
 	private String mv_img;
@@ -15,7 +15,7 @@ public class AddMovieDTO {
 	private float mv_hate;	// hate/총 예매
 	private int mv_on;		// 상영여부(1:상영, 0:X)
 	
-	public AddMovieDTO(String mv_title,Date mv_openday,String mv_genre, String mv_story, String mv_img) {
+	public AddMovieDTO(String mv_title,String mv_openday,String mv_genre, String mv_story, String mv_img) {
 		this.mv_title = mv_title;
 		this.mv_openday = mv_openday;
 		this.mv_genre = mv_genre;
@@ -40,11 +40,11 @@ public class AddMovieDTO {
 		this.mv_title = mv_title;
 	}
 
-	public Date getMv_openday() {
+	public String getMv_openday() {
 		return mv_openday;
 	}
 
-	public void setMv_openday(Date mv_openday) {
+	public void setMv_openday(String mv_openday) {
 		this.mv_openday = mv_openday;
 	}
 

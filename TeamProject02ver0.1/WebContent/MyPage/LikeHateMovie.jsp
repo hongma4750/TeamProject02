@@ -26,7 +26,7 @@
 <%
 
 
-//session.setAttribute("login",memberdto);
+
  
 String strseq = request.getParameter("seq");
 int mv_seq = Integer.parseInt(strseq);
@@ -59,7 +59,7 @@ MovieDAO mdao = MovieDAO.getInstance();
 MemberDTO memberdto = new MemberDTO();
 
 
-session.setAttribute("login",memberdto);
+memberdto = (MemberDTO)session.getAttribute("login");
 
 //좋아요 클릭시
 if(lhm==1){

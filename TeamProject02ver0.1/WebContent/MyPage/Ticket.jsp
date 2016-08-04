@@ -33,12 +33,18 @@
 </head>
 <body>
 <%
-MemberDTO memberdto = new MemberDTO();
-
-
-session.setAttribute("login",memberdto);
-
-//예매내역이 있으면 보여주기
+Object ologin  = session.getAttribute("login");
+MemberDTO mem = null;
+if(ologin==null){
+	%>
+	<script>
+	alert('로그인 하십시오');
+	location.href="index01.jsp";
+	</script>
+	<%
+	return;
+}
+mem = (MemberDTO)ologin;
 %>
 
 <%!
@@ -83,7 +89,7 @@ SeatDAO sdao = SeatDAO.getInstance();
 <form action = "index01.jsp?mode=MyPage/CancleReserv" method = "post">
 
 <%
-List<ReservationDTO> rLists = rdao.getTicketList(memberdto.getM_id());
+List<ReservationDTO> rLists = rdao.getTicketList(mem.getM_id());
 //페이징기법/////////
 request.setAttribute("reList",rLists);
 int pageno = toInt(request.getParameter("pageno"));
@@ -165,7 +171,7 @@ for(int j = record_start_no; j < record_start_no+page_per_record_cnt; j++){
             if(rLists.size() == j) break;
 	//
 	ReservationDTO rdto = rLists.get(j);
-	TheaterDTO tdto = tdao.getTheater(rdto.getTh_seq());
+	TheaterDTO tdto = tdao.getTheater(rdto.getMv_seq());
 	MovieDTO mdto = mdao.getmoviedetail(tdto.getMv_seq());
 	List<SeatDTO> slist = sdao.getSeatList(rdto.getTh_seq());
 	

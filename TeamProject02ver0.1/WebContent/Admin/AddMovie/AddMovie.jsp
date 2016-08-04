@@ -13,21 +13,16 @@
 <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-
 <%
-//admin 로그인일때
-//세션을 통해 로그인 유저 정보취득하는 dto
-MemberDTO user = new MemberDTO();
-user.setM_id("test");
-user.setM_pw("test");
-user.setM_name("테스트어드민");
-user.setM_photo(" ");
-user.setM_email("test@test.com");
+MemberDTO memberdto = new MemberDTO();
 
+
+memberdto = (MemberDTO)session.getAttribute("login");
 %>
 
+
 <section1 align = "left"> 
-<form action="Admin/AddMovie/AddMovieAF.jsp" method = "post" enctype = "multipart/form-data">
+<form action="admin.jsp?mode=Admin/AddMovie/AddMovieAF" method = "post" enctype = "multipart/form-data">
 
 <table align = "center" >
 <tr>
@@ -35,7 +30,7 @@ user.setM_email("test@test.com");
 </tr>
 
 <tr>
-  <td width="100px">아이디</td><td><input type = "text" name = "id" value="<%=user.getM_id() %>"  size="40" readonly="readonly"/></td>
+  <td width="100px">아이디</td><td><input type = "text" name = "id" value="<%=memberdto.getM_id() %>"  size="40" readonly="readonly"/></td>
 </tr>
 
 <tr>
@@ -57,7 +52,7 @@ user.setM_email("test@test.com");
   <td colspan="2">&nbsp;</td>
 </tr>
 <tr>
-  <td colspan="2"><textarea rows="15" cols="56" name = "mv_story" value=""></textarea></td>
+  <td colspan="2"><textarea rows="15" cols="56" name = "mv_story"></textarea></td>
 </tr>
 
 <tr>
@@ -65,7 +60,7 @@ user.setM_email("test@test.com");
 </tr>
 
 <tr>
-  <td>포스터</td><td><input type = "file" name = "fileload" value="" size="40"/></td>
+  <td>포스터</td><td><input type = "file" name = "filename" size="40"/></td>
 </tr>
 
 <tr>

@@ -11,8 +11,9 @@ public class TheaterDTO {
 	private String th_cinema;
 	private int th_num;
 	private int th_totalseat;
-	private int th_leftseat;
 	private Timestamp th_time; /////////////timestamp
+	private Timestamp th_s_date;
+	private Timestamp th_e_date;
 	
 	public TheaterDTO() { 
 	}
@@ -65,14 +66,6 @@ public class TheaterDTO {
 		this.th_totalseat = th_totalseat;
 	}
 
-	public int getTh_leftseat() {
-		return th_leftseat;
-	}
-
-	public void setTh_leftseat(int th_leftseat) {
-		this.th_leftseat = th_leftseat;
-	}
-
 	public Timestamp getTh_time() {
 		return th_time;
 	}
@@ -81,11 +74,29 @@ public class TheaterDTO {
 		this.th_time = th_time;
 	}
 
+	public Timestamp getTh_s_date() {
+		return th_s_date;
+	}
+
+	public void setTh_s_date(Timestamp th_s_date) {
+		this.th_s_date = th_s_date;
+	}
+
+	public Timestamp getTh_e_date() {
+		return th_e_date;
+	}
+
+	public void setTh_e_date(Timestamp th_e_date) {
+		this.th_e_date = th_e_date;
+	}
+
 	@Override
 	public String toString() {
 		return "TheaterDTO [th_seq=" + th_seq + ", th_name=" + th_name + ", mv_seq=" + mv_seq + ", th_cinema="
-				+ th_cinema + ", th_num=" + th_num + ", th_totalseat=" + th_totalseat + ", th_leftseat=" + th_leftseat
-				+ ", th_time=" + th_time + "]";
+				+ th_cinema + ", th_num=" + th_num + ", th_totalseat=" + th_totalseat + ", th_time=" + th_time
+				+ ", th_s_date=" + th_s_date + ", th_e_date=" + th_e_date + "]";
 	}
+
+	
 
 }
