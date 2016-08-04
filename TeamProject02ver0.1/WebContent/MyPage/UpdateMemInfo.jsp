@@ -1,11 +1,18 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <%@page import="sist.co.Member.MemberDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -47,19 +54,19 @@ mem = (MemberDTO)ologin;
 <section1>
 
 
-<form action="index01.jsp?mode=MyPage/UpdateMemInfoAF" method= "post">
+<form action="index01.jsp?mode=MyPage/UpdateMemInfoAF" method= "post"  enctype="multipart/form-data">
 
-	<form name="frm" action="Member/JoinAF.jsp" method="post" enctype="multipart/form-data">
+
 		<div class="form-group" >
 			<label for="exampleInputName2">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
    			 <input type="text" class="form-control" id="exampleInputName2" value = "<%=mem.getM_id() %>" readonly="readonly" name = "id" style="width:40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   			 <input type="hidden" name="reid">
+   			 <input type="hidden" name="id">
     		
     		<br><br>
     		
     		
     		<label for="exampleInputName2">비밀번호</label>&nbsp;&nbsp;&nbsp;&nbsp;
-   			 <input type="password" class="form-control" id="exampleInputPassword3" name = "pw" size="20" placeholder="수정가능" value = "<%=mem.getM_pw() %>" style="width:40%;">
+   			 <input type="password" class="form-control" id="exampleInputPassword3" name = "upw" size="20" placeholder="수정가능" value = "<%=mem.getM_pw() %>" style="width:40%;">
     		<br><br>
     		
  
@@ -69,11 +76,11 @@ mem = (MemberDTO)ologin;
     		
     		
     		<label for="exampleInputEmail1">이메일 주소</label>&nbsp;&nbsp;
-    		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="수정가능" name = "email" value = "<%=mem.getM_email() %>"style="width:40%;">
+    		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="수정가능" name = "uemail" value = "<%=mem.getM_email() %>"style="width:40%;">
     		<br><br>
     	
-    		<img src="img/no_image.gif" alt="이미지 못찾음" class="img-thumbnail" style="width:140px;height:140px;" id="imgimg"><br><br>
-    		<input type="file" id="exampleInputFile" name="m_photo" onchange="readURL(this)">
+    		<img src="<%=mem.getM_photo() %>" alt="img/no_image.gif" class="img-thumbnail" style="width:140px;height:140px;" id="imgimg"><br><br>
+    		<input type="file" id="exampleInputFile" name="uphoto" onchange="readURL(this)">
     		<input type="button" value="삭제" onclick="deleteURL()">
 
     		<br><br><br>
