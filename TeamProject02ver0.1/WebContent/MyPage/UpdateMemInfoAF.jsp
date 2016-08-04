@@ -153,7 +153,7 @@ System.out.println("isS: " + isS);
   
  
   &nbsp;&nbsp;<a href = "index01.jsp?mode=MyPage/MovieHistory">나의 관람 영화</a><br>
-</nav1>
+</nav1> 
 
 <section1> <%
 //이전값과 현재 입력값이 다르면 수정 가능
