@@ -11,7 +11,6 @@ public class TheaterDTO {
 	private String th_cinema;
 	private int th_num;
 	private int th_totalseat;
-	private int th_leftseat;
 	private Timestamp th_time; /////////////timestamp
 	
 	public TheaterDTO() { 
@@ -65,14 +64,6 @@ public class TheaterDTO {
 		this.th_totalseat = th_totalseat;
 	}
 
-	public int getTh_leftseat() {
-		return th_leftseat;
-	}
-
-	public void setTh_leftseat(int th_leftseat) {
-		this.th_leftseat = th_leftseat;
-	}
-
 	public Timestamp getTh_time() {
 		return th_time;
 	}
@@ -84,7 +75,7 @@ public class TheaterDTO {
 	@Override
 	public String toString() {
 		return "TheaterDTO [th_seq=" + th_seq + ", th_name=" + th_name + ", mv_seq=" + mv_seq + ", th_cinema="
-				+ th_cinema + ", th_num=" + th_num + ", th_totalseat=" + th_totalseat + ", th_leftseat=" + th_leftseat
+				+ th_cinema + ", th_num=" + th_num + ", th_totalseat=" + th_totalseat 
 				+ ", th_time=" + th_time + "]";
 	}
 

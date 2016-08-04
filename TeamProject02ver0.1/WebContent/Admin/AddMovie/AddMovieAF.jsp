@@ -1,6 +1,6 @@
 <%--톰캣에서 파일사용할때 쓰는것// org.apache:아파치소속--%>
 <%@page import="sist.co.AddMovie.AddMovieDTO"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.*, java.sql.*"%>
 <%@ page import ="org.apache.commons.fileupload.disk.DiskFileItemFactory"%> 
 <%@ page import ="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import ="org.apache.commons.fileupload.FileItem"%>
@@ -8,11 +8,10 @@
 
 <%@ page import="sist.co.AddMovie.AddMovieDAO"%>
 
-<%@ page import ="java.util.Date"%>
-<%@ page import ="java.util.List"%>
-<%@ page import ="java.io.File"%>
-<%@ page import ="java.util.Iterator"%> <%--배열i역할을 하는 반복자 --%>
-<%@ page import ="java.io.IOException"%>
+<%@page import="java.io.PrintWriter"%> 
+<%@page import="java.util.Enumeration"%> 
+<%@page import="com.oreilly.servlet.*"%> 
+<%@page import="com.oreilly.servlet.multipart.*"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,121 +30,70 @@
 
 %>
 
-<%!
-public void processFromField(FileItem item, JspWriter out) throws IOException{
-	String name = item.getFieldName();
-	String value = "";
-	try{
-		value = item.getString("utf-8");	
-	}catch(Exception e){
-		value = item.getString();		
-	}
-}
-public void processUploadFile(FileItem fileItem, String dir, JspWriter out) 
-				throws IOException{
-	String fieldName = fileItem.getFieldName();
-	String filename = fileItem.getName();
-	String contentType = fileItem.getContentType();
-	long sizeInBytes = fileItem.getSize();
-	
-	System.out.println("size:" + sizeInBytes);
-	
-	// 업로드한 파일 있는 경우,
-	if(sizeInBytes > 0){
-		int idx = filename.lastIndexOf("\\");
-		if(idx == -1){
-			idx = filename.lastIndexOf("/");
-		}
-		filename=filename.substring(idx + 1);
-		
-		try{
-			File uploadedFile = new File(dir, filename);
-			fileItem.write(uploadedFile);
-		}catch(Exception e){}
-	}	
-}
-%>
-
 <%
-String fupload = application.getRealPath("/upload");
-//String fupload = "c:\\upload";
+ request.setCharacterEncoding("utf-8");
 
-System.out.println("fupload=" + fupload);
+String dir = application.getRealPath("/upload");
+out.println("경로:"+dir +"<br>");
+int max =10*1024*1024; // 업로드 파일의 최대 크기 지정 
+String mv_title = "";
+String mv_openday = "";
+String mv_genre = "";
+String mv_story = "";
+String filename = "";
+ 
+//실제 파일 업로드 부분
+ try{
+	 MultipartRequest m = new MultipartRequest(request, dir, max, "utf-8", new DefaultFileRenamePolicy());
+	 
+	 //request객체의 getparameter메소드를 이용 폼에서 입력된 값을 받아온다.
+	 mv_title = m.getParameter("mv_title");
+	 System.out.println("mv_title: " + mv_title);
+	 
+	 mv_openday = m.getParameter("mv_openday");
+	 System.out.println("mv_openday: " + mv_openday);
+	 
+	 mv_genre = m.getParameter("mv_genre");
+	 System.out.println("mv_genre: " + mv_genre);
+	 
+	 mv_story = m.getParameter("mv_story");
+	 System.out.println("mv_story: " + mv_story);
+	 
+	 //업로드한 파일들을 Enumeration타입으로 반환한다.
+	 Enumeration files=m.getFileNames();         
+     String file =(String)files.nextElement(); 
+     filename=m.getFilesystemName(file); //저장될 이름이다.
+     
+     String ofile1 =  m.getOriginalFileName("file"); //원본파일 이름이다.
 
-String yourTempDir = fupload;
-int yourMaxRequestSize=100*1024*1024;
-int yourMaxMemorySize=100*1024;
-
-//String id="";
-String mv_title="";
-String mv_openday="";
-String mv_genre="";
-String mv_story="";
-String filename="";
-
-boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-if(isMultipart){		// form or file
-	DiskFileItemFactory factory = new DiskFileItemFactory();
-	
-	factory.setSizeThreshold(yourMaxMemorySize);
-	factory.setRepository(new File(yourTempDir));
-	
-	ServletFileUpload upload = new ServletFileUpload(factory);
-	upload.setSizeMax(yourMaxRequestSize);
-	
-	List<FileItem> items = upload.parseRequest(request);
-	
-	Iterator<FileItem> it = items.iterator();		// <= for(int i = 0; i < 10
-	while(it.hasNext()){
-		FileItem item = it.next();
-		
-		if(item.isFormField()){
-			processFromField(item, out);
-			if(item.getFieldName().equals("mv_title")){
-				mv_title = item.getString("utf-8");
-			}else if(item.getFieldName().equals("mv_openday")){
-				mv_openday = item.getString("utf-8");
-			}else if(item.getFieldName().equals("mv_genre")){
-				mv_genre = item.getString("utf-8");
-			}
-		}else{ 
-			
-			if(item.getFieldName().equals("fileload")){
-				int idx = item.getName().lastIndexOf("\\");
-				if(idx == -1){
-					idx=item.getName().lastIndexOf("/");
-				}
-				filename = item.getName().substring(idx+1);				
-			}
-			processUploadFile(item, fupload, out);
-		} 
-	}	
-}else{
-	System.out.println("Multi Part가 아님");
-} 
-
-
-//업로드후에 DB에 저장하기
+ } catch(Exception e) {
+  e.printStackTrace();
+ }
 
 AddMovieDAO addmdao = AddMovieDAO.getInstance();
 
-SimpleDateFormat transFormat = new SimpleDateFormat("YYYY-MM-DD");
-Date d_mv_openday = transFormat.parse(mv_openday);
+/* SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+Date d_mv_openday = transFormat.parse(mv_openday); */
+java.sql.Date date=java.sql.Date.valueOf("mv_openday");
 
-boolean isS = addmdao.addMovie(new AddMovieDTO(mv_title, d_mv_openday, mv_genre, mv_story, filename));
-
+boolean isS = addmdao.addMovie(new AddMovieDTO(mv_title, date, mv_genre, mv_story, dir));
+%>
+<title>Insert title here</title>
+</head>
+<body>
+<%
 if(isS){
 	%>
 	<script type="text/javascript">
 	alert="영화 추가를 성공했습니다.";
-	location.href="index01.jsp?mode=Admin/Index";	
+	location.href="admin.jsp?mode=Admin/Index";	
 	</script>
 	<%
 }else{ 
 	%>
 	<script type="text/javascript">
 	alert="영화 추가를 실패했습니다.";
-	location.href="index01.jsp?mode=Admin/Index";	
+	location.href="admin.jsp?mode=Admin/Index";	
 	</script>
 <%
 }

@@ -12,7 +12,7 @@ public class DBManager {
 	public static Connection getConnection(){
 		Connection conn=null;
 		 
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@211.238.142.199:1521:xe";
 		String db_id="hr";
 		String db_pw="hr";
 		

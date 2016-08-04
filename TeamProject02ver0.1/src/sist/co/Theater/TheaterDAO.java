@@ -68,7 +68,6 @@ public class TheaterDAO implements ITheater{
 				thdto.setTh_cinema(rs.getString(i++));
 				thdto.setTh_num(rs.getInt(i++));
 				thdto.setTh_totalseat(rs.getInt(i++));
-				thdto.setTh_leftseat(rs.getInt(i++));
 				thdto.setTh_time(rs.getTimestamp(i++));
 				
 				thlist.add(thdto);
@@ -146,7 +145,6 @@ public class TheaterDAO implements ITheater{
 				thdto.setTh_cinema(rs.getString(i++));
 				thdto.setTh_num(rs.getInt(i++));
 				thdto.setTh_totalseat(rs.getInt(i++));
-				thdto.setTh_leftseat(rs.getInt(i++));
 				thdto.setTh_time(rs.getTimestamp(i++));
 			}
 			

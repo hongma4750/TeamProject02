@@ -27,7 +27,7 @@ user.setM_email("test@test.com");
 %>
 
 <section1 align = "left"> 
-<form action="Admin/AddMovie/AddMovieAF.jsp" method = "post" enctype = "multipart/form-data">
+<form action="admin.jsp?mode=Admin/AddMovie/AddMovieAF" method = "post" enctype = "multipart/form-data">
 
 <table align = "center" >
 <tr>
@@ -57,7 +57,7 @@ user.setM_email("test@test.com");
   <td colspan="2">&nbsp;</td>
 </tr>
 <tr>
-  <td colspan="2"><textarea rows="15" cols="56" name = "mv_story" value=""></textarea></td>
+  <td colspan="2"><textarea rows="15" cols="56" name = "mv_story"></textarea></td>
 </tr>
 
 <tr>
@@ -65,7 +65,7 @@ user.setM_email("test@test.com");
 </tr>
 
 <tr>
-  <td>포스터</td><td><input type = "file" name = "fileload" value="" size="40"/></td>
+  <td>포스터</td><td><input type = "file" name = "filename" size="40"/></td>
 </tr>
 
 <tr>
