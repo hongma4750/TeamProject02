@@ -4,6 +4,7 @@
     <%@ page import="sist.co.Theater.*" %>
     <%@ page import="java.sql.*" %>
     <%@ page import="java.util.*,java.util.Date" %>
+    <%@ page import="java.text.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,9 +40,14 @@
 	/* formatter = 
 			new java.text.SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", java.util.Locale.KOREA); 
 			java.util.Date	e = formatter.parse(th_e_date); */
-			
-			java.util.Date s = new java.text.SimpleDateFormat("yyyyMMdd").parse(th_s_date);
-			java.util.Date e = new java.text.SimpleDateFormat("yyyyMMdd").parse(th_e_date);
+
+	System.out.println("변경 전 : "+th_s_date);
+	DateFormat df = new SimpleDateFormat("yyyymmdd");
+	
+	Date s = df.parse(th_s_date);
+	Date e = df.parse(th_e_date);
+	System.out.println("th_s_Date : "+s);
+	System.out.println("th_e_Date : "+e);
 	Timestamp time = java.sql.Timestamp.valueOf(th_time);
 	
 	TheaterDTO dto = new TheaterDTO();

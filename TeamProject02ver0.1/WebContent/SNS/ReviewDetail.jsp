@@ -331,7 +331,7 @@ request.setAttribute("comList", comList);
 	        });
 	    	
 	    	}else{
-	    		alert("그만눌러이씨");
+	    		alert("그만눌러요");
 	    	}
 	    	
 	    });

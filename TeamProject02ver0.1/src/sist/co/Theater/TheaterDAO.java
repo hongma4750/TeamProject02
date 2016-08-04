@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,7 +290,7 @@ public class TheaterDAO implements ITheater{
 	}
 	
 	public void updateForm(TheaterDTO dto){
-		String sql = "update theater set mv_seq=?, th_s_date=TO_DATE(?, 'YYYY-MM-DD HH24:MI'),th_e_date=TO_DATE(?, 'YYYY-MM-DD HH24:MI'), th_time=? where th_seq=?";
+		String sql = "update theater set mv_seq=?, th_s_date=TO_DATE(?, 'YYYYMMDD'),th_e_date=TO_DATE(?, 'YYYYMMDD '), th_time=? where th_seq=?";
 		
 		Connection conn = null;
 		PreparedStatement pstmt =null;
@@ -299,10 +301,17 @@ public class TheaterDAO implements ITheater{
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getMv_seq());
 			
+			DateFormat df = new SimpleDateFormat("yyyymmdd");
+			
+			String ss = df.format(dto.getTh_s_date());
+			
+			System.out.println("ss : "+ss);
+			
+			String ee =df.format(dto.getTh_e_date());
 			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
-			pstmt.setDate(2,(Date)dto.getTh_s_date());
-			pstmt.setDate(3,(Date)dto.getTh_e_date());
+			pstmt.setString(2,ss);
+			pstmt.setString(3,ee);
 			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			pstmt.setTimestamp(4, dto.getTh_time());
 			pstmt.setInt(5, dto.getTh_seq());
