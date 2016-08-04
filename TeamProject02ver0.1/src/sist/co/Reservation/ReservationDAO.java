@@ -2,6 +2,7 @@ package sist.co.Reservation;
 
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -387,54 +388,100 @@ public class ReservationDAO implements iReservateionDAO {
 
 	}
 
-	@Override
-	public boolean reserve(ReservationDTO rdto) {
+	   @Override
+	   public boolean reserve(ReservationDTO rdto) {
 
-		String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-				
-		int count = 0;
-		
-		try{
-			conn = DBManager.getConnection();
-			log("2/6 Success reserve");
-			
-			psmt = conn.prepareStatement(sql);
-			int i = 1;
-			psmt.setString(i++, rdto.getM_id());
-			psmt.setInt(i++, rdto.getTh_seq());
-			psmt.setInt(i++, rdto.getMv_seq());
-			psmt.setInt(i++, rdto.getR_totalprice());
-			psmt.setInt(i++, rdto.getR_adult());
-			psmt.setInt(i++, rdto.getR_student());
-			psmt.setInt(i++, rdto.getR_elder());
-			psmt.setString(i++, rdto.getR_seat());
-			psmt.setTimestamp(i++, rdto.getR_time());	// (0801수정할거) DATE형에 timestamp형 넣어도 잘 들어가는지 확인해보기
-			psmt.setTimestamp(i++, rdto.getR_viewtime());
-			psmt.setString(i++, rdto.getR_thname());
-			psmt.setString(i++, rdto.getR_cinema());
-			log("3/6 Success reserve");
-			
-			count = psmt.executeUpdate();
-			log("4/6 Success reserve");
-			
-			
-		}catch(SQLException e){
-			log("Fail reserve");
-		}finally{
-			DBManager.close(conn, psmt);
-			log("6/6 Success reserve");
-		}
-		
-		return count>0?true:false;
-	}
-	
-	
-	
-	
-	
-	
+	      String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?, ?, SYSDATE, TO_DATE(?, 'YYYY-MM-DD HH24:MI'), ?, ?) ";
+	      /*String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?, ?, SYSDATE, TO_DATE(?, 'YYYY-MM-DD'), ?, ?) ";*/
+	      
+	      Connection conn = null;
+	      PreparedStatement psmt = null;
+	            
+	      int count = 0;
+	      //System.out.println("(method)rdto.getR_viewtime() : "+rdto.getR_viewtime());
+	      Date tmp = new Date(rdto.getR_viewtime().getTime());
+	      System.out.println("tmp:" + tmp);   // YYYY-MM-DD HH24:MI 형태가 되어야함
+	      
+	      try{
+	         conn = DBManager.getConnection();
+	         log("2/6 Success reserve");
+	         
+	         psmt = conn.prepareStatement(sql);
+	         int i = 1;
+	         psmt.setString(i++, rdto.getM_id());
+	         psmt.setInt(i++, rdto.getTh_seq());
+	         psmt.setInt(i++, rdto.getMv_seq());
+	         psmt.setInt(i++, rdto.getR_totalprice());
+	         psmt.setInt(i++, rdto.getR_adult());
+	         psmt.setInt(i++, rdto.getR_student());
+	         psmt.setInt(i++, rdto.getR_elder());
+	         psmt.setString(i++, rdto.getR_seat());
+	         //psmt.setTimestamp(i++, rdto.getR_viewtime());   // (0801수정할거) DATE형에 timestamp형 넣어도 잘 들어가는지 확인해보기 : timestamp => date
+	         psmt.setDate(i++, tmp);
+	         psmt.setString(i++, rdto.getR_thname());
+	         psmt.setString(i++, rdto.getR_cinema());
+	         log("3/6 Success reserve");
+	         
+	         count = psmt.executeUpdate();
+	         log("4/6 Success reserve");
+	         
+	         
+	      }catch(SQLException e){
+	         System.out.println(e.getMessage());
+	         log("Fail reserve");
+	      }finally{
+	         DBManager.close(conn, psmt);
+	         log("6/6 Success reserve");
+	      }
+	      
+	      return count>0?true:false;
+	   }
 
+	   // Done.jsp에서 새로고침하면 똑같은 데이터가 여러번 들어가는 문제가 발생하지 않도록 , 확인하는 작업
+	   @Override
+	   public boolean confirmreserve(ReservationDTO rdto) {
+	      
+	      //String sql = " INSERT INTO RESERVATION VALUES(R_SEQ.NEXTVAL, ?, ?, ?, 0, ?, ?, ?, ?, ?, SYSDATE, TO_DATE(?, 'YYYY-MM-DD HH24:MI'), ?, ?) ";
+	      String sql = " SELECT R_SEQ FROM RESERVATION WHERE M_ID=? AND TH_SEQ=? AND MV_SEQ=? AND R_SEAT=? AND R_VIEWTIME=TO_DATE(?, 'YYYY-MM-DD HH24:MI') ";
+	      
+	      Connection conn = null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;      
+	      
+	      boolean result = false;
+	      //System.out.println("(method)rdto.getR_viewtime() : "+rdto.getR_viewtime());
+	      Date tmp = new Date(rdto.getR_viewtime().getTime());
+	      //System.out.println("tmp:" + tmp);   // YYYY-MM-DD HH24:MI 형태가 되어야함
+	      
+	      try{
+	         conn = DBManager.getConnection();
+	         log("2/6 Success confirmreserve");
+	         
+	         psmt = conn.prepareStatement(sql);
+	         int i = 1;
+	         psmt.setString(i++, rdto.getM_id());
+	         psmt.setInt(i++, rdto.getTh_seq());
+	         psmt.setInt(i++, rdto.getMv_seq());
+	         psmt.setString(i++, rdto.getR_seat());
+	         psmt.setDate(i++, tmp);               // timestamp => date
+	         log("3/6 Success reseconfirmreserverve");
+	         
+	         rs = psmt.executeQuery();
+	         while(rs.next()){
+	            result = true;   // 데이터 존재
+	         }
+	         log("4/6 Success confirmreserve");
+	         
+	         
+	      }catch(SQLException e){
+	         System.out.println(e.getMessage());
+	         log("Fail confirmreserve");
+	      }finally{
+	         DBManager.close(conn, psmt);
+	         log("6/6 Success confirmreserve");
+	      }
+	      
+	      return result;
+	   }
 }
+	   

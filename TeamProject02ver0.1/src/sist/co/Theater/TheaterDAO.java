@@ -42,46 +42,49 @@ public class TheaterDAO implements ITheater{
 	
 	
 	
-	@Override
-	public List<TheaterDTO> getTheaterList(int mv_seq) {
-		
-		String sql = " SELECT * FROM THEATER WHERE MV_SEQ=? ";
-		
-		Connection conn=null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		
-		List<TheaterDTO> thlist = new ArrayList<TheaterDTO>();
+	// sysdate >= th_s_date 이면서 sysdate <= th_e_date 인 Theater data만 불러와야함. 
+	   @Override
+	   public List<TheaterDTO> getTheaterList(int mv_seq) {
+	      
+	      String sql = " SELECT * FROM THEATER WHERE MV_SEQ=? AND SYSDATE>=TH_S_DATE AND SYSDATE<=TH_E_DATE ORDER BY MV_SEQ ";
+	      
+	      Connection conn=null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;
+	      
+	      List<TheaterDTO> thlist = new ArrayList<TheaterDTO>();
 
-		try {
-			conn = DBManager.getConnection();
-			psmt=conn.prepareStatement(sql);
-			psmt.setInt(1, mv_seq);
-			
-			
-			rs = psmt.executeQuery();
-			while(rs.next()){
-				TheaterDTO thdto = new TheaterDTO();
-				int i = 1;
-				thdto.setTh_seq(rs.getInt(i++));
-				thdto.setTh_name(rs.getString(i++));
-				thdto.setMv_seq(rs.getInt(i++));
-				thdto.setTh_cinema(rs.getString(i++));
-				thdto.setTh_num(rs.getInt(i++));
-				thdto.setTh_totalseat(rs.getInt(i++));
-				thdto.setTh_time(rs.getTimestamp(i++));
-				
-				thlist.add(thdto);
-			}
-			
-			
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}finally{
-			DBManager.close(conn, psmt);
-		}
-		return thlist;
-	}
+	      try {
+	         conn = DBManager.getConnection();
+	         psmt=conn.prepareStatement(sql);
+	         psmt.setInt(1, mv_seq);
+	         
+	         
+	         rs = psmt.executeQuery();
+	         while(rs.next()){
+	            TheaterDTO thdto = new TheaterDTO();
+	            int i = 1;
+	            thdto.setTh_seq(rs.getInt(i++));
+	            thdto.setTh_name(rs.getString(i++));
+	            thdto.setMv_seq(rs.getInt(i++));
+	            thdto.setTh_cinema(rs.getString(i++));
+	            thdto.setTh_num(rs.getInt(i++));
+	            thdto.setTh_totalseat(rs.getInt(i++));
+	            thdto.setTh_time(rs.getTimestamp(i++));
+	            thdto.setTh_s_date(rs.getDate(i++));
+	            thdto.setTh_e_date(rs.getDate(i++));
+	            
+	            thlist.add(thdto);
+	         }
+	         
+	         
+	      } catch (SQLException e) {
+	         System.out.println(e.getMessage());
+	      }finally{
+	         DBManager.close(conn, psmt);
+	      }
+	      return thlist;
+	   }
 
 	@Override
 	public List<TheaterDTO> getTh_num(int mv_seq, String th_name, String th_cinema) {
@@ -285,7 +288,7 @@ public class TheaterDAO implements ITheater{
 	}
 	
 	public void updateForm(TheaterDTO dto){
-		String sql = "update theater set mv_seq=?, th_s_date=?,th_e_date=?, th_time=? where th_seq=?";
+		String sql = "update theater set mv_seq=?, th_s_date=TO_DATE(?, 'YYYY-MM-DD HH24:MI'),th_e_date=TO_DATE(?, 'YYYY-MM-DD HH24:MI'), th_time=? where th_seq=?";
 		
 		Connection conn = null;
 		PreparedStatement pstmt =null;
@@ -295,8 +298,12 @@ public class TheaterDAO implements ITheater{
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getMv_seq());
-			pstmt.setTimestamp(2, dto.getTh_s_date());
-			pstmt.setTimestamp(3, dto.getTh_e_date());
+			
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
+			pstmt.setDate(2,(Date)dto.getTh_s_date());
+			pstmt.setDate(3,(Date)dto.getTh_e_date());
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			pstmt.setTimestamp(4, dto.getTh_time());
 			pstmt.setInt(5, dto.getTh_seq());
 			pstmt.executeUpdate();
@@ -307,5 +314,79 @@ public class TheaterDAO implements ITheater{
 		}
 		
 	}
+
+
+	   @Override
+	   public boolean addTheater(TheaterDTO thdto) {
+	      
+	      String sql = " INSERT INTO THEATER VALUES(TH_SEQ.NEXTVAL, ?, '', ?, ?, ?, "
+	            + " to_date('2000-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS'), to_date('2000-01-01','YYYY-MM-DD'), to_date('2000-01-01','YYYY-MM-DD')) ";
+	      
+	      Connection conn=null;
+	      PreparedStatement psmt = null;
+	      
+	      int count = 0;
+	      
+	      try{
+	         conn = DBManager.getConnection();
+	         log("2/6 Success addTheater");
+	         
+	         psmt = conn.prepareStatement(sql);
+	         int i = 1;
+	         psmt.setString(i++, thdto.getTh_name());
+	         psmt.setString(i++, thdto.getTh_cinema());
+	         psmt.setInt(i++, thdto.getTh_num());
+	         psmt.setInt(i++, thdto.getTh_totalseat());
+	         log("3/6 Success addTheater");
+	         
+	         count = psmt.executeUpdate();
+	         log("4/6 Success addTheater");
+	         
+	         
+	      }catch(SQLException e){
+	         System.out.println(e.getMessage());
+	         log("Fail addTheater");
+	      }finally{
+	         DBManager.close(conn, psmt);
+	         log("6/6 Success addTheater");
+	      }
+	      
+	      return count>0?true:false;
+	   }
+
+	   // 매일 날짜에 따라  seat DB의 삭제, 생성에 필요한 메소드 : // 모레에 상영하는 영화관의 모든 좌석들 DATA 생성하는데 필요
+	   @Override
+	   public List<TheaterDTO> getAllTheaterList() {
+	      
+	      String sql = " SELECT TH_SEQ, TH_TOTALSEAT FROM THEATER WHERE TO_DATE(SYSDATE+2, 'YYYY-MM-DD')<=TO_DATE(TH_E_DATE, 'YYYY-MM-DD') ORDER BY TH_SEQ ";
+	      
+	      Connection conn=null;
+	      PreparedStatement psmt = null;
+	      ResultSet rs = null;
+	      
+	      List<TheaterDTO> thlist = new ArrayList<TheaterDTO>();
+
+	      try {
+	         conn = DBManager.getConnection();
+	         psmt=conn.prepareStatement(sql);
+
+	         rs = psmt.executeQuery();
+	         while(rs.next()){
+	            TheaterDTO thdto = new TheaterDTO();
+	            int i = 1;
+	            thdto.setTh_seq(rs.getInt(i++));
+	            thdto.setTh_totalseat(rs.getInt(i++));
+	            
+	            thlist.add(thdto);
+	         }
+	         
+	         
+	      } catch (SQLException e) {
+	         System.out.println(e.getMessage());
+	      }finally{
+	         DBManager.close(conn, psmt);
+	      }
+	      return thlist;
+	   }
 
 }

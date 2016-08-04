@@ -36,6 +36,7 @@
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/AddMovie/AddMovie">영화추가</a></li>
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/showMovie/ShowMovie">상영정보설정</a></li>
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/showMovie/SelectMovie">상영영화설정</a></li>
+	  		<li role="presentation"><a href="admin.jsp?mode=Admin/add/AddTheater">상영관추가</a></li>
 	  		<li role="presentation"><a href="admin.jsp?mode=Admin/MemberInfo">회원정보</a></li>
 		</ul>
 		

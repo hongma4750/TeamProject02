@@ -14,31 +14,31 @@ ReservationDTO rdto = (ReservationDTO)session.getAttribute("rdto");
 if(rdto.getM_id()==null){ %>
 	<script type="text/javascript">
 		alert("로그인하십시오");
-		location.href = "login.jsp";
+		location.href = "../index01.jsp?mode=Member/login";
 	</script>
 <%	
 }else if(rdto.getTh_seq()==0){  %>
 	<script type="text/javascript">
 		alert("영화관을 선택하지 않았습니다");
-		location.href = "Reserve.jsp";
+		location.href = "../index01.jsp?mode=Movie/Reserve";
 	</script>
 <%
 }else if(rdto.getMv_seq()==0){  %>
 	<script type="text/javascript">
 		alert("영화를 선택하지 않았습니다");
-		location.href = "Reserve.jsp";
+		location.href = "../index01.jsp?mode=Movie/Reserve";
 	</script>
 <%
 }else if(rdto.getR_totalprice()==0){  %>
 	<script type="text/javascript">
 		alert("관람인원을 선택하지 않았습니다");
-		location.href = "Reserve.jsp";
+		location.href = "../index01.jsp?mode=Movie/Reserve";
 	</script>
 <%	
 }else{
 	System.out.println(rdto.toString()); %>
 	<script type="text/javascript">
-		location.href = "Seat.jsp";
+		location.href = "../index01.jsp?mode=Movie/Seat";
 	</script>
 <%
 } %>

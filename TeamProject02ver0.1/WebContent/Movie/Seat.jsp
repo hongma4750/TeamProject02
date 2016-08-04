@@ -1,3 +1,5 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="sist.co.Theater.TheaterDTO"%>
 <%@page import="sist.co.Theater.TheaterDAO"%>
 <%@page import="sist.co.Movie.MovieDTO"%>
@@ -38,18 +40,18 @@ function doSubmit() {
  
      document.myform.arr.value = arr.join(","); 
      document.myform.method = "POST";
-     document.myform.action = "SeatAf.jsp";
+     document.myform.action = "Movie/SeatAf.jsp";
      document.myform.submit();
 }
 function goReserve(){
-	location.href="Reserve.jsp";
+	location.href="index01.jsp?mode=Movie/Reserve";
 }
 function ini(){
 	var iniarr = [nu];
 	for(var i = 0; i < nu; i++){
 		// 선택한 좌석 버튼 초기화
 		iniarr[i] = $("p:eq("+i+")").text();
-		document.getElementById(iniarr[i]).disabled='false';
+		document.getElementById(iniarr[i]).disabled=false;
 		document.getElementById(iniarr[i]).style.backgroundColor='#4169e1';
 		// 선택한 좌석번호 초기화
 		var str = "p" + i;
@@ -134,14 +136,20 @@ public String[] getRow(List<SeatDTO> slist){	// rowname 추출
 	
 	return result;
 }
-
+public String timestamp2string(Timestamp tmsp){
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	return sdf.format(tmsp);
+}
 %>
 <%
 ReservationDTO rdto = (ReservationDTO)session.getAttribute("rdto");
 System.out.println("rdto.getTh_seq():"+rdto.getTh_seq());
 int people = rdto.getR_adult() + rdto.getR_student() + rdto.getR_elder();
+
 SeatDAO sdao = SeatDAO.getInstance();
-List<SeatDTO> slist = sdao.getSeatList(rdto.getTh_seq());
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+int leftseat = sdao.cal_leftSeat(rdto.getTh_seq(), sdf.format(rdto.getR_viewtime()));	//잔여석 
+List<SeatDTO> slist = sdao.getSeatList(rdto.getTh_seq(), sdf.format(rdto.getR_viewtime()));
 String[] rowname = getRow(slist);
 String[] chooseseat = new String[people];	// 선택한 인원수 == 배열 크기  
 
@@ -150,20 +158,21 @@ MovieDTO mdto = mdao.getmoviedetail(rdto.getMv_seq());
 TheaterDAO thdao = TheaterDAO.getInstance();
 TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 
+
 %>
 
 <a href="tmpadmin.jsp">tmpadmin</a>	<%-- 임시 좌석 DB insert에 해당. 원래 admin이 하는일 --%>
 
 
-<table>
+<table width="800px" height="500px">
 	<tr>
 		<td colspan="3">
 			<table>
 				<tr>
-					<th colspan="14" id="screen">Screen</th>
+					<th colspan="16" id="screen">Screen</th>
 				</tr>
 				<tr>
-					<th colspan="14" class="topbottom"></th>
+					<th colspan="16" class="topbottom"></th>
 				</tr>		
 				<%	for(int i = 0; i < rowname.length; i++){ %>
 						<tr>
@@ -172,12 +181,16 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 							<%
 								for(int j = 0; j < slist.size(); j++){
 									if(rowname[i].equals(slist.get(j).getS_name().substring(0, 1))){
-										if(slist.get(i).getS_check()==0){	// 빈자리 : anchor%>			
+										if(slist.get(j).getS_check()==0){	// 빈자리 : anchor%>			
 										 	<%-- <td><a href="Seat.jsp"><%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length()))+1 %></a></td> --%>
 											<td><input class="btsable" type='button' id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) %>' onclick="setDisable('<%=slist.get(j).getS_name() %>')" /></td>
 							<%			}else{ %> 									
 											<%-- <td><%=slist.get(j).getS_name().substring(1,2) %></td> --%> 
-											<td><input class="btsdisable" type='button' id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) %>' disabled="disabled" /></td>
+											<td><input class="btsdisable" type='button' disabled="disabled" id='<%=slist.get(j).getS_name() %>' value='<%=Integer.parseInt(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) %>' /></td>
+							<%			}
+										// 좌석 배치도 관련 : 통로
+										if("2".equals(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length())) || "8".equals(slist.get(j).getS_name().substring(1,slist.get(j).getS_name().length()))){%>
+											<td class="rowname"></td>	<%--왼쪽통로 --%>
 							<%			}
 									}
 								} %>
@@ -192,7 +205,7 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 			</table>
  		</td>
  		<td>
- 			<table height="200px">
+ 			<table>
  				<tr><th>선택한 좌석번호</th></tr>
  			<%	for(int i = 0; i < people; i++){ %>
  					<tr><td><p id="p<%=i%>">좌석<%=i+1%></p></td></tr>
@@ -212,24 +225,24 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 				</tr>
 				<tr>
 					<th>상영관</th>
-					<td><%=thdto.getTh_name() %></td>	
+					<td><%=thdto.getTh_name() %>  <%=rdto.getR_cinema() %></td>	
 				</tr>
 				<tr>
 					<th>날짜</th>
 					<%-- <td><%=year %>-<%=month %>-<%=sdate %> <%=getChooseTime(thlist, th_seq) %></td> --%>
-					<td>선택한날짜</td>
+					<td><%=timestamp2string(rdto.getR_viewtime()) %></td>
 				</tr>
 				<tr>
 					<th>인원</th>
 					<td>성인(<%=rdto.getR_adult() %>) 학생(<%=rdto.getR_student() %>) 우대(<%=rdto.getR_elder() %>)</td>
 				</tr>
 				<tr>
-					<th>금액</th>
-					<td><%=rdto.getR_totalprice() %>원</td>	<%--(0801수정할거)가격 comma표시 --%>
+					<th>잔여석</th>
+					<td colspan="2"><%=leftseat %>석/<%=thdto.getTh_totalseat() %>석</td>
 				</tr>
 				<tr>
-					<th>잔여석</th>
-					<td colspan="2"><%=thdto.getTh_leftseat() %>석</td>
+					<th>금액</th>
+					<td><%=rdto.getR_totalprice() %>원</td>	<%--(0801수정할거)가격 comma표시 --%>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -256,6 +269,7 @@ TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
 
 
 <a href="Index.jsp">HOME</a>
+<a href="Reserve.jsp">다시예매하기</a>
 
 
   

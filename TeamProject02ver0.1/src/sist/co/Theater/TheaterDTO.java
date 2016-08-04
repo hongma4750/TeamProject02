@@ -12,8 +12,8 @@ public class TheaterDTO {
 	private int th_num;
 	private int th_totalseat;
 	private Timestamp th_time;
-	private Timestamp th_s_date;
-	private Timestamp th_e_date;
+	private Date th_s_date;
+	private Date th_e_date;
 	
 	
 	
@@ -83,19 +83,20 @@ public class TheaterDTO {
 	
 	
 
-	public Timestamp getTh_s_date() {
+	
+	public Date getTh_s_date() {
 		return th_s_date;
 	}
 
-	public void setTh_s_date(Timestamp th_s_date) {
+	public void setTh_s_date(Date th_s_date) {
 		this.th_s_date = th_s_date;
 	}
 
-	public Timestamp getTh_e_date() {
+	public Date getTh_e_date() {
 		return th_e_date;
 	}
 
-	public void setTh_e_date(Timestamp th_e_date) {
+	public void setTh_e_date(Date th_e_date) {
 		this.th_e_date = th_e_date;
 	}
 

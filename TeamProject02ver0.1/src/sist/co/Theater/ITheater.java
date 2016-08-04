@@ -11,6 +11,9 @@ public interface ITheater {
 	//지점 group by
 	List<TheaterDTO> groupByTheater();
 	
+	// ay admin
+	   boolean addTheater(TheaterDTO thdto);
+	   List<TheaterDTO> getAllTheaterList();
 
 }
 

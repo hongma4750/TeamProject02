@@ -1,7 +1,10 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="sist.co.Theater.*" %>
     <%@ page import="java.sql.*" %>
+    <%@ page import="java.util.*,java.util.Date" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,17 +26,31 @@
 	TheaterDAO dao = TheaterDAO.getInstance();
 	int th_seq = dao.findTh_seq(th_name, th_cinema, th_num);
 	
-	System.out.println("zz : "+th_s_date);
-	Timestamp s = java.sql.Timestamp.valueOf(th_s_date);
-	Timestamp e = java.sql.Timestamp.valueOf(th_e_date);
+	/* SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date s = transFormat.parse(th_s_date);
+	SimpleDateFormat transFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date e = transFormat1.parse(th_e_date); */
+	
+	
+/* 	java.text.SimpleDateFormat formatter = 
+	new java.text.SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", java.util.Locale.KOREA); 
+	java.util.Date	s = formatter.parse(th_s_date);
+	 */
+	/* formatter = 
+			new java.text.SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", java.util.Locale.KOREA); 
+			java.util.Date	e = formatter.parse(th_e_date); */
+			
+			java.util.Date s = new java.text.SimpleDateFormat("yyyyMMdd").parse(th_s_date);
+			java.util.Date e = new java.text.SimpleDateFormat("yyyyMMdd").parse(th_e_date);
 	Timestamp time = java.sql.Timestamp.valueOf(th_time);
 	
 	TheaterDTO dto = new TheaterDTO();
 	
 	dto.setTh_seq(th_seq);
 	dto.setTh_s_date(s);
-	dto.setTh_time(time);
 	dto.setTh_e_date(e);
+	dto.setTh_time(time);
+	
 	dto.setMv_seq(mv_seq);
 	
 	dao.updateForm(dto);

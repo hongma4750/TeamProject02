@@ -25,12 +25,12 @@ System.out.println("people:"+people+",arr.length:"+arr.length);
 if(people > arr.length){%>
 	<script type="text/javascript">
 		alert("좌석을 다시 선택하세요");
-		location.href = "Seat.jsp";
+		location.href = "../index01.jsp?mode=Seat";
 	</script>
 <%}else{
 	rdto.setR_seat(sarr); %>
 	<script type="text/javascript">
-		location.href = "Pay.jsp";
+		location.href = "../index01.jsp?mode=Movie/Pay";
 	</script>
 <%} %>
 </body>

@@ -176,7 +176,7 @@ for(int i=1;i<=lastDay;i++){
 	%>
 
 	<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">
-	<%String th_s_date = m_year+"-"+two(m_month+"")+"-"+two(i+"")+" 00:00:00"; %>
+	<%String th_s_date =  m_year+"-"+two(m_month+"")+"-"+two(i+"")+" 00:00:00" ; %>
 	<a href = "admin.jsp?mode=Admin/showMovie/ShowMovie
 	&th_name=<%=request.getParameter("th_name") %>
 	&th_cinema=<%=request.getParameter("th_cinema") %>
@@ -278,7 +278,7 @@ for(int i=1;i<=lastDay;i++){
 	%>
 
 	<td onmouseover ="changeBg(1,this)" onmouseout="changeBg(2,this)">
-	<%String th_e_date = w_year+"-"+two(w_month+"")+"-"+two(i+"")+" 00:00:00"; %>
+	<%String th_e_date = w_year+"-"+two(w_month+"")+"-"+two(i+"")+" 00:00:00" ; %>
 	
 	
 	<a href = "admin.jsp?mode=Admin/showMovie/ShowMovie

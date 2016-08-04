@@ -1,3 +1,12 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="sist.co.Seat.SeatDTO"%>
+<%@page import="sist.co.Seat.SeatDAO"%>
+<%@page import="sist.co.Theater.TheaterDTO"%>
+<%@page import="sist.co.Theater.TheaterDAO"%>
+<%@page import="sist.co.Movie.MovieDTO"%>
+<%@page import="sist.co.Movie.MovieDAO"%>
 <%@page import="sist.co.Reservation.ReservationDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,15 +15,140 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>pay</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+function paychoose(value){
+	var selectValue = document.getElementById('selectone').value;
+	document.myform.mypay.value=selectValue;
+	//alert(selectValue);
+}
+function dosubmit(){
+	document.myform.method="GET";
+	document.myform.action="Movie/PayAf.jsp";
+	document.submit();
+}
+function goSeat(){
+	location.href="index01.jsp?mode=Movie/Seat";
+}
+</script>
+<style type="text/css">
+table {
+	border-collapse: collapse;
+	border: 1px solid black;	
+}
+th,td{
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: center;
+}
+th.myhead{
+	font-size: 20px;
+	height: 20px;
+	background-color: #dcdcdc;
+}
+.mydata{
+	height: 50px;
+	font-size: 20px;
+}
+</style>
 </head>
 <body>
-
+<%!
+public String timestamp2string(Timestamp tmsp){
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	return sdf.format(tmsp);
+}
+public String pricecomma(int num){	// 가격에 세자리마다 comma 표시
+	DecimalFormat df = new DecimalFormat("#,##0");	//DecimalFormat("#,##0.00")이런 포맷으로는 항상 소수점 2자리가 반올림되어 나옴
+	return df.format(num);
+}
+%>
 <%
 ReservationDTO rdto = (ReservationDTO)session.getAttribute("rdto");
 System.out.println("rdto.getTh_seq():"+rdto.getTh_seq()+",rdto.getR_seat()"+rdto.getR_seat());
 
+MovieDAO mdao = MovieDAO.getInstance();
+MovieDTO mdto = mdao.getmoviedetail(rdto.getMv_seq());
+TheaterDAO thdao = TheaterDAO.getInstance();
+TheaterDTO thdto = thdao.getTheaterinform(rdto.getTh_seq());
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+SeatDAO sdao = SeatDAO.getInstance();
+int leftseat = sdao.cal_leftSeat(rdto.getTh_seq(), sdf.format(rdto.getR_viewtime()));	//잔여석 
 
 %>
+
+
+<table>
+	<tr>
+		<th width="500px" class="myhead">총 결제 금액</th>
+		<td rowspan="5">
+			<table width="100%" height="100%">
+				<tr> <!-- <td colspan="2"><img src="../img/arrow.png" alt="포스터"></td> -->
+					<td colspan="2"><img src="<%=mdto.getMv_img()%>"></td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><%=mdto.getMv_title()%></td>
+				</tr>
+				<tr>
+					<th>상영관</th>
+					<td><%=thdto.getTh_name() %> <%=rdto.getR_cinema() %></td>	
+				</tr>
+				<tr>
+					<th>날짜</th>
+					<%-- <td><%=year %>-<%=month %>-<%=sdate %> <%=getChooseTime(thlist, th_seq) %></td> --%>
+					<td><%=timestamp2string(rdto.getR_viewtime()) %></td>
+				</tr>
+				<tr>
+					<th>인원</th>
+					<td>성인(<%=rdto.getR_adult() %>) 학생(<%=rdto.getR_student() %>) 우대(<%=rdto.getR_elder() %>)</td>
+				</tr>
+				<tr>
+					<th>좌석</th>
+					<td colspan="2"><%=rdto.getR_seat() %></td>
+				</tr>
+				<tr>
+					<th>잔여석</th>
+					<td colspan="2"><%=leftseat %>석/<%=thdto.getTh_totalseat() %>석</td>
+				</tr>
+				<tr>
+					<th>금액</th>
+					<td style="font-size: 18px;"><%=pricecomma(rdto.getR_totalprice()) %>원</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+					<form name="myform">
+						<input type="button" value="이전단계" onclick="goSeat()">
+					
+						<input type="hidden" name="mypay" value="">
+						<input type="submit" value="다음단계" onclick="dosubmit()">
+					</form>	
+					</td>				
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="mydata"><b><%=pricecomma(rdto.getR_totalprice()) %>원</b></td>
+	</tr>
+	<tr>
+		<th class="myhead">결제 수단 선택</th>
+	</tr>
+	<tr>
+		<td class="mydata">
+			<select id="selectone" size="3" style="width: 250px; font-size: 18px" onchange="paychoose()">
+				<option selected="selected">신용/체크카드</option>
+				<option>휴대폰결제</option>
+				<option>무통장입금</option>
+			</select>
+		</td>
+	</tr>	
+</table>
+
+
+<a href="Index.jsp">HOME</a>
+<a href="Reserve.jsp">다시예매하기</a>
 
 </body>
 </html>
