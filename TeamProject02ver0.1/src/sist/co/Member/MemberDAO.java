@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import sist.co.DBManager.DBManager;
 
@@ -238,6 +240,90 @@ public class MemberDAO implements iMember {
 		
 		return memberdto;
 	}
+	
+	//관리자 모드 회원정보 들어가면 DB에 저장된 순서대로 뜨는 정보
+		@Override
+		public List<MemberDTO> UserInfo() {
+			
+			String sql = " SELECT M_ID, M_NAME, M_EMAIL FROM MEMBER ";
+			
+			Connection conn= null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			List<MemberDTO> m_list = new ArrayList<MemberDTO>();
+			
+			try{
+				conn=DBManager.getConnection();
+				log("2/5 Success UserInfo");
+				
+				pstmt= conn.prepareStatement(sql);
+				log("3/5 Success UserInfo");
+					
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					MemberDTO dto = new MemberDTO();
+					dto.setM_id(rs.getString("m_id"));
+					dto.setM_name(rs.getString("m_name"));
+					dto.setM_email(rs.getString("m_email"));
+									
+					m_list.add(dto);
+				}
+				log("4/5 Success UserInfo");
+			}
+			catch(SQLException e){
+				log("Fail UserInfo", e);
+			}
+			finally{
+				DBManager.close(conn, pstmt, rs);
+				log("5/5 Success UserInfo");
+			}
+			return m_list;
+		}
+		
+		// 회원정보 ID 또는 이름 순으로 정렬
+		@Override
+		public List<MemberDTO> UserInfo(String sort_m) {
+			
+			List<MemberDTO> m_list = new ArrayList<MemberDTO>();
+			
+			String sql = " SELECT M_ID, M_NAME, M_EMAIL FROM MEMBER "
+						+ " ORDER BY ";
+			sql += sort_m;
+			Connection conn= null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try{
+				conn=DBManager.getConnection();
+				log("2/5 Success UserInfo");
+				
+				pstmt = conn.prepareStatement(sql);
+				log("3/5 Success UserInfo");
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					MemberDTO dto = new MemberDTO();
+					
+					dto.setM_id(rs.getString("m_id"));
+					dto.setM_name(rs.getString("m_name"));
+					dto.setM_email(rs.getString("m_email"));
+							
+					m_list.add(dto);
+				}
+				log("4/5 Success UserInfo");
+			}
+			catch(SQLException e){
+				log("Fail UserInfo", e);
+			}
+			finally{
+				DBManager.close(conn, pstmt, rs);
+				log("5/5 Success UserInfo");
+			}
+			return m_list;
+		}
 	
 	
 	
