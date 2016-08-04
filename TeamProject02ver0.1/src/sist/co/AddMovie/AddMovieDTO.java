@@ -1,5 +1,5 @@
 package sist.co.AddMovie;
-
+ 
 import java.util.Date;
 
 public class AddMovieDTO {

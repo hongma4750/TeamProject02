@@ -1,4 +1,4 @@
-<%--톰캣에서 파일사용할때 쓰는것// org.apache:아파치소속--%>
+ <%--톰캣에서 파일사용할때 쓰는것// org.apache:아파치소속--%>
 <%@page import="sist.co.AddMovie.AddMovieDTO"%>
 <%@page import="java.text.*"%>
 <%@page import="java.util.Date"%>

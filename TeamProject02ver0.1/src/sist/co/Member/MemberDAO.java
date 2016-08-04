@@ -20,7 +20,7 @@ public class MemberDAO implements iMember {
 		if(memberDAO==null){
 			memberDAO = new MemberDAO();
 		}
-		return memberDAO;
+		return memberDAO; 
 	}
 	
 	@Override

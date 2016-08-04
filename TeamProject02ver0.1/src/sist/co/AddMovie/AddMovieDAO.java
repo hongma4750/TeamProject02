@@ -1,4 +1,4 @@
-package sist.co.AddMovie;
+package sist.co.AddMovie; 
 
 import java.sql.Connection;
 import java.sql.Date;

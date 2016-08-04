@@ -1,4 +1,4 @@
---[1] member
+ --[1] member
 
 DROP TABLE MEMBER
 CASCADE CONSTRAINT;

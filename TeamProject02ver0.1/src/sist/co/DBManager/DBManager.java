@@ -1,4 +1,4 @@
-package sist.co.DBManager;
+package sist.co.DBManager; 
 
 import java.sql.Connection;
 import java.sql.DriverManager;

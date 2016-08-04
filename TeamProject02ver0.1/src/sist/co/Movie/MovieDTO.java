@@ -1,4 +1,4 @@
-package sist.co.Movie;
+package sist.co.Movie; 
 import java.io.Serializable;
 import java.util.Date;
 

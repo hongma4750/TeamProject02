@@ -1,4 +1,4 @@
-package sist.co.Member;
+package sist.co.Member; 
 
 public class MemberDTO {
 	 

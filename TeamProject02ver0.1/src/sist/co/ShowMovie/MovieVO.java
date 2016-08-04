@@ -1,4 +1,4 @@
-package sist.co.ShowMovie;
+package sist.co.ShowMovie; 
 import java.io.Serializable;
 public class MovieVO implements Serializable{
 	 
