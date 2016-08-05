@@ -22,14 +22,14 @@
 
 	<form name="frm" action="Member/JoinAF.jsp" method="post" enctype="multipart/form-data">
 		<div class="form-group" >
-			<label for="exampleInputName2">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
-   			 <input type="text" class="form-control" id="exampleInputName2" placeholder="lovely4750" name="m_id" style="width:40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<label for="exampleInputName2">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="text" class="form-control" id="exampleInputName2" placeholder="ID를 입력하세요" name="m_id" style="width:40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    			 <input type="hidden" name="reid">
     		<input type="button" value="중복검사" onclick="idCheck()" >
     		<br><br>
     		
     		
-    		<label for="exampleInputName2">비밀번호</label>&nbsp;&nbsp;&nbsp;&nbsp;
+    		<label for="exampleInputName2">비밀번호</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    			 <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" style="width:40%;" name="m_pw">
     		<br><br>
     		
@@ -37,12 +37,12 @@
    			 <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" style="width:40%;" name="m_pwch">
     		<br><br>
  
-    		<label for="exampleInputName2">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   			 <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" style="width:40%;"name="m_name">
+    		<label for="exampleInputName2">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			 <input type="text" class="form-control" id="exampleInputName2" placeholder="이름을 입력하세요" style="width:40%;"name="m_name">
     		<br><br>
     		
     		
-    		<label for="exampleInputEmail1">이메일 주소</label>&nbsp;&nbsp;
+    		<label for="exampleInputEmail1">이메일 주소</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="이메일을 입력하세요" style="width:40%;"name="m_email">
     		<br><br>
     	
